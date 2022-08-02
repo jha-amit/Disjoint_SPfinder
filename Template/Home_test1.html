@@ -1,0 +1,857 @@
+{% load static %}
+<! DOCTYPE html>
+<html lang="en-US">
+<head> 
+  <link href="{% static 'styles_home.css' %}" rel="stylesheet" type="text/css"> 
+<style>  
+    #boxes {
+        content: "";
+        display: table;
+        clear: both;
+        margin-left: 0;
+        Margin-right: 0
+      }
+    div{
+        float:left;
+        height: 1000px;  
+        }
+      #col1 {
+        background-color: #a1edcc;
+        width: 400px
+      }
+      #map-canvas {
+        width:1100px;
+  }
+</style>
+</head>
+<body>
+<h1>Hello {{name}}. Shortest_path Map view.<a href = "static/Read_me.txt" target = "_self">Read_me</a></h1> 
+</body>
+<main id="boxes">
+
+    <div id="col1">     
+      <form  id="plotting" action="plot" method=POST enctype="multipart/form-data">
+        {%csrf_token%}
+            Diamond graph edge slope(L)=<input type="text" id="edge_slope" name="edge_slope"><br>
+            Truncation layer gap from outermost circle=<input type="text" id="Truncation_layerto_arc" name="Truncation_layerto_arc"><br>            
+            Horizontal spacing (d)=<input type="text" id="distance"  name="distance"><br>
+            Start point latitude=<input type="text" id ="Start_point_latitude" name="Start_point_latitude"><br>
+            Start point longitude=<input type="text" id="Start_point_longitude" name="Start_point_longitude"><br>
+            End point latitude=<input type="text" id="End_point_latitude" name="End_point_latitude"><br>
+            End point longitude=<input type="text" id="End_point_longitude" name="End_point_longitude"><br>
+            Radial increment start=<input type="text" id="increment_start" name="increment_start"><br>
+            Radial increment end=<input type="text" id="increment_end" name="increment_end"><br>                        
+            Enter your gmap API key=<input type="text" id="enter_your_gmap_API_key" name="enter_your_gmap_API_key"><br>
+            <input id= "post" type= "submit", name="Plot", value="Plot"> 
+      </form>
+      <form  id="Radial_single_SP" action="radial_SP" method=POST enctype="multipart/form-data">
+        {%csrf_token%}
+            
+        Grid density(nTimes)=<input type="text" id="Grid_density" name="Grid_density"><br>
+        Enter a start latitude =<input type="text" id="start_lat" name="start_lat"><br>
+        Enter a start longitude =<input type="text" id="start_long" name="start_long"><br>
+        Enter a end latitude =<input type="text" id="end_lat" name="end_lat"><br>
+        Enter a end longitude =<input type="text" id="end_long" name="end_long"><br>
+        Enter a high value to represent infinity costs =<input type="text" id="High_val" name="High_val"><br>
+        Input cost file for terminal graph at start=<input type="file" name="radial_start"><br>
+        Input cost file for terminal graph at end=<input type="file" name="radial_end"><br>               
+            <input id= "Compute_radial_SP" type= "submit", name="SSP", value="SSP"> 
+    </form>
+
+    <form method="post" id="toggleMarker">
+    <div id="statusText"> </div>    
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" name='machine_state' value='Toggle marker'>      
+    </form>
+    
+
+    <form  id="Diamond_graph_two_SP" action="shortest_path1" method=POST enctype="multipart/form-data">
+    {%csrf_token%}
+    Input cost file for diamond grid = <input type="file" name="Cost_matrix"><br>
+    Grid density(nTimes) = <input type="text" id="Grid_density" name="Grid_density"><br>               
+    <input id= "Compute_DS2p" type= "submit", name="DS2P", value="DS2P">  
+    </form>
+    
+    
+      
+    <form method="POST" id="change_cost">
+    Input node number to be modified = <input type="text" id="node_id" name="node_id"><br>
+    Input modified cost horizontal = <input type="text" id="Cost_horizon" name="Cost_horizontal"><br>
+    Input modified cost vertical = <input type="text" id="Cost_verti" name="Cost_vertical" ><br> 
+    Input modified cost diagonal= <input type="text" id="Cost_diago" name="Cost_diagonal"><br>
+    <input type="submit", name="Submit", value="Add to list">  
+    </form>
+                 
+    <form id= "Recompute" action="Modify_cost" method=POST enctype="multipart/form-data">
+    {%csrf_token%}
+    <input type="submit", name="Modify_DS2P", value="Recompute_DS2P">
+    </form>
+    
+
+    </div>
+    <form >      
+      <div id="Cost horizontal"> </div>
+      <div id="Cost vertical"> </div>
+      <div id="Cost diagonal"> </div>
+    </form>
+
+    <div id="map-canvas"></div>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaCEDKl3L0G7qhBm0CCVZMwAr1x_1Z03k" async></script> 
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>    
+    
+<script>
+
+ 
+// function will get executed when plotting button uis pressed
+  $("#plotting").submit(function (e) {
+    // preventing from page reload and default actions
+    e.preventDefault();
+
+// Get the time of start of this process
+let t1=performance.now()
+// serialize the data for sending the form data.
+  var serializedData = $(this).serialize();
+  var map;
+  var start_lat = document.getElementById('Start_point_latitude').value;
+  var start_long = document.getElementById('Start_point_longitude').value;
+  var start=[parseFloat(start_lat),parseFloat(start_long)];
+  const myLatlng = {lat: start[0], lng: start[1]};
+  var mapOptions = {        
+    zoom: 10,
+    center: myLatlng
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+                          mapOptions);
+ 
+    // make POST ajax call
+  $.ajax({
+      type: 'POST',
+      url: "{% url 'plot' %}",
+      headers: {'X-CSRFToken': '{{ csrf_token }}'},
+      data: serializedData,
+      success: function (response) {
+        alert("Posted form for plotting");
+// put the plotting code here
+                         
+              Lat = response.Lat;
+              Long = response.Long;
+              N=response.N;
+              K=response.K;        
+              d=response.d;
+              Patchx=response.Patchx;
+              Patchy=response.Patchy;
+              console.log(Patchx,N)
+
+              Hash=response.Hash;
+
+              radial_nodes_long_start=response.radial_nodes_long_start;
+              radial_nodes_lat_start=response.radial_nodes_lat_start;
+              radial_nodes_long_end=response.radial_nodes_long_end;
+              radial_nodes_lat_end=response.radial_nodes_lat_end;
+              n_circum_start=response.n_circum_start;       
+              n_radial_start=response.n_radial_start;
+              n_circum_end=response.n_circum_end;
+              n_radial_end=response.n_radial_end;
+
+            
+              const conversion=1/111;
+              var lat1,lat2,lat3,long1,long2,long3;
+
+              for (var i=0;i<N-1;i++){
+              for (var j=0;j<N-1;j++){
+                  if ((i<d/2 && j>=Math.floor(d/2)-i)) {
+                  lat1=Patchy[i][j]*conversion+start[0];   
+                  long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                  lat2=Patchy[i][j+1]*conversion+start[0];
+                  long2=Patchx[i][j+1]/(111.32*Math.cos(lat2*3.14/180))+start[1];                
+                  lat3=Patchy[i+1][j]*conversion+start[0];
+                  long3=Patchx[i+1][j]/(111.32*Math.cos(lat3*3.14/180))+start[1];
+                  var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat3, lng: long3 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);}
+
+                  else if(i>=d/2 && i<=N-1-d/2){
+                  lat1=Patchy[i][j]*conversion+start[0];   
+                  long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                  lat2=Patchy[i][j+1]*conversion+start[0];
+                  long2=Patchx[i][j+1]/(111.32*Math.cos(lat2*3.14/180))+start[1];                
+                  lat3=Patchy[i+1][j]*conversion+start[0];
+                  long3=Patchx[i+1][j]/(111.32*Math.cos(lat3*3.14/180))+start[1];
+                  var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat3, lng: long3 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);}
+                  
+                  else if(i>N-1-d/2 && j<2*N-2-d/2-i){
+                  lat1=Patchy[i][j]*conversion+start[0];   
+                  long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                  lat2=Patchy[i][j+1]*conversion+start[0];
+                  long2=Patchx[i][j+1]/(111.32*Math.cos(lat2*3.14/180))+start[1];                
+                  lat3=Patchy[i+1][j]*conversion+start[0];
+                  long3=Patchx[i+1][j]/(111.32*Math.cos(lat3*3.14/180))+start[1];
+
+                  var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat3, lng: long3 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);}
+
+                  }
+                  }
+
+              for (var i=0;i<n_radial_start-1;i++){
+              for (var j=0;j<n_circum_start-1;j++){
+                  lat1=radial_nodes_lat_start[i][j];   
+                  long1=radial_nodes_long_start[i][j];
+                  lat2=radial_nodes_lat_start[i][j+1];
+                  long2=radial_nodes_long_start[i][j+1];               
+                  lat3=radial_nodes_lat_start[i+1][j];
+                  long3=radial_nodes_long_start[i+1][j];
+                      
+                  var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat3, lng: long3 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+
+                  }
+                  }
+              for (var i=0;i<n_radial_end-1;i++){
+              for (var j=0;j<n_circum_end-1;j++){
+                  lat1=radial_nodes_lat_end[i][j];   
+                  long1=radial_nodes_long_end[i][j];
+                  lat2=radial_nodes_lat_end[i][j+1];
+                  long2=radial_nodes_long_end[i][j+1];               
+                  lat3=radial_nodes_lat_end[i+1][j];
+                  long3=radial_nodes_long_end[i+1][j];
+                      
+                  var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat3, lng: long3 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+
+                  }
+              }
+              for (var i=0; i<n_circum_end-1; i++) {
+              lat1=radial_nodes_lat_end[n_radial_end-1][i];   
+              long1=radial_nodes_long_end[n_radial_end-1][i];
+              lat2=radial_nodes_lat_end[n_radial_end-1][i+1];
+              long2=radial_nodes_long_end[n_radial_end-1][i+1];               
+
+                  var POLYline = new google.maps.Polyline({
+                  path: [{ lat: lat1, lng: long1 },
+                  { lat: lat2, lng: long2 }],
+                  geodesic: true,
+                  strokeColor: "#FF0000",
+                  strokeOpacity: 1.0,
+                  strokeWeight: 2,
+                  });
+                  POLYline.setMap(map);
+              }
+
+                  for (var i=0; i<n_circum_start-1; i++) {
+                  lat1=radial_nodes_lat_start[n_radial_start-1][i];   
+                  long1=radial_nodes_long_start[n_radial_start-1][i];
+                  lat2=radial_nodes_lat_start[n_radial_start-1][i+1];
+                  long2=radial_nodes_long_start[n_radial_start-1][i+1];               
+                  
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                  
+              }
+              for (var i=0; i<n_radial_start-1; i++) {
+                  lat1=radial_nodes_lat_start[i][n_circum_start-1];   
+                  long1=radial_nodes_long_start[i][n_circum_start-1];
+                  lat2=radial_nodes_lat_start[i+1][n_circum_start-1];
+                  long2=radial_nodes_long_start[i+1][n_circum_start-1];               
+                  
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                  
+              }
+              for (var i=0; i<n_radial_end-1; i++) {
+                  lat1=radial_nodes_lat_end[i][n_circum_end-1];   
+                  long1=radial_nodes_long_end[i][n_circum_end-1];
+                  lat2=radial_nodes_lat_end[i+1][n_circum_end-1];
+                  long2=radial_nodes_long_end[i+1][n_circum_end-1];               
+                  
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                  
+              }
+              for (var i=0;i<N-1;i++) { 
+                  if (i<=N-2-d/2){
+                      lat1=Patchy[i][N-1]*conversion+start[0];   
+                      long1=Patchx[i][N-1]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                      lat2=Patchy[i+1][N-1]*conversion+start[0];   
+                      long2=Patchx[i+1][N-1]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+                  
+                      lat1=Patchy[N-1][i]*conversion+start[0];   
+                      long1=Patchx[N-1][i]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                      lat2=Patchy[N-1][i+1]*conversion+start[0];   
+                      long2=Patchx[N-1][i+1]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                      var POLYline = new google.maps.Polyline({
+                      path: [{ lat: lat1, lng: long1 },
+                      { lat: lat2, lng: long2 }],
+                      geodesic: true,
+                      strokeColor: "#FF0000",
+                      strokeOpacity: 1.0,
+                      strokeWeight: 2,
+                      });
+                      POLYline.setMap(map);
+              }}
+          let t2=performance.now()
+          console.log(t2-t1)
+
+      $("#Radial_single_SP").submit(function (e) {
+          e.preventDefault();
+          var form = $('#Radial_single_SP')[0];      
+          // Create an FormData object 
+          var data = new FormData(form);    
+            
+          $.ajax({
+
+            type: 'POST',
+            url: "{% url 'radial_SP' %}",
+            headers: {'X-CSRFToken': '{{ csrf_token }}'},
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (response) { 
+                // put the Radial SP code here
+                  
+                  sPath_terminal_start=response.sPath_terminal_start;
+                  sPath_terminal_end=response.sPath_terminal_end; 
+                  console.log(sPath_terminal_end)                 
+
+                  for (var j=0;j<sPath_terminal_start.length;j=j+1){
+                      for(var i=0;i<sPath_terminal_start[j].length-3;i=i+2){   
+                      [N1,N2] = [Math.floor(sPath_terminal_start[j][i]),Math.floor(sPath_terminal_start[j][i+2])];
+                      X1=Math.floor(N1/n_circum_start);
+                      X2=Math.floor(N2/n_circum_start);
+                      Y1=N1%(n_circum_start);
+                      Y2=N2%(n_circum_start);
+                      
+                      lat1 = radial_nodes_lat_start[X1][Y1];
+                      lat2 = radial_nodes_lat_start[X2][Y2];           
+                      long1 = radial_nodes_long_start[X1][Y1];
+                      long2 = radial_nodes_long_start[X2][Y2]; 
+                      var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "red",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 5,
+                          });
+                          POLYline.setMap(map);
+                      }}
+
+                      for (var j=0;j<sPath_terminal_end.length;j=j+1){
+                      for(var i=0;i<sPath_terminal_end[j].length-3;i=i+2){   
+                      [N1,N2] = [Math.floor(sPath_terminal_end[j][i]),Math.floor(sPath_terminal_end[j][i+2])];
+                      X1=Math.floor(N1/n_circum_end);
+                      X2=Math.floor(N2/n_circum_end);
+                      Y1=N1%(n_circum_end);
+                      Y2=N2%(n_circum_end);                      
+                      lat1 = radial_nodes_lat_end[X1][Y1];
+                      lat2 = radial_nodes_lat_end[X2][Y2];           
+                      long1 = radial_nodes_long_end[X1][Y1];
+                      long2 = radial_nodes_long_end[X2][Y2]; 
+                      var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "red",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 5,
+                          });
+                          POLYline.setMap(map);
+                      }}
+                      alert("Terminal_graph_Cost_data submitted!!")
+            },
+            error: function(response) {                        
+                    // Some error in ajax call
+                      alert("some Error in posting terminal cost data");
+                      }
+              });
+        })
+  // Data posting and ploting for disjoint shortest paths
+
+      $("#Diamond_graph_two_SP").submit(function (e) {
+        e.preventDefault();
+        var form = $('#Diamond_graph_two_SP')[0];    
+        var data = new FormData(form);
+        $.ajax({
+
+          type: 'POST',
+          url: "{% url 'shortest_path1' %}",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          contentType: false,
+          processData: false,
+          data: data,
+          success: function (response) {
+                  alert("sPath data submitted !!")
+                  
+                start = response.start
+                sPath = response.sPath                  
+                Hash = response.Hash                
+                
+                truncation_layer = response.truncation_layer
+                center_start_lat = response.center_start_lat
+                center_start_long = response.center_start_long
+                center_end_lat = response.center_end_lat
+                center_end_long = response.center_end_long
+                Cost_horizontal = response.Cost_horizontal
+                Cost_vertical = response.Cost_vertical
+                Cost_diagonal = response.Cost_diag                
+
+                  var N1,N2,j1,i11,i12,j2,i21,i22,X1,Y1,X2,Y2,X3,Y3,X4,Y4;
+                        for (var i=K-1;i>0;i--){
+                            if (sPath[i][1] != 0.0 && i<K-1){
+                            [N1,N2] = [Math.floor(sPath[i][1]),Math.floor(sPath[i][2])];
+                            [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                            [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                            [X1,Y1,X2,Y2,X3,Y3,X4,Y4]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2),Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]
+                            
+                            lat1 = Patchy[X1][Y1]*conversion+start[0];
+                            lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                            long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                            long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = Patchy[X2][Y2]*conversion+start[0]
+                            lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                            long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                            long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+                        }
+                        else if (sPath[i][1] == 0.0){
+                          N2 = Math.floor(sPath[i][2]);
+                           
+                            [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                            [X3,Y3,X4,Y4]=[Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]
+                            
+                            lat1 = center_start_lat;
+                            lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                            long1 = center_start_long
+                            long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = center_start_lat;
+                            lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                            long1 = center_start_long;
+                            long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map); 
+                        }
+                        else if (i == K-1){
+                          N1 = Math.floor(sPath[i][1]);
+                            [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                            
+                            [X1,Y1,X2,Y2]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2)]
+                            
+                            lat1 = Patchy[X1][Y1]*conversion+start[0];
+                            lat2 =center_end_lat          
+                            long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                            long2 = center_end_long
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = Patchy[X2][Y2]*conversion+start[0]
+                            lat2 = center_end_lat           
+                            long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                            long2 = center_end_long;
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map); 
+                        }}                       
+
+        markers=[]
+
+          for (let i=0;i<=Lat.length;i++){
+            //console.log({{ point.lat }}, {{ point.lon }});
+                var myLatLng = new google.maps.LatLng(Lat[i], Long[i]);
+                marker = new google.maps.Marker({
+                position: myLatLng,
+                draggable: false,
+                id: i,
+                //scaledSize: new google.maps.Size(.01, .05),
+                //anchor: new google.maps.Point(.05, .05),
+                //icon: {url:icons[iconCounter], scaledSize: new google.maps.Size(70, 70)},
+            });
+            markers.push(marker)
+            };
+            
+            $('#toggleMarker :checkbox').change(function (e) {      
+                e.preventDefault();
+                
+            if (this.checked) {
+                    alert('checked');
+                    
+                    for (let i = 0; i < markers.length; i++) {
+                        markers[i].setMap(map);
+                    }
+                    }
+
+                else {
+                    alert('NOT checked');
+                    for (let i = 0; i < markers.length; i++) {
+                        markers[i].setMap(null);
+                    }       
+                }
+            })                 
+        
+
+        var nodeid_forcostchange =[]
+        for (let i = 0; i < markers.length; i++) {
+          google.maps.event.addListener(markers[i], "click", function (event) {
+                    alert(this.id);
+                    
+                    //alert(this.position);
+                    var node_id = JSON.stringify(this.id);
+                    node_row=Math.floor(node_id/N);
+                    node_col=Math.floor(node_id%N);
+                    console.log(node_id, Cost_horizontal)
+                    if (node_row<N-1){ 
+                      var CostV=Cost_vertical[node_row+1][node_col];
+                      if (node_col<N-1){
+                        var CostD=Cost_diagonal[node_row+1][node_col+1];}
+                      else {var CostD="None"};}
+                    else {
+                      var CostV="None";
+                      var CostD="None";
+                    }
+                    if (node_col<N-1){
+                    var CostH=Cost_horizontal[node_row][node_col+1];}        
+                    else{
+                      var CostH="None"
+                    }                   
+
+                    document.getElementById("Cost horizontal").innerHTML = "Cost horizontal"+CostH;
+                    document.getElementById("Cost vertical").innerHTML = "Cost vertical"+CostV;
+                    document.getElementById("Cost diagonal").innerHTML = "Cost diagonal"+CostD;
+                  })
+      }
+      var COST = []
+        $("#change_cost").submit(function (e){
+            e.preventDefault();
+            nodeid_forcostchange.push(document.getElementById('node_id').value);
+            var cost_elements = []
+            var Cost_horizontal = document.getElementById('Cost_horizon').value;
+            cost_elements.push(Cost_horizontal);
+            var Cost_vertical = document.getElementById('Cost_verti').value;
+            cost_elements.push(Cost_vertical);
+            var Cost_diagonal = document.getElementById('Cost_diago').value;
+            cost_elements.push(Cost_diagonal);
+            COST.push(cost_elements);
+            console.log(COST)
+          })                     
+      
+       $("#Recompute").submit(function (e) {
+        e.preventDefault();
+
+        for (var a of nodeid_forcostchange){
+          data.append("nodeid_forcostchange[]",a);}
+
+        for (var a of COST){
+          data.append("COST[]",a);}
+
+          $.ajax({
+          type: 'POST',
+          url: "{% url 'Modify_cost' %}",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          contentType: false,
+          processData: false,
+          data: data,
+          success: function (response) {
+                  alert("Modified sPath data submitted !!")
+                  // put the code here
+                  sPath1 = response.sPath1                  
+                  // Hash = response.Hash                
+                  // Lat = response.Lat
+                  // Long = response.Long
+                  // truncation_layer = response.truncation_layer
+                  // center_start_lat = response.center_start_lat
+                  // center_start_long = response.center_start_long
+                  // center_end_lat = response.center_end_lat
+                  // center_end_long = response.center_end_long
+                  // Cost_horizontal = response.Cost_horizontal
+                  // Cost_vertical = response.Cost_vertical
+                  // Cost_diagonal = response.Cost_diag
+
+                  var N1,N2,j1,i11,i12,j2,i21,i22,X1,Y1,X2,Y2,X3,Y3,X4,Y4;
+                        for (var i=K-1;i>0;i--){
+                            if (sPath1[i][1] != 0.0 && i<K-1){
+                            [N1,N2] = [Math.floor(sPath1[i][1]),Math.floor(sPath1[i][2])];
+                            [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                            [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                            [X1,Y1,X2,Y2,X3,Y3,X4,Y4]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2),Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]
+                            
+                            lat1 = Patchy[X1][Y1]*conversion+start[0];
+                            lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                            long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                            long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = Patchy[X2][Y2]*conversion+start[0]
+                            lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                            long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                            long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+                        }
+                        else if (sPath1[i][1] == 0.0){
+                          N2 = Math.floor(sPath[i][2]);
+                           
+                            [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                            [X3,Y3,X4,Y4]=[Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]
+                            
+                            lat1 = center_start_lat;
+                            lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                            long1 = center_start_long
+                            long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = center_start_lat;
+                            lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                            long1 = center_start_long;
+                            long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map); 
+                        }
+                        else if (i == K-1){
+                          N1 = Math.floor(sPath1[i][1]);
+                            [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                            
+                            [X1,Y1,X2,Y2]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2)]
+                            
+                            lat1 = Patchy[X1][Y1]*conversion+start[0];
+                            lat2 =center_end_lat          
+                            long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                            long2 = center_end_long
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FF00FF",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map);
+
+                            lat1 = Patchy[X2][Y2]*conversion+start[0]
+                            lat2 = center_end_lat           
+                            long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                            long2 = center_end_long;
+                            var POLYline = new google.maps.Polyline({
+                              path: [{ lat: lat1, lng: long1 },
+                              { lat: lat2, lng: long2 }],
+                              geodesic: true,
+                              strokeColor: "#FFFF00",
+                              strokeOpacity: 1.0,
+                              strokeWeight: 7,
+                            });
+                            POLYline.setMap(map); 
+                        }};
+                      },
+        error: function(response) {
+                alert("some Error in posting modified sPath data.")}  
+        
+        });
+      })
+                        
+    },
+        error: function(response) {
+                alert("some Error in posting sPath data.")}  
+        
+        });
+      })
+          
+      },
+    error: function(response) {
+          alert("some Error in plotting");
+                }
+      
+            });
+            
+        }); 
+        
+</script>
+
+</main>
+</html>
