@@ -6,16 +6,8 @@ Created on Mon Sep 14 16:46:18 2020
 """
 import sys
 import numpy as np
-import random
-import numpy as np
-import random
 import math
 cimport cython
-import time
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-import matplotlib.cm as cmx
  
 ctypedef fused my_type:
     int

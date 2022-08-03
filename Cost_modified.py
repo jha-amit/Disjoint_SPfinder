@@ -1,31 +1,12 @@
-
-
 # -*- coding: utf-8 -*-
 """
 Created on Mon Nov 30 16:46:26 2020
 
 @author: amit
 """
-from cmath import inf
 import sys
-from matplotlib import projections
 import numpy as np
-import random
 import math
-import matplotlib as mpl
-import numpy as np
-from scipy.special import comb
-from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from matplotlib import cm
-#from pygem import IDW
-from statistics import mean
-import time
-from scipy.integrate import simps
-import xlsxwriter
-import random
-import csv
-
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
 
 def Patchpoints(n,theta,alpha): # number of nodes per row or column, Theta=angle of rotation for alighning the start and end,
@@ -99,7 +80,7 @@ def interpolation(nTimes,n,Patchz): # nTimes = number of interpolted points per 
                                         #n=number of nodes per row or column, Patch=costs at nodes  
     
     def bernstein_poly(i, n, t):
-        return comb(n, i) * (t**(i)) * (1 - t)**(n-i)
+        return math.factorial(n)/(math.factorial(n-i)*math.factorial(i)) * (t**(i)) * (1 - t)**(n-i)
     k=0
     nPointsC = 2 #Number of points in each row in a patch
     
@@ -201,10 +182,10 @@ def Cost_diamondgraph(n,zvals,nTimes,L,L_Diag):
             c=c+nTimes-1
         k=k+nTimes-1
         c=0
-    Cost_horizontal[:,0]=inf
-    Cost_vertical[0,:]=inf
-    Cost_diag[:,0]=inf
-    Cost_diag[0,:]=inf
+    Cost_horizontal[:,0]=math.inf
+    Cost_vertical[0,:]=math.inf
+    Cost_diag[:,0]=math.inf
+    Cost_diag[0,:]=math.inf
 
 
     return Cost_horizontal,Cost_vertical,Cost_diag
@@ -410,7 +391,8 @@ def interpolation_radial(nTimes,zvals,Patchz): # nTimes = number of interpolted 
                                         #n=number of nodes per row or column, Patch=costs at nodes  
     
     def bernstein_poly(i, n, t):
-        return comb(n, i) * (t**(i)) * (1 - t)**(n-i)
+        return math.factorial(n)/(math.factorial(n-i)*math.factorial(i)) * (t**(i)) * (1 - t)**(n-i)
+
     k=0
     nPointsC = 2 #Number of points in each row in a patch
     
@@ -431,7 +413,7 @@ def interpolation_radial(nTimes,zvals,Patchz): # nTimes = number of interpolted 
         
             a=Patchz[k:k+2,c:c+2]
             
-            if a.reshape(a.shape[0]*a.shape[1],).tolist().count(inf) == 0:
+            if a.reshape(a.shape[0]*a.shape[1],).tolist().count(math.inf) == 0:
                 
                 zvals[i:i+nTimes,j:j+nTimes] = np.dot(np.transpose(polynomial_arrayV),\
                                     np.dot(Patchz[k:k+2,c:c+2],polynomial_arrayV))
@@ -498,34 +480,3 @@ def Patch_terminal(center_start_lat,center_start_long,center_end_lat,center_end_
     return  radial_nodes_lat_start, radial_nodes_long_start,\
             radial_nodes_starty, radial_nodes_startx,radial_nodes_lat_end, radial_nodes_long_end,\
             radial_nodes_endy, radial_nodes_endx
-
-def latlong_generator(r,center,input_points,file_name):
-
-    radius_meters=r # radius for boundary of data generation
-    #radius_degrees = radius_meters*2*math.pi / 111300
-        
-    random.seed(10)
-    w = [radius_meters*(random.random()) for i in range(input_points)] # variable radius 
-    t_forlong =  [math.cos(2*math.pi*(random.random())) for i in range(input_points)]
-    t_forlat=[math.sin(2*math.pi*(random.random())) for i in range(input_points)]
-    
-    temp_long_off=[]
-    lat_off=[]
-
-
-    for number1, number2,number3 in zip(w, t_forlong,t_forlat):        
-        lat=center[0]+number1*number3/111.1
-        lat_off.append(lat)
-        temp_long_off.append(center[1]+number1 * number2/(111.32*math.cos(lat*3.14/180)))
-
-       # print(temp_long_off)
-
-    Longitude_input=temp_long_off
-    Latitude_input=lat_off
-    random.seed(11)
-    Cost_input=[random.random() for i in range(input_points)]
-    with open(file_name, "w") as csv_file:
-        writer = csv.writer(csv_file, delimiter=',',lineterminator='\n')
-        writer.writerow(['Longitude','Latitude','Cost'])
-        for i in range(0, len(Latitude_input)):
-            writer.writerow([Longitude_input[i],Latitude_input[i],Cost_input[i]])

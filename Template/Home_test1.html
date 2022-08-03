@@ -87,6 +87,7 @@
     </form>  
       
     <form method="POST" id="change_cost">
+      {%csrf_token%}
     Input node number to be modified = <input type="text" id="node_id" name="node_id"><br>
     Input modified cost horizontal = <input type="text" id="Cost_horizon" name="Cost_horizontal"><br>
     Input modified cost vertical = <input type="text" id="Cost_verti" name="Cost_vertical" ><br> 

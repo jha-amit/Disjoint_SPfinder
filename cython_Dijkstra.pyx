@@ -15,15 +15,9 @@ Created on Mon Sep 14 16:46:18 2020
 import sys
 import numpy as np
 import random
-import numpy as np
-import random
 import math
 cimport cython
 import time
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-import matplotlib.cm as cmx
  
 ctypedef fused my_type:
     int
@@ -95,7 +89,6 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
         if res == True:
              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')
              break
-        else: print('nodes are alive')
          
         if layer < sink_neighbour:   
             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):        

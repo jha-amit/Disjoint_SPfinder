@@ -6,16 +6,9 @@ Created on Mon Sep 14 16:46:18 2020
 """
 import sys
 import numpy as np
-import random
-import numpy as np
-import random
 import math
 cimport cython
-import time
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-import matplotlib.cm as cmx
+
  
 ctypedef fused my_type:
     int
@@ -47,13 +40,13 @@ def IDW(my_type[::1] X, my_type[::1] Y, my_type[::1] Z, my_type[::1] X_i, my_typ
     cdef int s, p
     cdef double d,u,suminf
     
-    lstxyzi_out = np.zeros(X_i.shape[0])
+    lstxyzi_out = np.ones(X_i.shape[0])*math.inf
     cdef double[::1] lstxyzi = lstxyzi_out
     for p in range(len(X_i)):
         sumsup=[]
         z_temp=[]
         for s in range(len(X)):
-            if abs(X[s]-X_i[p])<=latlimit and abs(Y[s]-Y_i[p])<=longlimit:
+            if abs(X[s]-X_i[p])<=latlimit and abs(Y[s]-Y_i[p])<=longlimit and Z[s]!=math.inf:
                 d = math.sqrt(((X[s]-X_i[p])*111.1)**2+((Y[s]-Y_i[p])*111.32*math.cos(X[s]*3.14/180))**2)                
                 if d!=0:
                     sumsup.append(1/d)

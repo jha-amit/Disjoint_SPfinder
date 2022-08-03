@@ -3,13 +3,11 @@ import sys
 import numpy as np
 import random
 import math
-import gmplot
 import csv
 import os
 
-from sympy import re
 from cython_Dijkstra import node_val
-from Cost_modified import interpolation,Cost_diamondgraph,Patchpoints,hash1,complete_graph,Patch_terminal,interpolation_radial,Cost_radial
+from Cost_modified import interpolation,Cost_diamondgraph,Patchpoints,hash1,Patch_terminal,interpolation_radial,Cost_radial
 import pickle
 from .forms import UploadFileForm
 from django.conf import settings
@@ -24,7 +22,6 @@ from bellman_ford import bellman_ford
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-import time
 
 
 val=None
@@ -158,7 +155,6 @@ def plot(request):
 
     # convert it to list for sending it through post request to HTTP rendering.
 
-    print(radial_nodes_lat_start[0,:])
     radial_nodes_lat_start=radial_nodes_lat_start.tolist()
 
     radial_nodes_long_start=radial_nodes_long_start.tolist()
@@ -503,11 +499,8 @@ def shortest_path1(request):
     Patchx=np.array(Patchx)
     Patchy=np.array(Patchy)
 # surface patch density and edgelength
-    if  request.is_ajax() and request.POST:
-        nTimes=int(request.POST['Grid_density'])
-        print(nTimes)
-
-
+   
+    nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["Cost_matrix"]
     fs = FileSystemStorage()
     Cost_matrix = fs.save(myfile.name, myfile)
@@ -587,7 +580,7 @@ def shortest_path1(request):
     sPath[K-1,:]=Node_val[n-1,:]
     for m in range(K-2,-1,-1):
         sPath[m,:]=Node_val[int(sPath[m+1,1]),:]
-    print(sPath)
+    
 
     request.session['N_K']=N_K.tolist()
     
@@ -653,12 +646,9 @@ def Modify_cost(request):
     COST =  request.POST.getlist('COST[]')
     
     if len(node_ids)!=0:
-        for nodes,costs in zip(node_ids,COST):
-            
+        for nodes,costs in zip(node_ids,COST):            
             i=int(nodes)
-            j=costs.split(',')
-            print(costs,j)
-            
+            j=costs.split(',')            
             Cost_horizontal[i//N,i%N +1] = float(j[0])            
             Cost_vertical[i//N,i%N + 1] = float(j[1])
             Cost_diag[i//N +1,i%N + 1] = float(j[2])
