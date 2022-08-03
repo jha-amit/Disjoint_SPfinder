@@ -12,15 +12,31 @@
         Margin-right: 0
       }
     div{
-        float:left;
-        height: 1000px;  
+        float:left         
         }
       #col1 {
         background-color: #a1edcc;
+        height: 1000px;
         width: 400px
       }
+      #Cost_horizontal {
+        background-color: #a1edcc;
+        height: 50px;
+        width: 50px
+      }
+      #Cost_vertical {
+        background-color: #a1edcc;
+        height: 50px;
+        width: 1000px
+      }
+      #Cost_diagonal {
+        background-color: #a1edcc;
+        height: 50px;
+        width: 50px
+      }
       #map-canvas {
-        width:1100px;
+        height: 1000px;
+        width:900px;
   }
 </style>
 </head>
@@ -61,17 +77,14 @@
     <form method="post" id="toggleMarker">
     <div id="statusText"> </div>    
             <input type="checkbox" class="custom-control-input" id="customSwitch1" name='machine_state' value='Toggle marker'>      
-    </form>
-    
+    </form>    
 
     <form  id="Diamond_graph_two_SP" action="shortest_path1" method=POST enctype="multipart/form-data">
     {%csrf_token%}
     Input cost file for diamond grid = <input type="file" name="Cost_matrix"><br>
     Grid density(nTimes) = <input type="text" id="Grid_density" name="Grid_density"><br>               
     <input id= "Compute_DS2p" type= "submit", name="DS2P", value="DS2P">  
-    </form>
-    
-    
+    </form>  
       
     <form method="POST" id="change_cost">
     Input node number to be modified = <input type="text" id="node_id" name="node_id"><br>
@@ -79,22 +92,21 @@
     Input modified cost vertical = <input type="text" id="Cost_verti" name="Cost_vertical" ><br> 
     Input modified cost diagonal= <input type="text" id="Cost_diago" name="Cost_diagonal"><br>
     <input type="submit", name="Submit", value="Add to list">  
-    </form>
+    </form> 
                  
     <form id= "Recompute" action="Modify_cost" method=POST enctype="multipart/form-data">
     {%csrf_token%}
     <input type="submit", name="Modify_DS2P", value="Recompute_DS2P">
     </form>
-    
 
-    </div>
-    <form >      
-      <div id="Cost horizontal"> </div>
-      <div id="Cost vertical"> </div>
-      <div id="Cost diagonal"> </div>
+    <form>
+      <div id="Cost_horizontal"></div>
     </form>
 
-    <div id="map-canvas"></div>
+    </div>
+    
+
+    <div id="map-canvas"></div>   
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaCEDKl3L0G7qhBm0CCVZMwAr1x_1Z03k" async></script> 
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
@@ -671,10 +683,9 @@ let t1=performance.now()
                     else{
                       var CostH="None"
                     }                   
-
-                    document.getElementById("Cost horizontal").innerHTML = "Cost horizontal"+CostH;
-                    document.getElementById("Cost vertical").innerHTML = "Cost vertical"+CostV;
-                    document.getElementById("Cost diagonal").innerHTML = "Cost diagonal"+CostD;
+                    console.log(CostV)
+                    document.getElementById("Cost_horizontal").innerHTML = "Cost horizontal "+CostH + " Cost vertical"+CostV+ " Cost diagonal"+CostD;
+                    
                   })
       }
       var COST = []
@@ -854,4 +865,6 @@ let t1=performance.now()
 </script>
 
 </main>
+
+
 </html>
