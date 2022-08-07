@@ -1665,14 +1665,6 @@ static CYTHON_INLINE long __Pyx_div_long(long, long);
 
 /* PyIntBinop.proto */
 #if !CYTHON_COMPILING_IN_PYPY
-static PyObject* __Pyx_PyInt_FloorDivideObjC(PyObject *op1, PyObject *op2, long intval, int inplace, int zerodivision_check);
-#else
-#define __Pyx_PyInt_FloorDivideObjC(op1, op2, intval, inplace, zerodivision_check)\
-    (inplace ? PyNumber_InPlaceFloorDivide(op1, op2) : PyNumber_FloorDivide(op1, op2))
-#endif
-
-/* PyIntBinop.proto */
-#if !CYTHON_COMPILING_IN_PYPY
 static PyObject* __Pyx_PyInt_SubtractObjC(PyObject *op1, PyObject *op2, long intval, int inplace, int zerodivision_check);
 #else
 #define __Pyx_PyInt_SubtractObjC(op1, op2, intval, inplace, zerodivision_check)\
@@ -3909,19 +3901,16 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   /* "cython_Dijkstra.pyx":65
  *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
  * 
- *     source_neighbour = truncated_layer//2             # <<<<<<<<<<<<<<
+ *     source_neighbour = truncated_layer             # <<<<<<<<<<<<<<
  *     sink_neighbour = int(K-source_neighbour)
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_FloorDivideObjC(__pyx_v_truncated_layer, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_truncated_layer); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
   __pyx_v_source_neighbour = __pyx_t_4;
 
   /* "cython_Dijkstra.pyx":66
  * 
- *     source_neighbour = truncated_layer//2
+ *     source_neighbour = truncated_layer
  *     sink_neighbour = int(K-source_neighbour)             # <<<<<<<<<<<<<<
  * 
  *     Cijk=0
@@ -5860,19 +5849,16 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   /* "cython_Dijkstra.pyx":65
  *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
  * 
- *     source_neighbour = truncated_layer//2             # <<<<<<<<<<<<<<
+ *     source_neighbour = truncated_layer             # <<<<<<<<<<<<<<
  *     sink_neighbour = int(K-source_neighbour)
  * 
  */
-  __pyx_t_2 = __Pyx_PyInt_FloorDivideObjC(__pyx_v_truncated_layer, __pyx_int_2, 2, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_truncated_layer); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
   __pyx_v_source_neighbour = __pyx_t_4;
 
   /* "cython_Dijkstra.pyx":66
  * 
- *     source_neighbour = truncated_layer//2
+ *     source_neighbour = truncated_layer
  *     sink_neighbour = int(K-source_neighbour)             # <<<<<<<<<<<<<<
  * 
  *     Cijk=0
@@ -24092,148 +24078,6 @@ static CYTHON_INLINE long __Pyx_div_long(long a, long b) {
     q -= ((r != 0) & ((r ^ b) < 0));
     return q;
 }
-
-/* PyIntBinop */
-#if !CYTHON_COMPILING_IN_PYPY
-#if PY_MAJOR_VERSION < 3 || CYTHON_USE_PYLONG_INTERNALS
-#define __Pyx_PyInt_FloorDivideObjC_ZeroDivisionError(operand)\
-    if (unlikely(zerodivision_check && ((operand) == 0))) {\
-        PyErr_SetString(PyExc_ZeroDivisionError, "integer division by zero");\
-        return NULL;\
-    }
-#endif
-static PyObject* __Pyx_PyInt_FloorDivideObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, int inplace, int zerodivision_check) {
-    (void)inplace;
-    (void)zerodivision_check;
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long x;
-        long a = PyInt_AS_LONG(op1);
-            __Pyx_PyInt_FloorDivideObjC_ZeroDivisionError(b)
-            if (unlikely(b == -1 && ((unsigned long)a) == 0-(unsigned long)a))
-                return PyInt_Type.tp_as_number->nb_floor_divide(op1, op2);
-            else {
-                long q, r;
-                q = a / b;
-                r = a - q*b;
-                q -= ((r != 0) & ((r ^ b) < 0));
-                x = q;
-            }
-            return PyInt_FromLong(x);
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS
-    if (likely(PyLong_CheckExact(op1))) {
-        const long b = intval;
-        long a, x;
-#ifdef HAVE_LONG_LONG
-        const PY_LONG_LONG llb = intval;
-        PY_LONG_LONG lla, llx;
-#endif
-        const digit* digits = ((PyLongObject*)op1)->ob_digit;
-        const Py_ssize_t size = Py_SIZE(op1);
-        if (likely(__Pyx_sst_abs(size) <= 1)) {
-            a = likely(size) ? digits[0] : 0;
-            if (size == -1) a = -a;
-        } else {
-            switch (size) {
-                case -2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                case 2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                case -3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                case 3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                case -4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = -(PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                case 4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-#ifdef HAVE_LONG_LONG
-                    } else if (8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT) {
-                        lla = (PY_LONG_LONG) (((((((((unsigned PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (unsigned PY_LONG_LONG)digits[0]));
-                        goto long_long;
-#endif
-                    }
-                    CYTHON_FALLTHROUGH;
-                default: return PyLong_Type.tp_as_number->nb_floor_divide(op1, op2);
-            }
-        }
-                __Pyx_PyInt_FloorDivideObjC_ZeroDivisionError(b)
-                {
-                    long q, r;
-                    q = a / b;
-                    r = a - q*b;
-                    q -= ((r != 0) & ((r ^ b) < 0));
-                    x = q;
-                }
-            return PyLong_FromLong(x);
-#ifdef HAVE_LONG_LONG
-        long_long:
-                {
-                    PY_LONG_LONG q, r;
-                    q = lla / llb;
-                    r = lla - q*llb;
-                    q -= ((r != 0) & ((r ^ llb) < 0));
-                    llx = q;
-                }
-            return PyLong_FromLongLong(llx);
-#endif
-        
-        
-    }
-    #endif
-    return (inplace ? PyNumber_InPlaceFloorDivide : PyNumber_FloorDivide)(op1, op2);
-}
-#endif
 
 /* PyIntBinop */
 #if !CYTHON_COMPILING_IN_PYPY

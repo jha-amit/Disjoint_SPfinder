@@ -51,6 +51,7 @@
             Diamond graph edge slope(L)=<input type="text" id="edge_slope" name="edge_slope"><br>
             Truncation layer gap from outermost circle=<input type="text" id="Truncation_layerto_arc" name="Truncation_layerto_arc"><br>            
             Horizontal spacing (d)=<input type="text" id="distance"  name="distance"><br>
+            Buffer layers = <input type="text" id="Buffer_layers" name="Buffer_layers"><br>
             Start point latitude=<input type="text" id ="Start_point_latitude" name="Start_point_latitude"><br>
             Start point longitude=<input type="text" id="Start_point_longitude" name="Start_point_longitude"><br>
             End point latitude=<input type="text" id="End_point_latitude" name="End_point_latitude"><br>
@@ -82,7 +83,8 @@
     <form  id="Diamond_graph_two_SP" action="shortest_path1" method=POST enctype="multipart/form-data">
     {%csrf_token%}
     Input cost file for diamond grid = <input type="file" name="Cost_matrix"><br>
-    Grid density(nTimes) = <input type="text" id="Grid_density" name="Grid_density"><br>               
+    Grid density(nTimes) = <input type="text" id="Grid_density" name="Grid_density"><br>
+                     
     <input id= "Compute_DS2p" type= "submit", name="DS2P", value="DS2P">  
     </form>  
       
@@ -151,7 +153,7 @@ let t1=performance.now()
               Long = response.Long;
               N=response.N;
               K=response.K;        
-              d=response.d;
+              truncation_layer=response.truncation_layer;
               Patchx=response.Patchx;
               Patchy=response.Patchy;
               console.log(Patchx,N)
@@ -173,7 +175,7 @@ let t1=performance.now()
 
               for (var i=0;i<N-1;i++){
               for (var j=0;j<N-1;j++){
-                  if ((i<d/2 && j>=Math.floor(d/2)-i)) {
+                  if ((i<truncation_layer && j>=truncation_layer-i)) {
                   lat1=Patchy[i][j]*conversion+start[0];   
                   long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
                   lat2=Patchy[i][j+1]*conversion+start[0];
@@ -199,7 +201,7 @@ let t1=performance.now()
                       });
                       POLYline.setMap(map);}
 
-                  else if(i>=d/2 && i<=N-1-d/2){
+                  else if(i>=truncation_layer && i<=N-1-truncation_layer){
                   lat1=Patchy[i][j]*conversion+start[0];   
                   long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
                   lat2=Patchy[i][j+1]*conversion+start[0];
@@ -225,7 +227,7 @@ let t1=performance.now()
                       });
                       POLYline.setMap(map);}
                   
-                  else if(i>N-1-d/2 && j<2*N-2-d/2-i){
+                  else if(i>N-1-truncation_layer && j<2*N-2-truncation_layer-i){
                   lat1=Patchy[i][j]*conversion+start[0];   
                   long1=Patchx[i][j]/(111.32*Math.cos(lat1*3.14/180))+start[1];
                   lat2=Patchy[i][j+1]*conversion+start[0];
@@ -384,7 +386,7 @@ let t1=performance.now()
                   
               }
               for (var i=0;i<N-1;i++) { 
-                  if (i<=N-2-d/2){
+                  if (i<=N-2-truncation_layer){
                       lat1=Patchy[i][N-1]*conversion+start[0];   
                       long1=Patchx[i][N-1]/(111.32*Math.cos(lat1*3.14/180))+start[1];
                       lat2=Patchy[i+1][N-1]*conversion+start[0];   

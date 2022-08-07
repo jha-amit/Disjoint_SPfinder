@@ -62,7 +62,7 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
     cdef double Cijk = 0
     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
 
-    source_neighbour = truncated_layer//2
+    source_neighbour = truncated_layer
     sink_neighbour = int(K-source_neighbour)
 
     Cijk=0

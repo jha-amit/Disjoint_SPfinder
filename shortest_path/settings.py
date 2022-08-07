@@ -24,7 +24,7 @@ print ("base dir path", BASE_DIR)
 SECRET_KEY = '1%p8hzw#tbv53a(f=88htsm&8#h=vo)g5hyz@sj)f6xnv)bo6*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*'] #it was blank, this is local ip address. Can be fed through a form. 
 
@@ -127,7 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+#STATIC_ROOT = os.path.join(BASE_DIR,'asset')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

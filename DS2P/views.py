@@ -52,12 +52,23 @@ def plot(request):
 
     gmap_license="https://maps.googleapis.com/maps/api/js?key="+gmap_license
 
-    theta=math.atan((((end_lat-start_lat)*111)/((end_long-start_long)*111.2))) # need correction for eliptical co-ordinates
+    Y_cord = (end[0]-start[0])/conversion
+    X_cord = (end[1]-start[1])*(111*math.cos(start[0]*math.pi/180))
 
+    if (Y_cord<=0 and X_cord<=0):
+        theta =math.pi + math.atan(abs(Y_cord/X_cord))
+    elif (Y_cord>=0 and X_cord<=0):
+        theta =math.pi-math.atan(abs(Y_cord/X_cord))
+    elif (Y_cord>=0 and X_cord>=0):
+        theta =math.atan(abs(Y_cord/X_cord))
+    elif (Y_cord<=0 and X_cord>=0):
+        theta =2*math.pi-math.atan(abs(Y_cord/X_cord))
+
+
+    
     # distance from start to end
-    Y_cord = (start[0]-end[0])*(111.32*math.cos(start[1]*3.14/180))
-    X_cord = (start[1]-end[1])/conversion
-    #print(gmap_license)
+    
+    print(theta,Y_cord,X_cord)
     K = int(math.sqrt(X_cord**2 + Y_cord**2)/math.tan(alpha))
     if K%2 ==0:
         K=K
@@ -65,13 +76,14 @@ def plot(request):
         K=K+1
         print('layer is incremented by 1 to make it even')
         
-    N=int(K/2)+1
+    
+    N= int(K/2)+1
     # edgelength
     L= math.sqrt(math.tan(alpha)**2 + 1)
         # Get the grid in place
     Patchx=np.zeros((N,N))
     Patchy=np.zeros((N,N))
-    Patchx,Patchy= Patchpoints(N,theta,alpha)
+    Patchx,Patchy= Patchpoints(N, theta, alpha)
     
     # Patchz holds the information of cost of constructon in the viscinity of vertices on the grid 
     Patchz=np.zeros((N,N))
@@ -89,7 +101,7 @@ def plot(request):
     for i in range(0,N):
         for j in range(0,N):
             Lat[k]=Patchy[i,j]*conversion+start[0]       
-            Long[k]=Patchx[i,j]/(111.32*math.cos(Lat[k]*3.14/180))+start[1]
+            Long[k]=Patchx[i,j]/(111.32*math.cos(Lat[k]*math.pi/180))+start[1]
             k=k+1
         
     # this is the distance of chord (truncation layer) from the circle.
@@ -104,22 +116,21 @@ def plot(request):
     # separation we can achieve using this algorithm.
     delta=distance(Patchx[0,1],Patchy[0,1],Patchx[1,0],Patchy[1,0])
     d_half=int(d/2)
-    t=1
-    buffer=t*d_half  # User can choose any number of layer that will be added to the 
+    buffer= int(request.POST['Buffer_layers']) # User can choose any number of layer that will be added to the 
                     #minimum separation constraint in order to make a choice of two 
                     #path combination out of many possible combinations.
     
-    truncation_layer=int(d_half+buffer)        
+    truncation_layer = int(d_half + buffer)        
     
     # We define the center of the radial grid at the termnals.
     
-    truncation_layer_midpoint_start = [(Patchx[truncation_layer//2,0] + Patchx[0,truncation_layer//2])/2 , \
-        (Patchy[truncation_layer//2,0] + Patchy[0,truncation_layer//2])/2]
+    truncation_layer_midpoint_start = [(Patchx[truncation_layer,0] + Patchx[0,truncation_layer])/2 , \
+        (Patchy[truncation_layer,0] + Patchy[0,truncation_layer])/2]
 
     centery_start =truncation_layer_midpoint_start[1] + (radius - dr_truncated_layer) *math.sin(math.pi+theta)        
     centerx_start = truncation_layer_midpoint_start[0] + (radius - dr_truncated_layer) * math.cos(theta+(math.pi))       
     center_start_lat = start[0] + centery_start*conversion
-    center_start_long = start[1] +centerx_start/(111.32*math.cos(center_start_lat*3.14/180))
+    center_start_long = start[1] +centerx_start/(111.32*math.cos(center_start_lat*math.pi/180))
 
     # This decides number of rows in the radial grid 
     incremental_radius_start=float(request.POST['increment_start'])
@@ -133,13 +144,13 @@ def plot(request):
     n_radial_start=int(radius/incremental_radius_start+1)
 
     # calculations for the end
-    truncation_layer_midpoint_end = [(Patchx[N-1,N-1-truncation_layer//2] + Patchx[N-1-truncation_layer//2,N-1])/2 ,\
-            (Patchy[N-1,N-1-truncation_layer//2] + Patchy[N-1-truncation_layer//2,N-1])/2]
+    truncation_layer_midpoint_end = [(Patchx[N-1,N-1-truncation_layer] + Patchx[N-1-truncation_layer,N-1])/2 ,\
+            (Patchy[N-1,N-1-truncation_layer] + Patchy[N-1-truncation_layer,N-1])/2]
     
     centery_end = truncation_layer_midpoint_end[1] + (radius - dr_truncated_layer) * math.sin(theta)       
     centerx_end= truncation_layer_midpoint_end[0] + (radius - dr_truncated_layer) * math.cos(theta)       
     center_end_lat = start[0] + centery_end * conversion        
-    center_end_long= start[1] +centerx_end/(111.32*math.cos(center_end_lat*3.14/180))
+    center_end_long= start[1] +centerx_end/(111.32*math.cos(center_end_lat*math.pi/180))
     
     n_circum_end=int(2*math.pi/(dtheta)+1)        
     n_radial_end=int(radius/incremental_radius_end+1)
@@ -221,7 +232,7 @@ def plot(request):
     request.session['radial_nodes_endy']=radial_nodes_endy
     request.session['radial_nodes_endx']=radial_nodes_endx  
 
-    return JsonResponse ({'radial_nodes_long_start' : radial_nodes_long_start,\
+    return JsonResponse ({'radial_nodes_long_start' : radial_nodes_long_start,'truncation_layer':truncation_layer,\
             'radial_nodes_lat_start': radial_nodes_lat_start,'radial_nodes_long_end' : radial_nodes_long_end,\
             'radial_nodes_lat_end': radial_nodes_lat_end,'N':N,'K':K,'d':d,'start':start,'Patchx':Patchx,'Lat':Lat,\
         'Long':Long,'Patchy':Patchy,'gmap_license':gmap_license,'n_circum_start':n_circum_start,\
@@ -297,7 +308,7 @@ def radial_SP(request):
 
     # centr_to_starty = (start_lat - center_start_lat)/conversion
     # centr_to_startx = (start_long - center_start_long) * \
-    #     (111.32*math.cos(center_start_lat*3.14/180))
+    #     (111.32*math.cos(center_start_lat*math.pi/180))
 
     # angle_start = math.atan(centr_to_starty/centr_to_startx)
     
@@ -305,23 +316,23 @@ def radial_SP(request):
     # if math.sqrt(centr_to_starty**2 + centr_to_startx**2) > radius:
         
     #     start_lat = center_start_lat + radius* math.cos(angle_start-theta)*conversion
-    #     start_long = center_start_long + radius* math.sin(angle_start-theta)/(111.32*math.cos(center_start_lat*3.14/180))
+    #     start_long = center_start_long + radius* math.sin(angle_start-theta)/(111.32*math.cos(center_start_lat*math.pi/180))
     #     centr_to_starty = (start_lat - center_start_lat)/conversion
-    #     centr_to_startx = (start_long - center_start_long) * (111.32*math.cos(center_start_lat*3.14/180))
+    #     centr_to_startx = (start_long - center_start_long) * (111.32*math.cos(center_start_lat*math.pi/180))
     #     print('The start is shifted within the radial grid to', start_lat,start_long)
 
     # centr_to_endy = (end_lat - center_end_lat)/conversion
     # centr_to_endx = (end_long - center_end_long) * \
-    #     (111.32*math.cos(center_end_lat*3.14/180))
+    #     (111.32*math.cos(center_end_lat*math.pi/180))
 
     # angle_end = math.atan(centr_to_endy/centr_to_endx)
 
     # if math.sqrt(centr_to_endy**2 + centr_to_endx**2) > radius:        
     #     end_lat = center_end_lat + radius* math.cos(angle_end+theta)*conversion
-    #     end_long = center_end_long + radius* math.sin(angle_end+theta)/(111.32*math.cos(center_end_lat*3.14/180))
+    #     end_long = center_end_long + radius* math.sin(angle_end+theta)/(111.32*math.cos(center_end_lat*math.pi/180))
     #     centr_to_endy = (end_lat - center_end_lat)/conversion
     #     centr_to_endx = (end_long - center_end_long) * \
-    #         (111.32*math.cos(center_end_lat*3.14/180))
+    #         (111.32*math.cos(center_end_lat*math.pi/180))
         
     #     print('The end is shifted within the radial grid to', end_lat,end_long)
 
@@ -336,7 +347,7 @@ def radial_SP(request):
     #         n_circum_end*int(math.sqrt(centr_to_endy**2 + centr_to_endx**2)/incremental_radius_end)
 
     # Compute the target node number on the radial grid.
-    last_angle_start=math.asin(truncation_layer/(2*radius))
+    last_angle_start=math.asin(truncation_layer/(radius))
 
     last_column_left=int(last_angle_start/dtheta)
     target_nodes_start_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
@@ -347,7 +358,7 @@ def radial_SP(request):
     target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of   
         
     #target_nodes_start=[N_start-1,N_start-2]
-    last_angle_end=math.asin(truncation_layer/(2*radius))
+    last_angle_end=math.asin(truncation_layer/(radius))
     last_column_left=int(last_angle_end/dtheta)
     target_nodes_end_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     target_nodes_end_j = target_nodes_end_j1 + [(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
@@ -357,7 +368,21 @@ def radial_SP(request):
     # if  request.is_ajax() and request.POST:
     nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["radial_start"]
-    fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
+    # reader = csv.DictReader(str(myfile.name))
+    # print(os.path.getsize(reader))
+    # #lines=myfile.read()
+    # #print(len(lines))
+    # #Radial_Start=myfile.readlines()
+    # for row in reader:       
+    #     Latitude_start.append(float(row['Latitude']))
+    #     print(Latitude_start)
+    #     Longitude_start.append(float(row['Longitude']))
+    #     Cost_start.append(float(row['Cost']))
+
+    # print(Longitude_start)
+
+
+    fs = FileSystemStorage('media/') #defaults to   MEDIA_ROOT  
     radial_start = fs.save(myfile.name, myfile)
 
     with open('media/radial_start.csv', newline='') as csvfile:
@@ -371,7 +396,7 @@ def radial_SP(request):
 
    
     myfile = request.FILES["radial_end"]
-    fs = FileSystemStorage()
+    fs = FileSystemStorage('media/')
     radial_end = fs.save(myfile.name, myfile)   
     
   
@@ -381,6 +406,7 @@ def radial_SP(request):
             Latitude_end.append(float(row['Latitude']))
             Longitude_end.append(float(row['Longitude']))
             Cost_end.append(float(row['Cost']))
+    
 
     os.remove(os.path.join(settings.MEDIA_ROOT, radial_end))
     #Interpolate costs at nodes
@@ -399,7 +425,13 @@ def radial_SP(request):
     Patchz_start=np.array(Cost_start_input).reshape(n_radial_start,n_circum_start)
     #print(Patchz_start[1,:])
 
-    Patchz_end=np.array(Cost_end_input).reshape(n_radial_end,n_circum_end)            
+    Patchz_end=np.array(Cost_end_input).reshape(n_radial_end,n_circum_end)
+    # Check for the inputs to be within 
+    if min(Cost_start_input)==math.inf:
+        print('There is some mistake in data input')
+    if min(Cost_end_input)==math.inf:
+        print('There is some mistake in data input')
+                    
 
     r_start_circum=(nTimes-1)*(n_circum_start-1)+1
     r_start_radial=(nTimes-1)*(n_radial_start-1)+1
@@ -410,8 +442,8 @@ def radial_SP(request):
     zvals_start=np.zeros((r_start_radial,r_start_circum))
     zvals_end=np.zeros((r_end_radial,r_end_circum))    
 
-    zvals_start= interpolation_radial(nTimes,zvals_start,Patchz_start)
-    zvals_end= interpolation_radial(nTimes,zvals_end,Patchz_end) 
+    zvals_start = interpolation_radial(nTimes,zvals_start,Patchz_start)
+    zvals_end = interpolation_radial(nTimes,zvals_end,Patchz_end) 
     
 
     # edges costs of radial graphs,
@@ -580,7 +612,7 @@ def shortest_path1(request):
     sPath[K-1,:]=Node_val[n-1,:]
     for m in range(K-2,-1,-1):
         sPath[m,:]=Node_val[int(sPath[m+1,1]),:]
-    
+    print(Cost_horizontal[0,:],sPath)
 
     request.session['N_K']=N_K.tolist()
     

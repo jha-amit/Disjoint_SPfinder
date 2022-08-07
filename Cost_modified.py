@@ -442,11 +442,11 @@ def Patch_terminal(center_start_lat,center_start_long,center_end_lat,center_end_
 
 
     
-    radial_nodes_starty=np.array([[r*math.sin(gamma)for gamma in\
+    radial_nodes_starty=np.array([[r*math.sin(gamma) for gamma in\
                         (np.linspace(theta,2*math.pi+theta,n_circum_start))]\
                              for r in (np.linspace(0,radius,n_radial_start))])
 
-    radial_nodes_startx=np.array([[r*math.cos(gamma)for gamma in \
+    radial_nodes_startx=np.array([[r*math.cos(gamma) for gamma in \
                             (np.linspace(theta,2*math.pi+theta,n_circum_start))]\
                                  for r in (np.linspace(0,radius,n_radial_start))])
 
@@ -466,14 +466,14 @@ def Patch_terminal(center_start_lat,center_start_long,center_end_lat,center_end_
 
     for i in range(radial_nodes_lat_start.shape[0]):
          for j in range(radial_nodes_lat_start.shape[1]):
-            radial_nodes_long_start[i,j]=  center_start_long + (radial_nodes_startx[i,j])/(111.32*math.cos(radial_nodes_lat_start[i,j]*3.14/180))
+            radial_nodes_long_start[i,j]=  center_start_long + (radial_nodes_startx[i,j])/(111.32*math.cos(radial_nodes_lat_start[i,j]*math.pi/180))
 
     radial_nodes_lat_end = center_end_lat + (radial_nodes_endy)*conversion
     radial_nodes_long_end = np.zeros((radial_nodes_lat_end.shape[0],radial_nodes_lat_end.shape[1]))
 
     for i in range(radial_nodes_lat_end.shape[0]):
          for j in range(radial_nodes_lat_end.shape[1]):
-            radial_nodes_long_end[i,j]=  center_end_long + (radial_nodes_endx[i,j])/(111.32*math.cos(radial_nodes_lat_end[i,j]*3.14/180))
+            radial_nodes_long_end[i,j]=  center_end_long + (radial_nodes_endx[i,j])/(111.32*math.cos(radial_nodes_lat_end[i,j]*math.pi/180))
 
    
 
