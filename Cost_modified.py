@@ -9,7 +9,7 @@ import numpy as np
 import math
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
 
-def Patchpoints(n,theta,alpha): # number of nodes per row or column, Theta=angle of rotation for alighning the start and end,
+def Patchpoints(n,theta,alpha,l_scale): # number of nodes per row or column, Theta=angle of rotation for alighning the start and end,
                                 # alpha=angle of inclination of lines with horizontal
     Patchx=np.ones((n,n))
     Patchy=np.ones((n,n))
@@ -23,7 +23,9 @@ def Patchpoints(n,theta,alpha): # number of nodes per row or column, Theta=angle
         
     # This rotation matrix is transpose of the roatation matrix that rotates counterclockwise. 
     # Then my point that i want to roatate will be a row vector or [X,Y] type.
-    # Also the angle theta that we are giving input is 
+    # Also the angle theta that we are giving input is
+    Patchx=Patchx*l_scale
+    Patchy=Patchy*l_scale 
     Rotation_matrix=np.array([[math.cos(theta),math.sin(theta)],[-math.sin(theta),math.cos(theta)]])
     #print(Patchx,Patchy)
     for i in range(0,n):

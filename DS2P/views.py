@@ -42,6 +42,8 @@ def plot(request):
         d=int(request.POST['distance'])
         alpha=float(request.POST['edge_slope'])
         gmap_license=request.POST["enter_your_gmap_API_key"]
+        l_scale=float(request.POST["enter scaling factor for grid"])
+
 
     conversion=1/111 #conversion from change in latitude to km.
                     #conversion for km to latitude = (111.32*math.cos(lat[k]*math.pi/180)) 
@@ -69,7 +71,7 @@ def plot(request):
     # distance from start to end
     
     print(theta,Y_cord,X_cord)
-    K = int(math.sqrt(X_cord**2 + Y_cord**2)/math.tan(alpha))
+    K = int(math.sqrt(X_cord**2 + Y_cord**2)/(l_scale*math.tan(alpha)))
     if K%2 ==0:
         K=K
     else:
@@ -79,11 +81,11 @@ def plot(request):
     
     N= int(K/2)+1
     # edgelength
-    L= math.sqrt(math.tan(alpha)**2 + 1)
+    L= math.sqrt(l_scale*math.tan(alpha)**2 + 1)
         # Get the grid in place
     Patchx=np.zeros((N,N))
     Patchy=np.zeros((N,N))
-    Patchx,Patchy= Patchpoints(N, theta, alpha)
+    Patchx,Patchy= Patchpoints(N, theta, alpha, l_scale)
     
     # Patchz holds the information of cost of constructon in the viscinity of vertices on the grid 
     Patchz=np.zeros((N,N))
@@ -109,9 +111,8 @@ def plot(request):
     # calculate the radius to restrict the last arc within dr_truncated_layer
     # the user does not need to enter it through GUI.          
     
-    radius = (dr_truncated_layer**2 + (d/2)**2) / (2*dr_truncated_layer)      
+    radius = (dr_truncated_layer**2 + (l_scale*d/2)**2) / (2*dr_truncated_layer)      
     
-    d_half=int(d/2)
     # this is the path difference we can get at every drop or this is the minimum path 
     # separation we can achieve using this algorithm.
     delta=distance(Patchx[0,1],Patchy[0,1],Patchx[1,0],Patchy[1,0])
@@ -230,7 +231,8 @@ def plot(request):
     request.session['radial_nodes_lat_end']=radial_nodes_lat_end
     request.session['radial_nodes_long_end']=radial_nodes_long_end
     request.session['radial_nodes_endy']=radial_nodes_endy
-    request.session['radial_nodes_endx']=radial_nodes_endx  
+    request.session['radial_nodes_endx']=radial_nodes_endx
+    request.session['l_scale']= l_scale   
 
     return JsonResponse ({'radial_nodes_long_start' : radial_nodes_long_start,'truncation_layer':truncation_layer,\
             'radial_nodes_lat_start': radial_nodes_lat_start,'radial_nodes_long_end' : radial_nodes_long_end,\
@@ -273,7 +275,7 @@ def radial_SP(request):
 
     radial_nodes_endx=request.session['radial_nodes_endx']
     radial_nodes_endx=np.array(radial_nodes_endx)
-
+    l_scale = request.session['l_scale']
     alpha=request.session['alpha']
     radius = request.session['radius']
     theta = request.session['theta']
@@ -347,7 +349,7 @@ def radial_SP(request):
     #         n_circum_end*int(math.sqrt(centr_to_endy**2 + centr_to_endx**2)/incremental_radius_end)
 
     # Compute the target node number on the radial grid.
-    last_angle_start=math.asin(truncation_layer/(radius))
+    last_angle_start=math.asin(l_scale*truncation_layer/(radius))
 
     last_column_left=int(last_angle_start/dtheta)
     target_nodes_start_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
@@ -358,7 +360,7 @@ def radial_SP(request):
     target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of   
         
     #target_nodes_start=[N_start-1,N_start-2]
-    last_angle_end=math.asin(truncation_layer/(radius))
+    last_angle_end=math.asin(l_scale*truncation_layer/(radius))
     last_column_left=int(last_angle_end/dtheta)
     target_nodes_end_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     target_nodes_end_j = target_nodes_end_j1 + [(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
