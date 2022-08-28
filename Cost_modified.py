@@ -142,7 +142,7 @@ def Cost_diamondgraph(n,zvals,nTimes,L,L_Diag):
 
     Cost_horizontal=np.zeros((n,n))
     Cost_vertical=np.zeros((n,n))
-    Cost_diag=np.zeros((n,n))
+    #Cost_diag=np.zeros((n,n))
     '''if n%2!=0:   
         r=nTimes*(n-1)//2-(n-1)//2+1
     else:
@@ -173,24 +173,22 @@ def Cost_diamondgraph(n,zvals,nTimes,L,L_Diag):
             c1=c1+nTimes-1
         c1=0
         k1=k1+nTimes-1
-   # DIAGONALS OF THE FRAME WILL HAVE A LENGTH OF 2 WHILE HAVING SAME NUMBER OF POINTS.    
-    k=0
-    c=0
-    edgelength_DIAGONAL=L_Diag
-    for i in range(1,n):
-        for j in range(1,n):
-            if zvals[k,c]!=math.inf:
-                Cost_diag[i,j]=simpson([zvals[k+i,c+i] for i in range(0,nTimes)],nTimes, edgelength_DIAGONAL) 
-            c=c+nTimes-1
-        k=k+nTimes-1
-        c=0
+#    # DIAGONALS OF THE FRAME WILL HAVE A LENGTH OF 2 WHILE HAVING SAME NUMBER OF POINTS.    
+#     k=0
+#     c=0
+#     edgelength_DIAGONAL=L_Diag
+#     for i in range(1,n):
+#         for j in range(1,n):
+#             if zvals[k,c]!=math.inf:
+#                 Cost_diag[i,j]=simpson([zvals[k+i,c+i] for i in range(0,nTimes)],nTimes, edgelength_DIAGONAL) 
+#             c=c+nTimes-1
+#         k=k+nTimes-1
+#         c=0
     Cost_horizontal[:,0]=math.inf
     Cost_vertical[0,:]=math.inf
-    Cost_diag[:,0]=math.inf
-    Cost_diag[0,:]=math.inf
 
 
-    return Cost_horizontal,Cost_vertical,Cost_diag
+    return Cost_horizontal,Cost_vertical
 #  COST FOR THE COMPLETE GRAPH NEAR START.(Input arguments l=for scaling the edge size as per requirement,
 #  n= for nxn array of nodes, zvals=interpolated cost values,nTimes=number of interpolated points(nTimesxnTimes))
 def complete_graph(l,n,zvals,nTimes):
@@ -439,8 +437,8 @@ def interpolation_radial(nTimes,zvals,Patchz): # nTimes = number of interpolted 
 
     #++++++++++++++++++++++++++++++++++++++++++++++
 
-def Patch_terminal(center_start_lat,center_start_long,center_end_lat,center_end_long, n_circum_start, n_radial_start,theta,radius,\
-                n_circum_end, n_radial_end,conversion):
+def Patch_terminal(center_start_lat, center_start_long, center_end_lat, center_end_long, n_circum_start, \
+                    n_radial_start, theta, radius, n_circum_end, n_radial_end,conversion):
 
 
     

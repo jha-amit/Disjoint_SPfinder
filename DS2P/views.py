@@ -81,7 +81,7 @@ def plot(request):
     
     N= int(K/2)+1
     # edgelength
-    L= math.sqrt(l_scale*math.tan(alpha)**2 + 1)
+    L= math.sqrt((l_scale*math.tan(alpha))**2 + l_scale**2)
         # Get the grid in place
     Patchx=np.zeros((N,N))
     Patchy=np.zeros((N,N))
@@ -105,30 +105,39 @@ def plot(request):
             Lat[k]=Patchy[i,j]*conversion+start[0]       
             Long[k]=Patchx[i,j]/(111.32*math.cos(Lat[k]*math.pi/180))+start[1]
             k=k+1
-        
-    # this is the distance of chord (truncation layer) from the circle.
-    dr_truncated_layer = float(request.POST['Truncation_layerto_arc'])
-    # calculate the radius to restrict the last arc within dr_truncated_layer
-    # the user does not need to enter it through GUI.          
-    
-    radius = (dr_truncated_layer**2 + (l_scale*d/2)**2) / (2*dr_truncated_layer)      
+
     
     # this is the path difference we can get at every drop or this is the minimum path 
     # separation we can achieve using this algorithm.
+
     delta=distance(Patchx[0,1],Patchy[0,1],Patchx[1,0],Patchy[1,0])
-    d_half=int(d/2)
+    d_half=int(d/(2*l_scale)) # layer to facilitate d separation
     buffer= int(request.POST['Buffer_layers']) # User can choose any number of layer that will be added to the 
                     #minimum separation constraint in order to make a choice of two 
                     #path combination out of many possible combinations.
     
-    truncation_layer = int(d_half + buffer)        
+    truncation_layer = int(d_half + buffer)
+
+    truncation_layer_midpoint_start = [(Patchx[truncation_layer,0] + Patchx[0,truncation_layer])/2 , \
+        (Patchy[truncation_layer,0] + Patchy[0,truncation_layer])/2]  
+
+    # this is the distance of chord (truncation layer) from the circle.
+    dr_truncated_layer = float(request.POST['Truncation_layerto_arc'])
+    print(truncation_layer)
+    # calculate the radius to restrict the last arc within dr_truncated_layer
+    # the user does not need to enter it through GUI.          
+    x=distance(truncation_layer_midpoint_start[0],\
+                truncation_layer_midpoint_start[1],Patchx[truncation_layer,0],\
+                    Patchy[truncation_layer,0])
+    radius = (dr_truncated_layer**2 + x**2) / (2*dr_truncated_layer)      
+    print(radius,x)
+            
     
     # We define the center of the radial grid at the termnals.
     
-    truncation_layer_midpoint_start = [(Patchx[truncation_layer,0] + Patchx[0,truncation_layer])/2 , \
-        (Patchy[truncation_layer,0] + Patchy[0,truncation_layer])/2]
+   
 
-    centery_start =truncation_layer_midpoint_start[1] + (radius - dr_truncated_layer) *math.sin(math.pi+theta)        
+    centery_start = truncation_layer_midpoint_start[1] + (radius - dr_truncated_layer) *math.sin(math.pi+theta)        
     centerx_start = truncation_layer_midpoint_start[0] + (radius - dr_truncated_layer) * math.cos(theta+(math.pi))       
     center_start_lat = start[0] + centery_start*conversion
     center_start_long = start[1] +centerx_start/(111.32*math.cos(center_start_lat*math.pi/180))
@@ -349,19 +358,22 @@ def radial_SP(request):
     #         n_circum_end*int(math.sqrt(centr_to_endy**2 + centr_to_endx**2)/incremental_radius_end)
 
     # Compute the target node number on the radial grid.
-    last_angle_start=math.asin(l_scale*truncation_layer/(radius))
+    last_angle_start=math.asin(truncation_layer*l_scale/(radius))
 
     last_column_left=int(last_angle_start/dtheta)
+    print(last_column_left)
     target_nodes_start_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     
     target_nodes_start_j = target_nodes_start_j1+[(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
     target_nodes_start_i = n_radial_start-1
     target_nodes_start = [(target_nodes_start_i) * n_circum_start + target_nodes_start_j[i] for i in range(len(target_nodes_start_j))]
-    target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of   
+    target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of
+    print(target_nodes_start)   
         
     #target_nodes_start=[N_start-1,N_start-2]
     last_angle_end=math.asin(l_scale*truncation_layer/(radius))
     last_column_left=int(last_angle_end/dtheta)
+    print(last_column_left)
     target_nodes_end_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     target_nodes_end_j = target_nodes_end_j1 + [(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
     target_nodes_end_i = n_radial_end - 1
@@ -413,19 +425,22 @@ def radial_SP(request):
     os.remove(os.path.join(settings.MEDIA_ROOT, radial_end))
     #Interpolate costs at nodes
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
-    # using known points x, y, z.   
+    # using known points x, y, z.
+    # 
+    Lat_lim = float(request.POST['Lat_limit'])
+    Long_lim = float(request.POST['Long_limit'])
     
     Cost_start_input = IDW(np.array(Latitude_start),np.array(Longitude_start),np.array(Cost_start),radial_nodes_lat_start.\
-        reshape(int(n_circum_start)*n_radial_start,), radial_nodes_long_start.reshape((n_circum_start)*n_radial_start,),1,1)
+        reshape(int(n_circum_start)*n_radial_start,), radial_nodes_long_start.reshape((n_circum_start)*n_radial_start,),Lat_lim,Long_lim)
 
     
 
     Cost_end_input=IDW(np.array(Latitude_end),np.array(Longitude_end),np.array(Cost_end),radial_nodes_lat_end.\
-        reshape(int(n_circum_end)*n_radial_end,), radial_nodes_long_end.reshape((n_circum_end)*n_radial_end,),1,1)
+        reshape(int(n_circum_end)*n_radial_end,), radial_nodes_long_end.reshape((n_circum_end)*n_radial_end,),Lat_lim,Long_lim)
 
     
     Patchz_start=np.array(Cost_start_input).reshape(n_radial_start,n_circum_start)
-    #print(Patchz_start[1,:])
+    print(Patchz_start[1,:])
 
     Patchz_end=np.array(Cost_end_input).reshape(n_radial_end,n_circum_end)
     # Check for the inputs to be within 
@@ -455,6 +470,8 @@ def radial_SP(request):
 
     Cost_radial_end = Cost_radial(n_circum_end,zvals_end,nTimes,n_radial_end,\
                                 radial_nodes_endx, radial_nodes_endy)
+
+    #print(Cost_radial_start[target_nodes_start[0]//n_circum_start,target_nodes_start[0]%n_circum_start],  Cost_radial_end[target_nodes_end[0]//n_circum_end,target_nodes_end[0]%n_circum_end])
 
 
     # total number of nodes in the radial grid.
@@ -527,6 +544,7 @@ def shortest_path1(request):
     center_start_long = request.session['center_start_long'] 
     center_end_lat =  request.session['center_end_lat']
     center_end_long = request.session['center_end_long']
+    l_scale = request.session['l_scale']
 
     n=int(1/48*((K+2)*(K+4)*(2*K+6)))
     Patchz=np.zeros((N,N))   
@@ -537,8 +555,7 @@ def shortest_path1(request):
     nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["Cost_matrix"]
     fs = FileSystemStorage()
-    Cost_matrix = fs.save(myfile.name, myfile)
-    
+    Cost_matrix = fs.save(myfile.name, myfile)    
 
     L_Diag = 2*L*math.sin(alpha)  
     Longitude_input = []
@@ -567,7 +584,10 @@ def shortest_path1(request):
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
     # using known points x, y, z.
 
-    Cost=IDW(Latitude_input,Longitude_input,Cost_input,Lat,Long,1,1)
+    Lat_lim = float(request.POST['Lat_limit'])
+    Long_lim = float(request.POST['Long_limit'])
+
+    Cost=IDW(Latitude_input,Longitude_input,Cost_input,Lat,Long,Lat_lim, Long_lim)
 
     Hash=np.zeros((n,3))
     Hash=hash1(n,K)
@@ -603,10 +623,11 @@ def shortest_path1(request):
     zvals=np.zeros((r,r))
     zvals=interpolation(nTimes,N,Patchz)
 
-    Cost_horizontal,Cost_vertical,Cost_diag = Cost_diamondgraph(N,zvals,nTimes,L,L_Diag)
+    Cost_horizontal,Cost_vertical = Cost_diamondgraph(N,zvals,nTimes,L,L_Diag)
     
+    #d_scaled = int(d/l_sc
 
-    Node_val=node_val(Hash,Cost_horizontal,Cost_vertical,Cost_diag,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
+    Node_val=node_val(Hash,Cost_horizontal,Cost_vertical,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
 
   
     # Shortest path computation           
@@ -626,11 +647,11 @@ def shortest_path1(request):
 
     Cost_horizontal = np.where(Cost_horizontal == math.inf , 1000000, Cost_horizontal)
     Cost_vertical = np.where(Cost_vertical == math.inf , 1000000, Cost_vertical)
-    Cost_diag = np.where(Cost_diag == math.inf , 1000000, Cost_diag)
+    
 
     Cost_horizontal = Cost_horizontal.tolist()
     Cost_vertical = Cost_vertical.tolist()
-    Cost_diag = Cost_diag.tolist()
+  
    
     
     Patchx = Patchx.tolist()
@@ -640,15 +661,15 @@ def shortest_path1(request):
 
     request.session['Cost_horizontal'] = Cost_horizontal
     request.session['Cost_vertical'] = Cost_vertical
-    request.session['Cost_diag'] = Cost_diag
     
-    return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,'Long':Long,'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'Cost_diag':Cost_diag,'K':K,'d':d, 'N':N, 'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, 'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
+    
+    return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,'Long':Long,'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'K':K,'d':d, 'N':N, 'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, 'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
 def Modify_cost(request):
 # request is a REST api framework using which we can request variables saved as session in other views modules...
     Cost_horizontal=np.array(request.session['Cost_horizontal'])
     Cost_vertical=np.array(request.session['Cost_vertical'])
-    Cost_diag=np.array(request.session['Cost_diag'])
+    
     K=request.session['K']
     
     d=request.session['d']
@@ -682,14 +703,16 @@ def Modify_cost(request):
     if len(node_ids)!=0:
         for nodes,costs in zip(node_ids,COST):            
             i=int(nodes)
-            j=costs.split(',')            
+            j=costs.split(',')
+            print(costs)            
             Cost_horizontal[i//N,i%N +1] = float(j[0])            
             Cost_vertical[i//N,i%N + 1] = float(j[1])
-            Cost_diag[i//N +1,i%N + 1] = float(j[2])
+            
 
     
     sPath1=np.zeros((K,3))
-    Node_val= node_val(Hash,Cost_horizontal,Cost_vertical,Cost_diag,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
+    
+    Node_val= node_val(Hash,Cost_horizontal,Cost_vertical,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
     sPath1[K-1,:]=Node_val[n-1,:]
     
     for m in range(K-2,-1,-1):
@@ -700,10 +723,10 @@ def Modify_cost(request):
     N_K=N_K.tolist()
     Cost_horizontal=Cost_horizontal.tolist()
     Cost_vertical=Cost_vertical.tolist()
-    Cost_diag=Cost_diag.tolist()
+    
    
 
-    return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'Cost_diag':Cost_diag,'sPath1':sPath1,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
+    return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'sPath1':sPath1,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
     
 

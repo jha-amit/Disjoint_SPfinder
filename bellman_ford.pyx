@@ -40,10 +40,8 @@ def bellman_ford(my_type[:, ::1] B, my_type N, my_type start, my_type target, my
     cdef int n, i, j, k
     
     node_value1= np.ones(int(N))*highvalue
-    node_value1[int(start)]=0.0
-    cdef double[::1] node_value = node_value1
-    
-    
+    node_value1[int(start)]=0.0    
+    cdef double[::1] node_value = node_value1    
     #B[0,1:]=highvalue    
     #% Run relaxation for N-1 time 
     for n in range(0,int(N-1)):
@@ -56,7 +54,8 @@ def bellman_ford(my_type[:, ::1] B, my_type N, my_type start, my_type target, my
                 else:
                    node_value[j]=node_value[j]
              
-    #target_cost=node_value[0,target_node] #%get the target node path cost
+    #target_cost=node_value[0,target_node] 
+    #%get the target node path cost
     k=0
     cdef list L= []    
     L.append(target)

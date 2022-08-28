@@ -31,7 +31,7 @@ ctypedef fused my_type:
 @cython.wraparound(False) # Deactivate negative indexing.
 
 #Here we are type declaring the Hash and other variables using fused type function
-def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[:, ::1] Cost_diag, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):
+def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):
     
     n = Hash.shape[0]
     k = Hash.shape[1]
@@ -94,13 +94,8 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):        
                 # give range of nodes in next layer.
                 j=(Hash[v1,0])            
-                if layer < sink_neighbour-1:
-                    l=int(sum(N[:layer+3]))
-                else:
-                    l=int(sum(N[:layer+2]))
-                    
                 
-                for v2 in range(int(sum(N[:layer+1])),l):
+                for v2 in range(int(sum(N[:layer+1])),int(sum(N[:layer+2]))):
                     #print(l1,l2)
                     j=Hash[v2,0]
                     
@@ -131,14 +126,7 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
                             else:
                                 Cijk = Cost_vertical[int(ip),int(jp)]
 
-                        elif abs(Hash[v2,0]-Hash[v1,0])<=2:
-
-                            Cijk = Cost_diag[int(ip),int(jp)]
-
-                            if (Cijk >= Cost_horizontal[int(ip),int(jp)] + Cost_vertical[int(ip),int(jp) - 1])\
-                                        and (Cijk >= Cost_vertical[int(ip),int(jp)] + Cost_horizontal[int(ip)-1,int(jp)]):
-
-                                Cijk = np.inf
+                        
                                 #max((Cost_horizontal[int(ip),int(jp)] + Cost_vertical[int(ip),int(jp) - 1]),\
                                         #(Cost_vertical[int(ip),int(jp)] + Cost_horizontal[int(ip)-1,int(jp)]))
 
@@ -151,18 +139,7 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
                             if Hash[v1,2]<=Hash[v2,2]: 
                                 Cijk = Cost_horizontal[int(ip),int(jp)]+Cijk # changing the inquality here
                             else:
-                                Cijk = Cost_vertical[int(ip),int(jp)]+Cijk
-
-                        elif abs(Hash[v2,0]-Hash[v1,0])<=2:
-
-                            Cijk1 = Cost_diag[int(ip),int(jp)]
-
-                            if (Cijk1 >= Cost_horizontal[int(ip),int(jp)] + Cost_vertical[int(ip),int(jp) - 1])\
-                                        and (Cijk1 >= Cost_vertical[int(ip),int(jp)] + Cost_horizontal[int(ip)-1,int(jp)]):
-
-                                Cijk1 = np.inf
-
-                            Cijk = Cijk1+Cijk
+                                Cijk = Cost_vertical[int(ip),int(jp)]+Cijk                      
 
 
                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):

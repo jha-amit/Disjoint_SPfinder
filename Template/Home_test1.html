@@ -29,11 +29,6 @@
         height: 50px;
         width: 1000px
       }
-      #Cost_diagonal {
-        background-color: #a1edcc;
-        height: 50px;
-        width: 50px
-      }
       #map-canvas {
         height: 1000px;
         width:900px;
@@ -67,10 +62,10 @@
         {%csrf_token%}
             
         Grid density(nTimes)=<input type="text" id="Grid_density" name="Grid_density"><br>
-        Enter a start latitude =<input type="text" id="start_lat" name="start_lat"><br>
-        Enter a start longitude =<input type="text" id="start_long" name="start_long"><br>
-        Enter a end latitude =<input type="text" id="end_lat" name="end_lat"><br>
-        Enter a end longitude =<input type="text" id="end_long" name="end_long"><br>
+       
+        Latitude difference for selecting inputs for interpolation =<input type="text" id="Lat_limit" name="Lat_limit"><br>
+        Longitude difference for selecting inputs for interpolation =<input type="text" id="Long_limit" name="Long_limit"><br>
+        
         Enter a high value to represent infinity costs =<input type="text" id="High_val" name="High_val"><br>
         Input cost file for terminal graph at start=<input type="file" name="radial_start"><br>
         Input cost file for terminal graph at end=<input type="file" name="radial_end"><br>               
@@ -86,6 +81,8 @@
     {%csrf_token%}
     Input cost file for diamond grid = <input type="file" name="Cost_matrix"><br>
     Grid density(nTimes) = <input type="text" id="Grid_density" name="Grid_density"><br>
+    Latitude difference for selecting inputs for interpolation =<input type="text" id="Lat_limit" name="Lat_limit"><br>
+    Longitude difference for selecting inputs for interpolation =<input type="text" id="Long_limit" name="Long_limit"><br>
                      
     <input id= "Compute_DS2p" type= "submit", name="DS2P", value="DS2P">  
     </form>  
@@ -95,7 +92,7 @@
     Input node number to be modified = <input type="text" id="node_id" name="node_id"><br>
     Input modified cost horizontal = <input type="text" id="Cost_horizon" name="Cost_horizontal"><br>
     Input modified cost vertical = <input type="text" id="Cost_verti" name="Cost_vertical" ><br> 
-    Input modified cost diagonal= <input type="text" id="Cost_diago" name="Cost_diagonal"><br>
+    
     <input type="submit", name="Submit", value="Add to list">  
     </form> 
                  
@@ -521,7 +518,7 @@ let t1=performance.now()
                 center_end_long = response.center_end_long
                 Cost_horizontal = response.Cost_horizontal
                 Cost_vertical = response.Cost_vertical
-                Cost_diagonal = response.Cost_diag                
+                              
 
                   var N1,N2,j1,i11,i12,j2,i21,i22,X1,Y1,X2,Y2,X3,Y3,X4,Y4;
                         for (var i=K-1;i>0;i--){
@@ -675,10 +672,8 @@ let t1=performance.now()
                     node_col=Math.floor(node_id%N);
                     console.log(node_id, Cost_horizontal)
                     if (node_row<N-1){ 
-                      var CostV=Cost_vertical[node_row+1][node_col];
-                      if (node_col<N-1){
-                        var CostD=Cost_diagonal[node_row+1][node_col+1];}
-                      else {var CostD="None"};}
+                      var CostV=Cost_vertical[node_row+1][node_col];}
+                    
                     else {
                       var CostV="None";
                       var CostD="None";
@@ -702,8 +697,6 @@ let t1=performance.now()
             cost_elements.push(Cost_horizontal);
             var Cost_vertical = document.getElementById('Cost_verti').value;
             cost_elements.push(Cost_vertical);
-            var Cost_diagonal = document.getElementById('Cost_diago').value;
-            cost_elements.push(Cost_diagonal);
             COST.push(cost_elements);
             console.log(COST)
           })                     
