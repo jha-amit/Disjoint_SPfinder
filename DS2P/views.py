@@ -396,8 +396,8 @@ def radial_SP(request):
     # print(Longitude_start)
 
 
-    fs = FileSystemStorage('media/') #defaults to   MEDIA_ROOT  
-    radial_start = fs.save(myfile.name, myfile)
+    fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
+    radial_start = fs.save('radial_start.csv', myfile)
 
     with open('media/radial_start.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -410,8 +410,8 @@ def radial_SP(request):
 
    
     myfile = request.FILES["radial_end"]
-    fs = FileSystemStorage('media/')
-    radial_end = fs.save(myfile.name, myfile)   
+    fs = FileSystemStorage()
+    radial_end = fs.save('radial_end.csv', myfile)   
     
   
     with open('media/radial_end.csv', newline='') as csvfile:
@@ -498,6 +498,7 @@ def radial_SP(request):
         results = bellman_ford(Cost_radial_start,N_start,start_node_number,int(target_nodes_start[i]),highvalue)
         
         sPath_terminal_start.append(results)
+    print(sPath_terminal_start,sPath_terminal_end)
        
 
     for i in range(len(target_nodes_end)):        
@@ -519,10 +520,7 @@ def radial_SP(request):
 
 
 
-    return JsonResponse ({'radial_nodes_long_start' : radial_nodes_long_start,\
-            'radial_nodes_lat_start': radial_nodes_lat_start,'radial_nodes_long_end' : radial_nodes_long_end,\
-            'radial_nodes_lat_end': radial_nodes_lat_end,'n_circum_start':n_circum_start,\
-            'n_radial_start':n_radial_start,'n_circum_end':n_circum_end,'n_radial_end':n_radial_end,'sPath_terminal_start':sPath_terminal_start,'sPath_terminal_end':sPath_terminal_end})
+    return JsonResponse ({'sPath_terminal_start':sPath_terminal_start,'sPath_terminal_end':sPath_terminal_end})
 
 def shortest_path1(request):
     Lat=request.session['Lat']
@@ -555,7 +553,7 @@ def shortest_path1(request):
     nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["Cost_matrix"]
     fs = FileSystemStorage()
-    Cost_matrix = fs.save(myfile.name, myfile)    
+    Cost_matrix = fs.save('Cost_matrix.csv', myfile)    
 
     L_Diag = 2*L*math.sin(alpha)  
     Longitude_input = []
@@ -663,7 +661,10 @@ def shortest_path1(request):
     request.session['Cost_vertical'] = Cost_vertical
     
     
-    return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,'Long':Long,'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'K':K,'d':d, 'N':N, 'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, 'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
+    return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,\
+        'Long':Long,'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'K':K,'d':d, 'N':N,\
+             'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, \
+                'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
 def Modify_cost(request):
 # request is a REST api framework using which we can request variables saved as session in other views modules...
