@@ -123,14 +123,14 @@ def plot(request):
 
     # this is the distance of chord (truncation layer) from the circle.
     dr_truncated_layer = float(request.POST['Truncation_layerto_arc'])
-    print(truncation_layer)
+    #print(truncation_layer)
     # calculate the radius to restrict the last arc within dr_truncated_layer
     # the user does not need to enter it through GUI.          
     x=distance(truncation_layer_midpoint_start[0],\
                 truncation_layer_midpoint_start[1],Patchx[truncation_layer,0],\
                     Patchy[truncation_layer,0])
     radius = (dr_truncated_layer**2 + x**2) / (2*dr_truncated_layer)      
-    print(radius,x)
+    #print(radius,x)
             
     
     # We define the center of the radial grid at the termnals.
@@ -309,71 +309,29 @@ def radial_SP(request):
 
     # user can define a start point anywhere within the radial grid.
    
-    # start_lat = float(request.POST['start_lat'])
-    # start_long = float(request.POST['start_long'])
-    # end_lat = float(request.POST['end_lat'])
-    # end_long = float(request.POST['end_long'])
-
-    # # we check if the user has given the lat-long within the radial graph or not
-    # conversion=1/111
-
-    # centr_to_starty = (start_lat - center_start_lat)/conversion
-    # centr_to_startx = (start_long - center_start_long) * \
-    #     (111.32*math.cos(center_start_lat*math.pi/180))
-
-    # angle_start = math.atan(centr_to_starty/centr_to_startx)
-    
-    
-    # if math.sqrt(centr_to_starty**2 + centr_to_startx**2) > radius:
-        
-    #     start_lat = center_start_lat + radius* math.cos(angle_start-theta)*conversion
-    #     start_long = center_start_long + radius* math.sin(angle_start-theta)/(111.32*math.cos(center_start_lat*math.pi/180))
-    #     centr_to_starty = (start_lat - center_start_lat)/conversion
-    #     centr_to_startx = (start_long - center_start_long) * (111.32*math.cos(center_start_lat*math.pi/180))
-    #     print('The start is shifted within the radial grid to', start_lat,start_long)
-
-    # centr_to_endy = (end_lat - center_end_lat)/conversion
-    # centr_to_endx = (end_long - center_end_long) * \
-    #     (111.32*math.cos(center_end_lat*math.pi/180))
-
-    # angle_end = math.atan(centr_to_endy/centr_to_endx)
-
-    # if math.sqrt(centr_to_endy**2 + centr_to_endx**2) > radius:        
-    #     end_lat = center_end_lat + radius* math.cos(angle_end+theta)*conversion
-    #     end_long = center_end_long + radius* math.sin(angle_end+theta)/(111.32*math.cos(center_end_lat*math.pi/180))
-    #     centr_to_endy = (end_lat - center_end_lat)/conversion
-    #     centr_to_endx = (end_long - center_end_long) * \
-    #         (111.32*math.cos(center_end_lat*math.pi/180))
-        
-    #     print('The end is shifted within the radial grid to', end_lat,end_long)
-
-    
-    # compute start node number on the radial grid
     start_node_number=0
-    #int(angle_start/dtheta) +\
-    #       n_circum_start*int(math.sqrt(centr_to_starty**2 + centr_to_startx**2)/incremental_radius_start)
+  
 
     end_node_number = 0
-    # int(angle_end/dtheta) +\
-    #         n_circum_end*int(math.sqrt(centr_to_endy**2 + centr_to_endx**2)/incremental_radius_end)
+   
 
     # Compute the target node number on the radial grid.
     last_angle_start=math.asin(truncation_layer*l_scale/(radius))
 
     last_column_left=int(last_angle_start/dtheta)
-    print(last_column_left)
+    #print(last_column_left)
     target_nodes_start_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     
     target_nodes_start_j = target_nodes_start_j1+[(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
     target_nodes_start_i = n_radial_start-1
     target_nodes_start = [(target_nodes_start_i) * n_circum_start + target_nodes_start_j[i] for i in range(len(target_nodes_start_j))]
     target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of
-    print(target_nodes_start)   
+    #print(target_nodes_start)   
         
     #target_nodes_start=[N_start-1,N_start-2]
     last_angle_end=math.asin(l_scale*truncation_layer/(radius))
     last_column_left=int(last_angle_end/dtheta)
-    print(last_column_left)
+    #print(last_column_left)
     target_nodes_end_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     target_nodes_end_j = target_nodes_end_j1 + [(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
     target_nodes_end_i = n_radial_end - 1
@@ -382,20 +340,6 @@ def radial_SP(request):
     # if  request.is_ajax() and request.POST:
     nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["radial_start"]
-    # reader = csv.DictReader(str(myfile.name))
-    # print(os.path.getsize(reader))
-    # #lines=myfile.read()
-    # #print(len(lines))
-    # #Radial_Start=myfile.readlines()
-    # for row in reader:       
-    #     Latitude_start.append(float(row['Latitude']))
-    #     print(Latitude_start)
-    #     Longitude_start.append(float(row['Longitude']))
-    #     Cost_start.append(float(row['Cost']))
-
-    # print(Longitude_start)
-
-
     fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
     ABC = fs.save('radial_start.csv', myfile)
 
@@ -470,8 +414,6 @@ def radial_SP(request):
     Cost_radial_end = Cost_radial(n_circum_end,zvals_end,nTimes,n_radial_end,\
                                 radial_nodes_endx, radial_nodes_endy)
 
-    #print(Cost_radial_start[target_nodes_start[0]//n_circum_start,target_nodes_start[0]%n_circum_start],  Cost_radial_end[target_nodes_end[0]//n_circum_end,target_nodes_end[0]%n_circum_end])
-
 
     # total number of nodes in the radial grid.
 
@@ -518,16 +460,15 @@ def radial_SP(request):
     request.session['truncated_layer_start_cost'] = truncated_layer_start_cost
     request.session['truncated_layer_end_cost'] = truncated_layer_end_cost
 
-    with open('sPath_terminal.txt','w') as file_list:
-        for lines in sPath_terminal_start:
-            file_list.write('%s\n' % lines)
-    with open('sPath_terminal_end.txt','w') as file_list:
-        for lines in sPath_terminal_end:
-            file_list.write('%s\n' % lines)
+    # with open('sPath_terminal.txt','w') as file_list:
+    #     for lines in sPath_terminal_start:
+    #         file_list.write('%s\n' % lines)
+    # with open('sPath_terminal_end.txt','w') as file_list:
+    #     for lines in sPath_terminal_end:
+    #         file_list.write('%s\n' % lines)
 
     os.remove(os.path.join(settings.MEDIA_ROOT, ABC))
-    os.remove(os.path.join(settings.MEDIA_ROOT, CFD))
-    
+    os.remove(os.path.join(settings.MEDIA_ROOT, CFD))    
 
     return JsonResponse ({'sPath_terminal_start':sPath_terminal_start,'sPath_terminal_end':sPath_terminal_end})
 
@@ -642,7 +583,7 @@ def shortest_path1(request):
     sPath[K-1,:]=Node_val[n-1,:]
     for m in range(K-2,-1,-1):
         sPath[m,:]=Node_val[int(sPath[m+1,1]),:]
-    print(Cost_horizontal[0,:],sPath)
+    #print(Cost_horizontal[0,:],sPath)
 
     request.session['N_K']=N_K.tolist()
     
@@ -716,8 +657,7 @@ def Modify_cost(request):
             j=costs.split(',')
             print(costs)            
             Cost_horizontal[i//N,i%N +1] = float(j[0])            
-            Cost_vertical[i//N,i%N + 1] = float(j[1])
-            
+            Cost_vertical[i//N,i%N + 1] = float(j[1])           
 
     
     sPath1=np.zeros((K,3))
@@ -732,9 +672,7 @@ def Modify_cost(request):
     Hash=Hash.tolist()    
     N_K=N_K.tolist()
     Cost_horizontal=Cost_horizontal.tolist()
-    Cost_vertical=Cost_vertical.tolist()
-    
-   
+    Cost_vertical=Cost_vertical.tolist()  
 
     return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'sPath1':sPath1,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
