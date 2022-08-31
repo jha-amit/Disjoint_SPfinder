@@ -397,24 +397,23 @@ def radial_SP(request):
 
 
     fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
-    fs.save('radial_start.csv', myfile)
+    ABC = fs.save('radial_start.csv', myfile)
 
-    with open('media/radial_start.csv', newline='') as csvfile:
+    with open('media/radial_start.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             Latitude_start.append(float(row['Latitude']))
             Longitude_start.append(float(row['Longitude']))
             Cost_start.append(float(row['Cost']))
-
-    os.remove(os.path.join(settings.MEDIA_ROOT, 'radial_start.csv'))
+  
 
    
-    myfile = request.FILES["radial_end"]
+    myfile1 = request.FILES["radial_end"]
     fs = FileSystemStorage()
-    fs.save('radial_end.csv', myfile) 
+    CFD = fs.save('radial_end.csv', myfile1) 
     
   
-    with open('media/radial_end.csv',newline='') as csvfile:
+    with open('media/radial_end.csv','r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             Latitude_end.append(float(row['Latitude']))
@@ -422,7 +421,7 @@ def radial_SP(request):
             Cost_end.append(float(row['Cost']))
     
 
-    os.remove(os.path.join(settings.MEDIA_ROOT, 'radial_end.csv'))
+    
     #Interpolate costs at nodes
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
     # using known points x, y, z.
@@ -526,6 +525,10 @@ def radial_SP(request):
         for lines in sPath_terminal_end:
             file_list.write('%s\n' % lines)
 
+    os.remove(os.path.join(settings.MEDIA_ROOT, ABC))
+    os.remove(os.path.join(settings.MEDIA_ROOT, CFD))
+    
+
     return JsonResponse ({'sPath_terminal_start':sPath_terminal_start,'sPath_terminal_end':sPath_terminal_end})
 
 def shortest_path1(request):
@@ -575,7 +578,7 @@ def shortest_path1(request):
             Longitude_input.append(float(row['Longitude']))
             Cost_input.append(float(row['Cost']))
 
-    os.remove(os.path.join(settings.MEDIA_ROOT, Cost_matrix))
+    
 
    
     Latitude_input=np.array(Latitude_input)
@@ -665,7 +668,7 @@ def shortest_path1(request):
 
     request.session['Cost_horizontal'] = Cost_horizontal
     request.session['Cost_vertical'] = Cost_vertical
-    
+    os.remove(os.path.join(settings.MEDIA_ROOT, Cost_matrix))
     
     return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,\
         'Long':Long,'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'K':K,'d':d, 'N':N,\
