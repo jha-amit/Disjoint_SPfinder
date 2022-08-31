@@ -69,8 +69,6 @@ def plot(request):
 
     
     # distance from start to end
-    
-    print(theta,Y_cord,X_cord)
     K = int(math.sqrt(X_cord**2 + Y_cord**2)/(l_scale*math.tan(alpha)))
     if K%2 ==0:
         K=K
@@ -383,7 +381,7 @@ def radial_SP(request):
 
     
     Patchz_start=np.array(Cost_start_input).reshape(n_radial_start,n_circum_start)
-    print(Patchz_start[1,:])
+   
 
     Patchz_end=np.array(Cost_end_input).reshape(n_radial_end,n_circum_end)
     # Check for the inputs to be within 
@@ -654,8 +652,7 @@ def Modify_cost(request):
     if len(node_ids)!=0:
         for nodes,costs in zip(node_ids,COST):            
             i=int(nodes)
-            j=costs.split(',')
-            print(costs)            
+            j=costs.split(',')      
             Cost_horizontal[i//N,i%N +1] = float(j[0])            
             Cost_vertical[i//N,i%N + 1] = float(j[1])           
 
