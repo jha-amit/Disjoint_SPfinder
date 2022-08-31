@@ -397,7 +397,7 @@ def radial_SP(request):
 
 
     fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
-    radial_start = fs.save('radial_start.csv', myfile)
+    fs.save('radial_start.csv', myfile)
 
     with open('media/radial_start.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -406,15 +406,15 @@ def radial_SP(request):
             Longitude_start.append(float(row['Longitude']))
             Cost_start.append(float(row['Cost']))
 
-    os.remove(os.path.join(settings.MEDIA_ROOT, radial_start))
+    os.remove(os.path.join(settings.MEDIA_ROOT, 'radial_start.csv'))
 
    
     myfile = request.FILES["radial_end"]
     fs = FileSystemStorage()
-    radial_end = fs.save('radial_end.csv', myfile)   
+    fs.save('radial_end.csv', myfile) 
     
   
-    with open('media/radial_end.csv', newline='') as csvfile:
+    with open('media/radial_end.csv',newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             Latitude_end.append(float(row['Latitude']))
@@ -422,7 +422,7 @@ def radial_SP(request):
             Cost_end.append(float(row['Cost']))
     
 
-    os.remove(os.path.join(settings.MEDIA_ROOT, radial_end))
+    os.remove(os.path.join(settings.MEDIA_ROOT, 'radial_end.csv'))
     #Interpolate costs at nodes
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
     # using known points x, y, z.
@@ -498,12 +498,13 @@ def radial_SP(request):
         results = bellman_ford(Cost_radial_start,N_start,start_node_number,int(target_nodes_start[i]),highvalue)
         
         sPath_terminal_start.append(results)
-    print(sPath_terminal_start,sPath_terminal_end)
+    
        
 
     for i in range(len(target_nodes_end)):        
         sPath_terminal_end.append(bellman_ford(Cost_radial_end,N_end,end_node_number,target_nodes_end[i],highvalue))
 
+    print(sPath_terminal_start,sPath_terminal_end)
     # get list of costs from source to targets in truncation layer.
     truncated_layer_start_cost = [sPath_terminal_start[i][1] for i in range(len(sPath_terminal_start))]
     truncated_layer_end_cost = [sPath_terminal_end[i][1] for i in range(len(sPath_terminal_end))]
@@ -518,7 +519,12 @@ def radial_SP(request):
     request.session['truncated_layer_start_cost'] = truncated_layer_start_cost
     request.session['truncated_layer_end_cost'] = truncated_layer_end_cost
 
-
+    with open('sPath_terminal.txt','w') as file_list:
+        for lines in sPath_terminal_start:
+            file_list.write('%s\n' % lines)
+    with open('sPath_terminal_end.txt','w') as file_list:
+        for lines in sPath_terminal_end:
+            file_list.write('%s\n' % lines)
 
     return JsonResponse ({'sPath_terminal_start':sPath_terminal_start,'sPath_terminal_end':sPath_terminal_end})
 
@@ -562,7 +568,7 @@ def shortest_path1(request):
     
 
     # Reading the file from filestorage
-    with open('media/Cost_matrix.csv', newline='') as csvfile:
+    with open('media/Cost_matrix.csv', 'w', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             Latitude_input.append(float(row['Latitude']))
