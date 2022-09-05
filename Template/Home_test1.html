@@ -489,7 +489,8 @@ let t1=performance.now()
                       alert("some Error in posting terminal cost data");
                       }
               });
-        })
+              e.stopImmediatePropagation();
+            })
   // Data posting and ploting for disjoint shortest paths
 
       $("#Diamond_graph_two_SP").submit(function (e) {
@@ -658,6 +659,7 @@ let t1=performance.now()
                         markers[i].setMap(null);
                     }       
                 }
+                e.stopImmediatePropagation();
             })                 
         
 
@@ -699,6 +701,7 @@ let t1=performance.now()
             cost_elements.push(Cost_vertical);
             COST.push(cost_elements);
             console.log(COST)
+            e.stopImmediatePropagation();
           })                     
       
        $("#Recompute").submit(function (e) {
@@ -842,6 +845,7 @@ let t1=performance.now()
                 alert("some Error in posting modified sPath data.")}  
         
         });
+        e.stopImmediatePropagation();
       })
                         
     },
@@ -849,6 +853,7 @@ let t1=performance.now()
                 alert("some Error in posting sPath data.")}  
         
         });
+        e.stopImmediatePropagation();
       })
           
       },
@@ -858,7 +863,8 @@ let t1=performance.now()
       
             });
             
-        }); 
+            e.stopImmediatePropagation();
+          }); 
         
 </script>
 

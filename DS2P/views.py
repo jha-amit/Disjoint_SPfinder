@@ -335,7 +335,7 @@ def radial_SP(request):
     target_nodes_end_i = n_radial_end - 1
     target_nodes_end = [(target_nodes_end_i) * n_circum_end + target_nodes_end_j[i] for i in range(len(target_nodes_end_j))]
     
-    # if  request.is_ajax() and request.POST:
+    #if  request.is_ajax() and request.POST:
     nTimes=int(request.POST['Grid_density'])
     myfile = request.FILES["radial_start"]
     fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
@@ -349,7 +349,7 @@ def radial_SP(request):
             Cost_start.append(float(row['Cost']))
   
 
-   
+    #if  request.is_ajax() and request.POST:
     myfile1 = request.FILES["radial_end"]
     fs = FileSystemStorage()
     CFD = fs.save('radial_end.csv', myfile1) 
@@ -443,7 +443,7 @@ def radial_SP(request):
     for i in range(len(target_nodes_end)):        
         sPath_terminal_end.append(bellman_ford(Cost_radial_end,N_end,end_node_number,target_nodes_end[i],highvalue))
 
-    print(sPath_terminal_start,sPath_terminal_end)
+   
     # get list of costs from source to targets in truncation layer.
     truncated_layer_start_cost = [sPath_terminal_start[i][1] for i in range(len(sPath_terminal_start))]
     truncated_layer_end_cost = [sPath_terminal_end[i][1] for i in range(len(sPath_terminal_end))]
@@ -510,14 +510,12 @@ def shortest_path1(request):
     
 
     # Reading the file from filestorage
-    with open('media/Cost_matrix.csv', 'w', newline='') as csvfile:
+    with open('media/Cost_matrix.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             Latitude_input.append(float(row['Latitude']))
             Longitude_input.append(float(row['Longitude']))
             Cost_input.append(float(row['Cost']))
-
-    
 
    
     Latitude_input=np.array(Latitude_input)
@@ -607,6 +605,8 @@ def shortest_path1(request):
 
     request.session['Cost_horizontal'] = Cost_horizontal
     request.session['Cost_vertical'] = Cost_vertical
+
+
     os.remove(os.path.join(settings.MEDIA_ROOT, Cost_matrix))
     
     return JsonResponse({'sPath':sPath,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,\
@@ -654,9 +654,9 @@ def Modify_cost(request):
             i=int(nodes)
             j=costs.split(',')      
             Cost_horizontal[i//N,i%N +1] = float(j[0])            
-            Cost_vertical[i//N,i%N + 1] = float(j[1])           
+            Cost_vertical[int(i//N +1) ,i%N] = float(j[1])
+            
 
-    
     sPath1=np.zeros((K,3))
     
     Node_val= node_val(Hash,Cost_horizontal,Cost_vertical,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
@@ -669,7 +669,8 @@ def Modify_cost(request):
     Hash=Hash.tolist()    
     N_K=N_K.tolist()
     Cost_horizontal=Cost_horizontal.tolist()
-    Cost_vertical=Cost_vertical.tolist()  
+    Cost_vertical=Cost_vertical.tolist()
+   
 
     return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'sPath1':sPath1,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
