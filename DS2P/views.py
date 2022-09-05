@@ -336,10 +336,16 @@ def radial_SP(request):
     target_nodes_end = [(target_nodes_end_i) * n_circum_end + target_nodes_end_j[i] for i in range(len(target_nodes_end_j))]
     
     #if  request.is_ajax() and request.POST:
-    nTimes=int(request.POST['Grid_density'])
-    myfile = request.FILES["radial_start"]
-    fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
-    ABC = fs.save('radial_start.csv', myfile)
+    if request.POST:
+        nTimes=int(request.POST['Grid_density'])
+        myfile = request.FILES["radial_start"]
+        fs = FileSystemStorage() #defaults to   MEDIA_ROOT  
+        ABC = fs.save('radial_start.csv', myfile)
+        Lat_lim = float(request.POST['Lat_limit'])
+        Long_lim = float(request.POST['Long_limit'])
+        highvalue=int(request.POST['High_val'])
+        myfile1 = request.FILES["radial_end"]
+        CFD = fs.save('radial_end.csv', myfile1) 
 
     with open('media/radial_start.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -348,11 +354,6 @@ def radial_SP(request):
             Longitude_start.append(float(row['Longitude']))
             Cost_start.append(float(row['Cost']))
   
-
-    #if  request.is_ajax() and request.POST:
-    myfile1 = request.FILES["radial_end"]
-    fs = FileSystemStorage()
-    CFD = fs.save('radial_end.csv', myfile1) 
     
   
     with open('media/radial_end.csv','r') as csvfile:
@@ -368,8 +369,7 @@ def radial_SP(request):
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
     # using known points x, y, z.
     # 
-    Lat_lim = float(request.POST['Lat_limit'])
-    Long_lim = float(request.POST['Long_limit'])
+  
     
     Cost_start_input = IDW(np.array(Latitude_start),np.array(Longitude_start),np.array(Cost_start),radial_nodes_lat_start.\
         reshape(int(n_circum_start)*n_radial_start,), radial_nodes_long_start.reshape((n_circum_start)*n_radial_start,),Lat_lim,Long_lim)
@@ -419,7 +419,7 @@ def radial_SP(request):
     N_end  = int(n_circum_end*n_radial_end)
 
     # start computing the radial SP
-    highvalue=int(request.POST['High_val'])
+ 
     sPath_terminal_start=[]
     sPath_terminal_end=[]
 
@@ -497,11 +497,14 @@ def shortest_path1(request):
     Patchx=np.array(Patchx)
     Patchy=np.array(Patchy)
 # surface patch density and edgelength
-   
-    nTimes=int(request.POST['Grid_density'])
-    myfile = request.FILES["Cost_matrix"]
-    fs = FileSystemStorage()
-    Cost_matrix = fs.save('Cost_matrix.csv', myfile)    
+    if request.POST:
+        nTimes=int(request.POST['Grid_density'])
+        myfile = request.FILES["Cost_matrix"]
+        fs = FileSystemStorage()
+        Cost_matrix = fs.save('Cost_matrix.csv', myfile)
+
+        Lat_lim = float(request.POST['Lat_limit'])
+        Long_lim = float(request.POST['Long_limit'])   
 
     L_Diag = 2*L*math.sin(alpha)  
     Longitude_input = []
@@ -528,8 +531,7 @@ def shortest_path1(request):
     # Inverse distance weight algorithm. We get a list of interpolated points for the unknown xi, yi,
     # using known points x, y, z.
 
-    Lat_lim = float(request.POST['Lat_limit'])
-    Long_lim = float(request.POST['Long_limit'])
+   
 
     Cost=IDW(Latitude_input,Longitude_input,Cost_input,Lat,Long,Lat_lim, Long_lim)
 
@@ -645,9 +647,9 @@ def Modify_cost(request):
     n=int(1/48*((K+2)*(K+4)*(2*K+6)))
 
     # receive list of nodes whose value is infinity
-    
-    node_ids=  request.POST.getlist('nodeid_forcostchange[]')
-    COST =  request.POST.getlist('COST[]')
+    if request.POST:
+        node_ids=  request.POST.getlist('nodeid_forcostchange[]')
+        COST =  request.POST.getlist('COST[]')
     
     if len(node_ids)!=0:
         for nodes,costs in zip(node_ids,COST):            

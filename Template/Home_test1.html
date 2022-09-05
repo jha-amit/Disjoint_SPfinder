@@ -93,7 +93,7 @@
     Input modified cost horizontal = <input type="text" id="Cost_horizon" name="Cost_horizontal"><br>
     Input modified cost vertical = <input type="text" id="Cost_verti" name="Cost_vertical" ><br> 
     
-    <input type="submit", name="Submit", value="Add to list">  
+    <input type="submit", name="edit_cost", value="Add to list">  
     </form> 
                  
     <form id= "Recompute" action="Modify_cost" method=POST enctype="multipart/form-data">
@@ -116,7 +116,7 @@
     
 <script>
 
- 
+//(".my-form").unbind('submit').bind 'submit', (event)
 // function will get executed when plotting button uis pressed
   $("#plotting").submit(function (e) {
     // preventing from page reload and default actions
@@ -417,7 +417,7 @@ let t1=performance.now()
           let t2=performance.now()
           console.log(t2-t1)
 
-      $("#Radial_single_SP").submit(function (e) {
+      $("#Radial_single_SP").unbind('submit').bind ('submit', function (e) {
           e.preventDefault();
           var form = $('#Radial_single_SP')[0];      
           // Create an FormData object 
@@ -493,7 +493,7 @@ let t1=performance.now()
             })
   // Data posting and ploting for disjoint shortest paths
 
-      $("#Diamond_graph_two_SP").submit(function (e) {
+      $("#Diamond_graph_two_SP").unbind('submit').bind ('submit', function (e) {
         e.preventDefault();
         var form = $('#Diamond_graph_two_SP')[0];    
         var data = new FormData(form);
@@ -659,7 +659,7 @@ let t1=performance.now()
                         markers[i].setMap(null);
                     }       
                 }
-                e.stopImmediatePropagation();
+                //e.stopImmediatePropagation();
             })                 
         
 
@@ -691,7 +691,7 @@ let t1=performance.now()
                   })
       }
       var COST = []
-        $("#change_cost").submit(function (e){
+        $("#change_cost").unbind('submit').bind ('submit', function (e) {
             e.preventDefault();
             nodeid_forcostchange.push(document.getElementById('node_id').value);
             var cost_elements = []
@@ -704,7 +704,7 @@ let t1=performance.now()
             e.stopImmediatePropagation();
           })                     
       
-       $("#Recompute").submit(function (e) {
+       $("#Recompute").unbind('submit').bind ('submit', function (e) {
         e.preventDefault();
 
         for (var a of nodeid_forcostchange){
@@ -845,7 +845,7 @@ let t1=performance.now()
                 alert("some Error in posting modified sPath data.")}  
         
         });
-        e.stopImmediatePropagation();
+        //e.stopImmediatePropagation();
       })
                         
     },
@@ -853,7 +853,7 @@ let t1=performance.now()
                 alert("some Error in posting sPath data.")}  
         
         });
-        e.stopImmediatePropagation();
+        //e.stopImmediatePropagation();
       })
           
       },
@@ -863,7 +863,7 @@ let t1=performance.now()
       
             });
             
-            e.stopImmediatePropagation();
+            //e.stopImmediatePropagation();
           }); 
         
 </script>
