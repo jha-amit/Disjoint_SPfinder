@@ -7,6 +7,7 @@ import csv
 import os
 
 from cython_Dijkstra import node_val
+from triconnected_dijkstra import node_val_tri
 from Cost_modified import interpolation,Cost_diamondgraph,Patchpoints,hash1,Patch_terminal,interpolation_radial,Cost_radial
 import pickle
 from .forms import UploadFileForm
@@ -197,6 +198,7 @@ def plot(request):
     Patchy=Patchy.tolist()    
   
     request.session['dtheta'] = dtheta
+    request.session['buffer'] = buffer
     request.session['n_radial_start']=n_radial_start
     request.session['n_radial_end']=n_radial_end
     request.session['n_circum_start']=n_circum_start
@@ -283,19 +285,12 @@ def radial_SP(request):
     radial_nodes_endx=request.session['radial_nodes_endx']
     radial_nodes_endx=np.array(radial_nodes_endx)
     l_scale = request.session['l_scale']
-    alpha=request.session['alpha']
+ 
     radius = request.session['radius']
-    theta = request.session['theta']
-    d=request.session['d']
+   
     K=request.session['K']
     N=request.session['N']
-    start=request.session['start']
-    incremental_radius_start= request.session['incremental_radius_start']
-    incremental_radius_end= request.session['incremental_radius_end']
-    center_start_lat = request.session['center_start_lat'] 
-    center_start_long = request.session['center_start_long'] 
-    center_end_lat =  request.session['center_end_lat']
-    center_end_long = request.session['center_end_long']
+   
   
     Longitude_start=[]
     Latitude_start=[]
@@ -320,10 +315,11 @@ def radial_SP(request):
     #print(last_column_left)
     target_nodes_start_j1 = list(np.linspace(last_column_left,0,last_column_left+1))
     
-    target_nodes_start_j = target_nodes_start_j1+[(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
+    target_nodes_start_j = target_nodes_start_j1 + [(n_circum_start-1-i) for i in np.linspace(1,last_column_left,last_column_left)]
     target_nodes_start_i = n_radial_start-1
     target_nodes_start = [(target_nodes_start_i) * n_circum_start + target_nodes_start_j[i] for i in range(len(target_nodes_start_j))]
-    target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of
+    target_nodes_start = target_nodes_start[::-1] # for matching the indexing convention of # 
+                                                    #i have to read the indices reverse to sync with the Hash (3D graph nodes)
     #print(target_nodes_start)   
         
     #target_nodes_start=[N_start-1,N_start-2]
@@ -458,6 +454,8 @@ def radial_SP(request):
     request.session['truncated_layer_start_cost'] = truncated_layer_start_cost
     request.session['truncated_layer_end_cost'] = truncated_layer_end_cost
 
+    request.session['highvalue'] = highvalue
+
     # with open('sPath_terminal.txt','w') as file_list:
     #     for lines in sPath_terminal_start:
     #         file_list.write('%s\n' % lines)
@@ -476,10 +474,8 @@ def shortest_path1(request):
     alpha=request.session['alpha']
     N=request.session['N']
     d=request.session['d']
-    K=request.session['K']
-    Lat=request.session['Lat']
-    L = request.session['L']
-    Long=request.session['Long']
+    K=request.session['K']    
+    L = request.session['L']    
     Patchx=request.session['Patchx']
     Patchy=request.session['Patchy']   
     start=request.session['start']
@@ -569,20 +565,38 @@ def shortest_path1(request):
     zvals=np.zeros((r,r))
     zvals=interpolation(nTimes,N,Patchz)
 
-    Cost_horizontal,Cost_vertical = Cost_diamondgraph(N,zvals,nTimes,L,L_Diag)
+    Cost_horizontal,Cost_vertical, Cost_diag= Cost_diamondgraph(N,zvals,nTimes,L,L_Diag)
     
     #d_scaled = int(d/l_sc
+    d = d/l_scale
 
     Node_val=node_val(Hash,Cost_horizontal,Cost_vertical,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
-
   
     # Shortest path computation           
-    sPath=np.zeros((K,3))    
+    sPath=np.zeros((K,3))
     sPath[K-1,:]=Node_val[n-1,:]
     for m in range(K-2,-1,-1):
         sPath[m,:]=Node_val[int(sPath[m+1,1]),:]
     #print(Cost_horizontal[0,:],sPath)
 
+    N1 = int(sPath[int(truncation_layer),1]) # cheapest node in truncation layer
+
+    print(truncated_layer_start_cost, truncation_layer,sPath[0:10,:],Hash[0:24])
+
+    for i in range(0,K):
+        if sPath[i,0]!=0.0:
+            N1 = int(sPath[i,2])
+            cheapest_costs = sPath[i,0]
+            break
+
+    [j1,i11,i12]=[Hash[N1,0],Hash[N1,1],Hash[N1,2]]
+
+    cheapest_nodes=[int((j1-i11)/2),int((j1+i11)/2),int((j1-i12)/2),int((j1+i12)/2)]
+
+
+      
+    request.session['cheapest_nodes'] = cheapest_nodes
+    request.session['cheapest_costs'] = cheapest_costs
     request.session['N_K']=N_K.tolist()
     
     sPath=sPath.tolist()
@@ -597,6 +611,7 @@ def shortest_path1(request):
 
     Cost_horizontal = Cost_horizontal.tolist()
     Cost_vertical = Cost_vertical.tolist()
+    Cost_diag = Cost_diag.tolist()
   
    
     
@@ -607,7 +622,7 @@ def shortest_path1(request):
 
     request.session['Cost_horizontal'] = Cost_horizontal
     request.session['Cost_vertical'] = Cost_vertical
-
+    request.session['Cost_diag'] = Cost_diag
 
     os.remove(os.path.join(settings.MEDIA_ROOT, Cost_matrix))
     
@@ -616,10 +631,163 @@ def shortest_path1(request):
              'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, \
                 'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
+def triconnectivity(request):
+    
+    alpha=request.session['alpha']
+    N=request.session['N']
+    d=request.session['d']
+    K=request.session['K']   
+    start=request.session['start']
+    buffer = request.session['buffer']/0.5
+    
+    truncated_layer_start_cost= np.array(request.session['truncated_layer_start_cost'])
+    truncated_layer_end_cost= np.array(request.session['truncated_layer_end_cost'])
+
+    center_start_lat = request.session['center_start_lat'] 
+    center_start_long = request.session['center_start_long'] 
+    center_end_lat =  request.session['center_end_lat']
+    center_end_long = request.session['center_end_long']
+
+    l_scale = request.session['l_scale']*0.5
+    theta = request.session['theta']
+    Cost_horizontal = np.array(request.session['Cost_horizontal'])
+    Cost_vertical = np.array(request.session['Cost_vertical'])
+    Cost_diag = np.array(request.session['Cost_diag'])
+    highvalue = request.session['highvalue']
+    cheapest_nodes = request.session['cheapest_nodes']
+    cheapest_costs = request.session['cheapest_costs']
+    cheapest_nodes = 2*np.array(cheapest_nodes)
+
+    # find the corresponding nodes in triconnected graph
+
+    
+    conversion = 1/111
+    K = 2*K
+    N = int(K/2) +1
+    n=int(1/48*((K+2)*(K+4)*(2*K+6)))
+
+    # recompute the lat long location for tri-connectivity
+
+    Patchx, Patchy = Patchpoints(N, theta, alpha, l_scale) # this is for triconnectivity in already scaled grid
+    
+    
+    # recompute Patch locations
+    k=0
+    Lat=[1]*N**2
+    Long=[1]*N**2
+    for i in range(0,N):
+        for j in range(0,N):
+            Lat[k]=Patchy[i,j]*conversion+start[0]       
+            Long[k]=Patchx[i,j]/(111.32*math.cos(Lat[k]*math.pi/180))+start[1]
+            k=k+1
+
+    delta=distance(Patchx[0,1],Patchy[0,1],Patchx[1,0],Patchy[1,0])
+    d_half=int(d/(2*l_scale)) # layer to facilitate d separation
+     # User can choose any number of layer that will be added to the 
+                    #minimum separation constraint in order to make a choice of two 
+                    #path combination out of many possible combinations.
+    
+    truncation_layer = int(d_half + buffer)
+
+    
+    
+# surface patch density and edgelength
+
+    Hash=np.zeros((n,3))
+    Hash=hash1(n,K)
+
+    N_K=np.array([1.0]*(K+1)) # number of nodes in each layer Note that there are K layers
+                                                            #between K+1 planes.
+    i=1
+    
+    # Number of nodes in each layer. Each layer has has number of nodes as sum of integers from zero to that layer.
+    
+    while i<=K+1:
+        if i<=K/2:
+            N_K[i-1]=int(i*(i+1)/2)
+        else:
+            N_K[i-1]=int((K-i+2)*(K-i+3)/2)
+        i=i+1
+
+    # cost computation of triconnectivity
+    Cost_tri_Horizon = np.ones((N,N))*math.inf
+    Cost_tri_vert = np.ones((N,N))*math.inf
+    
+
+    Cost_tri_Horizon[0::2, 0::2] = Cost_horizontal/2
+    Cost_tri_Horizon[0::2, 1::2] = Cost_horizontal[:,1:]/2
+
+    Cost_tri_vert[1::2, 0::2] = Cost_vertical[1:,:]/2
+    Cost_tri_vert[0::2, 0::2] = Cost_vertical/2
+
+    Cost_tri_Horizon[1::2,1::2] = Cost_diag[1::1,1::1]/2 - np.delete(Cost_tri_vert[1::2,0::2],-1,1)
+    Cost_tri_Horizon[1::2,2::2] = Cost_diag[1::1,1::1]/2 - Cost_tri_vert[2::2,2::2]
+
+    Cost_tri_vert[1::2,1::2] = Cost_diag[1::1,1::1]/2 - np.delete(Cost_tri_Horizon[0::2,1::2],-1,0)
+    Cost_tri_vert[2::2,1::2] = Cost_diag[1::1,1::1]/2 - Cost_tri_Horizon[2::2,2::2]
+
+    Cost_tri_Horizon[1::2,1::2] = math.inf
+    Cost_tri_vert[2::2,1::2] = math.inf
+    d = int(d/0.5)
+
+    # We have doubled the vertices in truncation layer, so we duplicate the radial paths.
+    #truncated_layer_start_cost = np.transpose(np.vstack((truncated_layer_start_cost,truncated_layer_start_cost))).reshape(len(truncated_layer_start_cost)*2,)
+    truncated_layer_end_cost = np.transpose(np.vstack((truncated_layer_end_cost, highvalue*truncated_layer_end_cost))).reshape(len(truncated_layer_end_cost)*2,)
+    truncated_layer_end_cost = np.array(truncated_layer_end_cost[0:-1].tolist())
+
+    truncated_layer_start_cost = np.transpose(np.vstack((truncated_layer_start_cost, highvalue*truncated_layer_start_cost))).reshape(len(truncated_layer_start_cost)*2,)
+    truncated_layer_start_cost = np.array(truncated_layer_start_cost[0:-1].tolist())
+
+    Cost_tri_Horizon = np.where(Cost_tri_Horizon == math.inf , 1000000, Cost_tri_Horizon)
+    Cost_tri_vert = np.where(Cost_tri_vert == math.inf , 1000000, Cost_tri_vert)
+    
+    Node_val = node_val(Hash,Cost_tri_Horizon, Cost_tri_vert, N_K, truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
+
+  
+    # Shortest path computation           
+    sPath1=np.zeros((K,3))    
+    sPath1[K-1,:]=Node_val[n-1,:]
+    for m in range(K-2,-1,-1):
+        sPath1[m,:]=Node_val[int(sPath1[m+1,1]),:]
+        
+    #print(Cost_horizontal[0,:],sPath)
+
+    request.session['N_K']=N_K.tolist()
+
+    print(sPath1, truncated_layer_start_cost, truncated_layer_end_cost)
+    
+    sPath1=sPath1.tolist()
+    Hash=Hash.tolist()
+    request.session['Hash'] = Hash
+    request.session['N'] = N
+    
+
+    Cost_tri_Horizon = np.where(Cost_tri_Horizon == math.inf , 1000000, Cost_tri_Horizon)
+    Cost_tri_vert = np.where(Cost_tri_vert == math.inf , 1000000, Cost_tri_vert)
+    
+
+    Cost_tri_Horizon = Cost_tri_Horizon.tolist()
+    Cost_tri_vert = Cost_tri_vert.tolist()
+  
+   
+    
+    Patchx = Patchx.tolist()
+    Patchy = Patchy.tolist()
+       
+
+    request.session['Cost_tri_Horizon'] = Cost_tri_Horizon
+    request.session['Cost_tri_vert'] = Cost_tri_vert
+
+    
+    return JsonResponse({'sPath1':sPath1,'start': start,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'Lat':Lat,\
+        'Long':Long,'Cost_tri_Horizon':Cost_tri_Horizon,'Cost_tri_vert':Cost_tri_vert,'K':K,'d':d, 'N':N,\
+             'truncation_layer':truncation_layer, 'center_start_lat':center_start_lat, \
+                'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
+
 def Modify_cost(request):
 # request is a REST api framework using which we can request variables saved as session in other views modules...
-    Cost_horizontal=np.array(request.session['Cost_horizontal'])
-    Cost_vertical=np.array(request.session['Cost_vertical'])
+    Cost_tri_Horizon=np.array(request.session['Cost_tri_Horizon'])
+    Cost_tri_vert=np.array(request.session['Cost_tri_Horizon'])
     
     K=request.session['K']
     
@@ -655,26 +823,26 @@ def Modify_cost(request):
         for nodes,costs in zip(node_ids,COST):            
             i=int(nodes)
             j=costs.split(',')      
-            Cost_horizontal[i//N,i%N +1] = float(j[0])            
-            Cost_vertical[int(i//N +1) ,i%N] = float(j[1])
+            Cost_tri_Horizon[i//N,i%N +1] = float(j[0])            
+            Cost_tri_vert[int(i//N +1) ,i%N] = float(j[1])
             
 
-    sPath1=np.zeros((K,3))
+    sPath2=np.zeros((K,3))
     
-    Node_val= node_val(Hash,Cost_horizontal,Cost_vertical,N_K,truncated_layer_start_cost, truncated_layer_end_cost,K,d,truncation_layer)
-    sPath1[K-1,:]=Node_val[n-1,:]
+    Node_val= node_val(Hash, Cost_tri_Horizon, Cost_tri_vert, N_K, truncated_layer_start_cost, truncated_layer_end_cost, K, d, truncation_layer)
+    sPath2[K-1,:]=Node_val[n-1,:]
     
     for m in range(K-2,-1,-1):
-        sPath1[m,:]=Node_val[int(sPath1[m+1,1]),:]
+        sPath2[m,:]=Node_val[int(sPath2[m+1,1]),:]
  
-    sPath1=sPath1.tolist()
+    sPath2=sPath2.tolist()
     Hash=Hash.tolist()    
     N_K=N_K.tolist()
     Cost_horizontal=Cost_horizontal.tolist()
     Cost_vertical=Cost_vertical.tolist()
    
 
-    return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'sPath1':sPath1,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
+    return JsonResponse({'Cost_horizontal':Cost_horizontal,'Cost_vertical':Cost_vertical,'sPath2':sPath2,'start': start,'K':K,'d':d,'Hash':Hash,'Patchx':Patchx,'Patchy':Patchy,'center_start_lat':center_start_lat,'center_start_long':center_start_long,'center_end_lat':center_end_lat, 'center_end_long':center_end_long})
 
     
 

@@ -13,6 +13,7 @@ urlpatterns = [
     path('radial_SP',views.radial_SP,name='radial_SP'),
     path('shortest_path1',views.shortest_path1,name='shortest_path1'),
     path('Modify_cost',views.Modify_cost,name='Modify_cost'),
+    path('triconnectivity',views.triconnectivity,name='triconnectivity'),
     #path('cost_manipulate',views.cost_manipulate,name='cost_manipulate'),
     path('gmap_license',views.plot,name='gmap_license')
 

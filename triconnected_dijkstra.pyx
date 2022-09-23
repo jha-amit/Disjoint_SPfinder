@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 11 16:24:53 2021
-
-@author: amit
-"""
-
-
-# -*- coding: utf-8 -*-
 """
 Created on Mon Sep 14 16:46:18 2020
 
@@ -31,7 +22,7 @@ ctypedef fused my_type:
 @cython.wraparound(False) # Deactivate negative indexing.
 
 #Here we are type declaring the Hash and other variables using fused type function
-def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):
+def node_val_tri(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_end_cost, my_type[::1] cheapest_nodes_X, my_type[::1] cheapest_nodes_Y, my_type K, my_type d, my_type truncated_layer, my_type cheapest_costs):
     
     n = Hash.shape[0]
     k = Hash.shape[1]
@@ -54,6 +45,7 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
     Node_val1[0,0]=0.0
     Node_val1[0,1]=0.0
     Node_val1[0,2]=0.0
+    print('ABSDF')
     
     
     cdef double[:,::1] node_val1 = Node_val1
@@ -61,33 +53,24 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
    
     cdef double  ip, jp, i1, i2, j, l1, l2
     cdef double Cijk = 0, Cijk1 = 0
-    cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer, i11, i12
+    cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
 
     source_neighbour = int(truncated_layer)
     sink_neighbour = int(K-source_neighbour)
 
     Cijk=0
-    i=0
+   
     
+
     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):
         i1 = Hash[v2,1]
         i2 = Hash[v2,2]
-        
        
-        if abs(i1-i2)>=d:
-            #i_2 =  int(i+(i1-i2)/(2))
-            i11 = int((truncated_layer + i1)*0.5)
-            i12 = int((truncated_layer + i2)*0.5)
-            print(i1,i2,i11,i12,truncated_layer)           
-            node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12] 
+        if (i1 == cheapest_nodes_X[1] and i2 == cheapest_nodes_Y[1]) or (i1 == cheapest_nodes_X[0] and i2 == cheapest_nodes_Y[0]):
+            node_val1[v2,0] = cheapest_costs 
             node_val1[v2,1] = 0
             node_val1[v2,2] = v2
             #print(node_val1[v2,0],v2)
-
-            #print(i+(i1-i2)/(2),i)
-            #if i_2 > len(truncated_layer_start_cost)-1:
-                #i = i+1
-
             
           
 

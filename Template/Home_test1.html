@@ -85,7 +85,12 @@
     Longitude difference for selecting inputs for interpolation =<input type="text" id="Long_limit" name="Long_limit"><br>
                      
     <input id= "Compute_DS2p" type= "submit", name="DS2P", value="DS2P">  
-    </form>  
+    </form>
+    
+    <form id= "Triconnect" action="triconnectivity" method=POST enctype="multipart/form-data">
+      {%csrf_token%}
+      <input type="submit", name="triconnectivity", value="Triconnected graph">
+    </form>
       
     <form method="POST" id="change_cost">
       {%csrf_token%}
@@ -624,8 +629,148 @@ let t1=performance.now()
                               strokeWeight: 7,
                             });
                             POLYline.setMap(map); 
-                        }}                       
+                        }}
+                      },
+        error: function(response) {
+                alert("some Error in posting sPath data.")}  
+        
+        });
+        //e.stopImmediatePropagation();
+      })
 
+      $("#Triconnect").unbind('submit').bind ('submit', function (e) {
+                e.preventDefault();
+                var form = $('#Triconnect')[0];    
+                var data = new FormData(form);
+                $.ajax({
+
+                  type: 'POST',
+                  url: "{% url 'triconnectivity' %}",
+                  headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                  contentType: false,
+                  processData: false,
+                  data: data,
+                  success: function (response) {
+                          alert("Triconnectivity is achieved!!")                          
+                          start = response.start
+                          sPath = response.sPath1                  
+                          Hash = response.Hash
+                          K = response.K
+                          Patchx = response.Patchx                
+                          Patchy = response.Patchy
+                          N = response.N
+
+                          truncation_layer = response.truncation_layer
+                          center_start_lat = response.center_start_lat
+                          center_start_long = response.center_start_long
+                          center_end_lat = response.center_end_lat
+                          center_end_long = response.center_end_long
+                          Cost_tri_Horizon = response.Cost_tri_Horizon
+                          Cost_vertical = response.Cost_vertical                
+                                          
+
+                              var N1,N2,j1,i11,i12,j2,i21,i22,X1,Y1,X2,Y2,X3,Y3,X4,Y4;
+                                    for (var i=K-2;i>0;i=i-1){
+                                        if (sPath[i][1] != 0.0 && i<K-1){
+                                        [N1,N2] = [Math.floor(sPath[i][1]),Math.floor(sPath[i][2])];
+                                        [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                                        [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                                        [X1,Y1,X2,Y2,X3,Y3,X4,Y4]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2),Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]
+                                        
+                                        lat1 = Patchy[X1][Y1]*conversion+start[0];
+                                        lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                                        long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                                        long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FF0011",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+                                        POLYline.setMap(map);
+
+                                        lat1 = Patchy[X2][Y2]*conversion+start[0]
+                                        lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                                        long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                                        long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FFFF11",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+                                        POLYline.setMap(map);
+                                    }
+                                    else if (sPath[i][1] == 0.0){
+                                      N2 = Math.floor(sPath[i][1]);                                      
+                                        [j2,i21,i22]=[Hash[N2][0],Hash[N2][1],Hash[N2][2]];
+                                        [X3,Y3,X4,Y4]=[Math.floor((j2-i21)/2),Math.floor((j2+i21)/2),Math.floor((j2-i22)/2),Math.floor((j2+i22)/2)]                                        
+                                        lat1 = center_start_lat;
+                                        lat2 = Patchy[X3][Y3]*conversion+start[0];            
+                                        long1 = center_start_long
+                                        long2 = Patchx[X3][Y3]/(111.32*Math.cos(lat2*3.14/180))+start[1]
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FF0011",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+
+                                        POLYline.setMap(map);
+                                        lat1 = center_start_lat;
+                                        lat2 = Patchy[X4][Y4]*conversion+start[0]            
+                                        long1 = center_start_long;
+                                        long2 = Patchx[X4][Y4]/(111.32*Math.cos(lat2*3.14/180))+start[1];
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FFFF11",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+                                        POLYline.setMap(map); 
+                                    }
+                                    else if (i == K-1){
+                                      N1 = Math.floor(sPath[i][1]);
+                                        [j1,i11,i12]=[Hash[N1][0],Hash[N1][1],Hash[N1][2]];
+                                        
+                                        [X1,Y1,X2,Y2]=[Math.floor((j1-i11)/2),Math.floor((j1+i11)/2),Math.floor((j1-i12)/2),Math.floor((j1+i12)/2)]
+                                        
+                                        lat1 = Patchy[X1][Y1]*conversion+start[0];
+                                        lat2 =center_end_lat          
+                                        long1 = Patchx[X1][Y1]/(111.32*Math.cos(lat1*3.14/180))+start[1]
+                                        long2 = center_end_long
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FF0011",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+                                        POLYline.setMap(map);
+
+                                        lat1 = Patchy[X2][Y2]*conversion+start[0]
+                                        lat2 = center_end_lat           
+                                        long1 = Patchx[X2][Y2]/(111.32*Math.cos(lat1*3.14/180))+start[1];
+                                        long2 = center_end_long;
+                                        var POLYline = new google.maps.Polyline({
+                                          path: [{ lat: lat1, lng: long1 },
+                                          { lat: lat2, lng: long2 }],
+                                          geodesic: true,
+                                          strokeColor: "#FFFF11",
+                                          strokeOpacity: 1.0,
+                                          strokeWeight: 7,
+                                        });
+                                        POLYline.setMap(map); 
+                                    }}
         markers=[]
 
           for (let i=0;i<=Lat.length;i++){
@@ -723,7 +868,7 @@ let t1=performance.now()
           success: function (response) {
                   alert("Modified sPath data submitted !!")
                   // put the code here
-                  sPath1 = response.sPath1                  
+                  sPath1 = response.sPath2                  
                   // Hash = response.Hash                
                   // Lat = response.Lat
                   // Long = response.Long
@@ -847,14 +992,14 @@ let t1=performance.now()
         });
         //e.stopImmediatePropagation();
       })
-                        
     },
-        error: function(response) {
-                alert("some Error in posting sPath data.")}  
-        
-        });
+      error: function(response) {
+        alert("some Error in posting Triconnected data.")}       
+      });
         //e.stopImmediatePropagation();
       })
+                        
+    
           
       },
     error: function(response) {
