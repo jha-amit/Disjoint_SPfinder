@@ -1088,7 +1088,7 @@ struct __pyx_memoryviewslice_obj;
 /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -1100,7 +1100,7 @@ struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct____pyx_fuse_0node_val {
 };
 
 
-/* "cython_Dijkstra.pyx":87
+/* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
@@ -1117,7 +1117,7 @@ struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct_1_genexpr {
 /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -1129,7 +1129,7 @@ struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct_2___pyx_fuse_1node_val {
 };
 
 
-/* "cython_Dijkstra.pyx":87
+/* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
@@ -2293,6 +2293,8 @@ static const char __pyx_k_np[] = "np";
 static const char __pyx_k_v1[] = "v1";
 static const char __pyx_k_v2[] = "v2";
 static const char __pyx_k_end[] = "end";
+static const char __pyx_k_i11[] = "i11";
+static const char __pyx_k_i12[] = "i12";
 static const char __pyx_k_inf[] = "inf";
 static const char __pyx_k_int[] = "int";
 static const char __pyx_k_new[] = "__new__";
@@ -2495,6 +2497,8 @@ static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_kp_s_got_differing_extents_in_dimensi;
 static PyObject *__pyx_n_s_i;
 static PyObject *__pyx_n_s_i1;
+static PyObject *__pyx_n_s_i11;
+static PyObject *__pyx_n_s_i12;
 static PyObject *__pyx_n_s_i2;
 static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
@@ -2586,9 +2590,9 @@ static PyObject *__pyx_n_s_v1;
 static PyObject *__pyx_n_s_v2;
 static PyObject *__pyx_pf_15cython_Dijkstra_node_val(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_signatures, PyObject *__pyx_v_args, PyObject *__pyx_v_kwargs, CYTHON_UNUSED PyObject *__pyx_v_defaults); /* proto */
 static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_genexpr(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, int __pyx_v_K, int __pyx_v_d, PyObject *__pyx_v_truncated_layer); /* proto */
+static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, int __pyx_v_K, int __pyx_v_d, int __pyx_v_truncated_layer); /* proto */
 static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_3genexpr(PyObject *__pyx_self); /* proto */
-static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, double __pyx_v_K, double __pyx_v_d, PyObject *__pyx_v_truncated_layer); /* proto */
+static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, double __pyx_v_K, double __pyx_v_d, double __pyx_v_truncated_layer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -2686,7 +2690,7 @@ static PyObject *__pyx_codeobj__35;
 /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -3241,7 +3245,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_15cython_Dijkstra_3node_val(PyObject *__py
   __Pyx_memviewslice __pyx_v_truncated_layer_end_cost = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_v_K;
   int __pyx_v_d;
-  PyObject *__pyx_v_truncated_layer = 0;
+  int __pyx_v_truncated_layer;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3354,7 +3358,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_15cython_Dijkstra_3node_val(PyObject *__py
     __pyx_v_truncated_layer_end_cost = __Pyx_PyObject_to_MemoryviewSlice_dc_int(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_truncated_layer_end_cost.memview)) __PYX_ERR(0, 34, __pyx_L3_error)
     __pyx_v_K = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_K == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
     __pyx_v_d = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_d == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
-    __pyx_v_truncated_layer = values[8];
+    __pyx_v_truncated_layer = __Pyx_PyInt_As_int(values[8]); if (unlikely((__pyx_v_truncated_layer == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
@@ -3372,7 +3376,7 @@ static PyObject *__pyx_fuse_0__pyx_pw_15cython_Dijkstra_3node_val(PyObject *__py
 }
 static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_2generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cython_Dijkstra.pyx":87
+/* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
@@ -3392,7 +3396,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_genexpr(PyObject *__pyx_se
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct_1_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3400,7 +3404,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_genexpr(PyObject *__pyx_se
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_15cython_Dijkstra_8node_val_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_pyx_fuse_0node_val_locals_gene, __pyx_n_s_cython_Dijkstra); if (unlikely(!gen)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_15cython_Dijkstra_8node_val_2generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_pyx_fuse_0node_val_locals_gene, __pyx_n_s_cython_Dijkstra); if (unlikely(!gen)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3443,9 +3447,9 @@ static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_2generator(__pyx_Coroutine
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 87, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview)) { __Pyx_RaiseClosureNameError("node_val1"); __PYX_ERR(0, 87, __pyx_L1_error) }
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 87, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 98, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview)) { __Pyx_RaiseClosureNameError("node_val1"); __PYX_ERR(0, 98, __pyx_L1_error) }
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 98, __pyx_L1_error) }
   __pyx_t_1.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.data;
   __pyx_t_1.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview;
   __PYX_INC_MEMVIEW(&__pyx_t_1, 0);
@@ -3464,23 +3468,23 @@ static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_2generator(__pyx_Coroutine
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 87, __pyx_L1_error) }
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 98, __pyx_L1_error) }
   __pyx_t_1.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.data;
   __pyx_t_1.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview;
   __PYX_INC_MEMVIEW(&__pyx_t_1, 0);
@@ -3499,21 +3503,21 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_7.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.data;
   __pyx_t_7.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview;
@@ -3533,7 +3537,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
 {
@@ -3542,7 +3546,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
@@ -3551,9 +3555,9 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_4 = __pyx_t_3; __Pyx_INCREF(__pyx_t_4); __pyx_t_6 = 0;
     __pyx_t_8 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 98, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -3561,17 +3565,17 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       if (likely(PyList_CheckExact(__pyx_t_4))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -3581,7 +3585,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 87, __pyx_L1_error)
+          else __PYX_ERR(0, 98, __pyx_L1_error)
         }
         break;
       }
@@ -3591,14 +3595,14 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_ele, __pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_math); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_math); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_inf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_inf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_ele, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_ele, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_11 = ((!__pyx_t_10) != 0);
     if (__pyx_t_11) {
@@ -3642,12 +3646,12 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
 /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
 
-static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, int __pyx_v_K, int __pyx_v_d, PyObject *__pyx_v_truncated_layer) {
+static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, int __pyx_v_K, int __pyx_v_d, int __pyx_v_truncated_layer) {
   struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct____pyx_fuse_0node_val *__pyx_cur_scope;
   PyObject *__pyx_v_n = NULL;
   PyObject *__pyx_v_k = NULL;
@@ -3665,7 +3669,9 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   int __pyx_v_v2;
   int __pyx_v_source_neighbour;
   int __pyx_v_sink_neighbour;
-  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_i;
+  int __pyx_v_i11;
+  int __pyx_v_i12;
   PyObject *__pyx_v_res = NULL;
   PyObject *__pyx_v_Cost_truncated_end1 = NULL;
   PyObject *__pyx_gb_15cython_Dijkstra_8node_val_2generator = 0;
@@ -3692,8 +3698,10 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   long __pyx_t_19;
   int __pyx_t_20;
   int __pyx_t_21;
-  Py_ssize_t __pyx_t_22;
-  double __pyx_t_23;
+  PyObject *__pyx_t_22 = NULL;
+  PyObject *__pyx_t_23 = NULL;
+  Py_ssize_t __pyx_t_24;
+  double __pyx_t_25;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3709,7 +3717,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   __pyx_cur_scope->__pyx_v_N = __pyx_v_N;
 
   /* "cython_Dijkstra.pyx":36
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):
  * 
  *     n = Hash.shape[0]             # <<<<<<<<<<<<<<
  *     k = Hash.shape[1]
@@ -3725,7 +3733,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
  *     n = Hash.shape[0]
  *     k = Hash.shape[1]             # <<<<<<<<<<<<<<
  *     N_nodes=int(K/2) +1
- *     #assert tuple(.shape) == tuple(array_2.shape)
+ * 
  */
   __pyx_t_1 = PyInt_FromSsize_t((__pyx_v_Hash.shape[1])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3736,8 +3744,8 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
  *     n = Hash.shape[0]
  *     k = Hash.shape[1]
  *     N_nodes=int(K/2) +1             # <<<<<<<<<<<<<<
+ * 
  *     #assert tuple(.shape) == tuple(array_2.shape)
- * #Here accprding to
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__Pyx_div_long(__pyx_v_K, 2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -3750,34 +3758,34 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   __pyx_v_N_nodes = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cython_Dijkstra.pyx":46
+  /* "cython_Dijkstra.pyx":47
  * 
  *     if my_type is int:
  *         dtype = np.intc             # <<<<<<<<<<<<<<
  *     elif my_type is double:
  *         dtype = np.double
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_dtype = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cython_Dijkstra.pyx":50
+  /* "cython_Dijkstra.pyx":51
  *         dtype = np.double
  * 
  *     Node_val1 = np.random.rand(n, k)*np.inf             # <<<<<<<<<<<<<<
  *     #Node_val2 = np.random.rand(n, k)*np.inf
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rand); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rand); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -3795,7 +3803,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_n, __pyx_v_k};
-    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else
@@ -3803,13 +3811,13 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_n, __pyx_v_k};
-    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_2);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -3820,92 +3828,91 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
     __Pyx_INCREF(__pyx_v_k);
     __Pyx_GIVEREF(__pyx_v_k);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_k);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_inf); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_inf); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_Node_val1 = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cython_Dijkstra.pyx":53
+  /* "cython_Dijkstra.pyx":54
  *     #Node_val2 = np.random.rand(n, k)*np.inf
  * 
  *     Node_val1[0,0]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__5, __pyx_float_0_0) < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__5, __pyx_float_0_0) < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":54
+  /* "cython_Dijkstra.pyx":55
  * 
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,2]=0.0
  * 
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__6, __pyx_float_0_0) < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__6, __pyx_float_0_0) < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":55
+  /* "cython_Dijkstra.pyx":56
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__7, __pyx_float_0_0) < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__7, __pyx_float_0_0) < 0)) __PYX_ERR(0, 56, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":58
+  /* "cython_Dijkstra.pyx":59
  * 
  * 
  *     cdef double[:,::1] node_val1 = Node_val1             # <<<<<<<<<<<<<<
  *     #cdef double[:,::1] node_val2 = Node_val2
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_v_Node_val1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_v_Node_val1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 59, __pyx_L1_error)
   __pyx_cur_scope->__pyx_v_node_val1 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "cython_Dijkstra.pyx":62
+  /* "cython_Dijkstra.pyx":63
  * 
  *     cdef double  ip, jp, i1, i2, j, l1, l2
  *     cdef double Cijk = 0, Cijk1 = 0             # <<<<<<<<<<<<<<
- *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
+ *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer, i11, i12
  * 
  */
   __pyx_v_Cijk = 0.0;
   __pyx_v_Cijk1 = 0.0;
 
-  /* "cython_Dijkstra.pyx":65
- *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
+  /* "cython_Dijkstra.pyx":66
+ *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer, i11, i12
  * 
- *     source_neighbour = truncated_layer             # <<<<<<<<<<<<<<
+ *     source_neighbour = int(truncated_layer)             # <<<<<<<<<<<<<<
  *     sink_neighbour = int(K-source_neighbour)
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_truncated_layer); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
-  __pyx_v_source_neighbour = __pyx_t_4;
+  __pyx_v_source_neighbour = __pyx_v_truncated_layer;
 
-  /* "cython_Dijkstra.pyx":66
+  /* "cython_Dijkstra.pyx":67
  * 
- *     source_neighbour = truncated_layer
+ *     source_neighbour = int(truncated_layer)
  *     sink_neighbour = int(K-source_neighbour)             # <<<<<<<<<<<<<<
  * 
  *     Cijk=0
  */
   __pyx_v_sink_neighbour = (__pyx_v_K - __pyx_v_source_neighbour);
 
-  /* "cython_Dijkstra.pyx":68
+  /* "cython_Dijkstra.pyx":69
  *     sink_neighbour = int(K-source_neighbour)
  * 
  *     Cijk=0             # <<<<<<<<<<<<<<
@@ -3914,7 +3921,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_Cijk = 0.0;
 
-  /* "cython_Dijkstra.pyx":69
+  /* "cython_Dijkstra.pyx":70
  * 
  *     Cijk=0
  *     i=0             # <<<<<<<<<<<<<<
@@ -3923,7 +3930,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_i = 0;
 
-  /* "cython_Dijkstra.pyx":71
+  /* "cython_Dijkstra.pyx":72
  *     i=0
  * 
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):             # <<<<<<<<<<<<<<
@@ -3948,21 +3955,21 @@ static PyObject *__pyx_pf_15cython_Dijkstra_2node_val(CYTHON_UNUSED PyObject *__
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 71, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
 }
 
-__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
   __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -3982,27 +3989,27 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 71, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
 }
 
-__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_1); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_10 = __pyx_t_8;
   for (__pyx_t_4 = __pyx_t_9; __pyx_t_4 < __pyx_t_10; __pyx_t_4+=1) {
     __pyx_v_v2 = __pyx_t_4;
 
-    /* "cython_Dijkstra.pyx":72
+    /* "cython_Dijkstra.pyx":73
  * 
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):
  *         i1 = Hash[v2,1]             # <<<<<<<<<<<<<<
@@ -4013,43 +4020,61 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_12 = 1;
     __pyx_v_i1 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-    /* "cython_Dijkstra.pyx":73
+    /* "cython_Dijkstra.pyx":74
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):
  *         i1 = Hash[v2,1]
  *         i2 = Hash[v2,2]             # <<<<<<<<<<<<<<
  * 
- *         if abs(i1-i2)>=d:
+ * 
  */
     __pyx_t_12 = __pyx_v_v2;
     __pyx_t_11 = 2;
     __pyx_v_i2 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-    /* "cython_Dijkstra.pyx":75
- *         i2 = Hash[v2,2]
+    /* "cython_Dijkstra.pyx":77
+ * 
  * 
  *         if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
- *             node_val1[v2,1] = 0
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
  */
     __pyx_t_13 = ((fabs((__pyx_v_i1 - __pyx_v_i2)) >= __pyx_v_d) != 0);
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":76
- * 
+      /* "cython_Dijkstra.pyx":79
  *         if abs(i1-i2)>=d:
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)             # <<<<<<<<<<<<<<
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)             # <<<<<<<<<<<<<<
+ *             i12 = int((truncated_layer + i2)*0.5)
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ */
+      __pyx_v_i11 = ((int)((__pyx_v_truncated_layer + __pyx_v_i1) * 0.5));
+
+      /* "cython_Dijkstra.pyx":80
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
+ *             i12 = int((truncated_layer + i2)*0.5)             # <<<<<<<<<<<<<<
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
+ */
+      __pyx_v_i12 = ((int)((__pyx_v_truncated_layer + __pyx_v_i2) * 0.5));
+
+      /* "cython_Dijkstra.pyx":82
+ *             i12 = int((truncated_layer + i2)*0.5)
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]             # <<<<<<<<<<<<<<
  *             node_val1[v2,1] = 0
  *             node_val1[v2,2] = v2
  */
-      __pyx_t_11 = __pyx_v_i;
-      __pyx_t_12 = ((Py_ssize_t)(__pyx_v_i + ((__pyx_v_i2 - __pyx_v_i1) / 2.0)));
+      __pyx_t_11 = __pyx_v_i11;
+      __pyx_t_12 = __pyx_v_i12;
       __pyx_t_14 = __pyx_v_v2;
       __pyx_t_15 = 0;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_14 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_15)) )) = ((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_start_cost.data) + __pyx_t_11)) ))) + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_start_cost.data) + __pyx_t_12)) ))));
 
-      /* "cython_Dijkstra.pyx":77
- *         if abs(i1-i2)>=d:
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
+      /* "cython_Dijkstra.pyx":83
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
  *             node_val1[v2,1] = 0             # <<<<<<<<<<<<<<
  *             node_val1[v2,2] = v2
  *             #print(node_val1[v2,0],v2)
@@ -4058,37 +4083,28 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       __pyx_t_11 = 1;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = 0.0;
 
-      /* "cython_Dijkstra.pyx":78
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
+      /* "cython_Dijkstra.pyx":84
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
  *             node_val1[v2,1] = 0
  *             node_val1[v2,2] = v2             # <<<<<<<<<<<<<<
  *             #print(node_val1[v2,0],v2)
- *             i = i+1
+ * 
  */
       __pyx_t_11 = __pyx_v_v2;
       __pyx_t_12 = 2;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_v2;
 
-      /* "cython_Dijkstra.pyx":80
- *             node_val1[v2,2] = v2
- *             #print(node_val1[v2,0],v2)
- *             i = i+1             # <<<<<<<<<<<<<<
+      /* "cython_Dijkstra.pyx":77
  * 
- * 
- */
-      __pyx_v_i = (__pyx_v_i + 1);
-
-      /* "cython_Dijkstra.pyx":75
- *         i2 = Hash[v2,2]
  * 
  *         if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
- *             node_val1[v2,1] = 0
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
  */
     }
   }
 
-  /* "cython_Dijkstra.pyx":83
+  /* "cython_Dijkstra.pyx":94
  * 
  * 
  *     layer = source_neighbour             # <<<<<<<<<<<<<<
@@ -4097,7 +4113,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
   __pyx_cur_scope->__pyx_v_layer = __pyx_v_source_neighbour;
 
-  /* "cython_Dijkstra.pyx":85
+  /* "cython_Dijkstra.pyx":96
  *     layer = source_neighbour
  * 
  *     while layer <=sink_neighbour:             # <<<<<<<<<<<<<<
@@ -4108,43 +4124,43 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_13 = ((__pyx_cur_scope->__pyx_v_layer <= __pyx_v_sink_neighbour) != 0);
     if (!__pyx_t_13) break;
 
-    /* "cython_Dijkstra.pyx":87
+    /* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
  * 
  *         if res == True:
  */
-    __pyx_t_1 = __pyx_pf_15cython_Dijkstra_8node_val_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_1 = __pyx_pf_15cython_Dijkstra_8node_val_genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_res, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "cython_Dijkstra.pyx":89
+    /* "cython_Dijkstra.pyx":100
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])
  * 
  *         if res == True:             # <<<<<<<<<<<<<<
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')
  *              break
  */
-    __pyx_t_5 = PyObject_RichCompare(__pyx_v_res, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
-    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_5 = PyObject_RichCompare(__pyx_v_res, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":90
+      /* "cython_Dijkstra.pyx":101
  * 
  *         if res == True:
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')             # <<<<<<<<<<<<<<
  *              break
  * 
  */
-      if (__Pyx_PrintOne(0, __pyx_kp_s_shift_the_target_its_in_infinite) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_kp_s_shift_the_target_its_in_infinite) < 0) __PYX_ERR(0, 101, __pyx_L1_error)
 
-      /* "cython_Dijkstra.pyx":91
+      /* "cython_Dijkstra.pyx":102
  *         if res == True:
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')
  *              break             # <<<<<<<<<<<<<<
@@ -4153,7 +4169,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
       goto __pyx_L7_break;
 
-      /* "cython_Dijkstra.pyx":89
+      /* "cython_Dijkstra.pyx":100
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])
  * 
  *         if res == True:             # <<<<<<<<<<<<<<
@@ -4162,7 +4178,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
     }
 
-    /* "cython_Dijkstra.pyx":93
+    /* "cython_Dijkstra.pyx":104
  *              break
  * 
  *         if layer < sink_neighbour:             # <<<<<<<<<<<<<<
@@ -4172,7 +4188,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_13 = ((__pyx_cur_scope->__pyx_v_layer < __pyx_v_sink_neighbour) != 0);
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":94
+      /* "cython_Dijkstra.pyx":105
  * 
  *         if layer < sink_neighbour:
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):             # <<<<<<<<<<<<<<
@@ -4197,21 +4213,21 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 94, __pyx_L1_error)
+    __PYX_ERR(0, 105, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -4231,27 +4247,27 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 94, __pyx_L1_error)
+    __PYX_ERR(0, 105, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_10 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_10 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_9 = __pyx_t_8;
       for (__pyx_t_4 = __pyx_t_10; __pyx_t_4 < __pyx_t_9; __pyx_t_4+=1) {
         __pyx_v_v1 = __pyx_t_4;
 
-        /* "cython_Dijkstra.pyx":96
+        /* "cython_Dijkstra.pyx":107
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 # give range of nodes in next layer.
  *                 j=(Hash[v1,0])             # <<<<<<<<<<<<<<
@@ -4262,7 +4278,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_11 = 0;
         __pyx_v_j = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-        /* "cython_Dijkstra.pyx":98
+        /* "cython_Dijkstra.pyx":109
  *                 j=(Hash[v1,0])
  * 
  *                 for v2 in range(int(sum(N[:layer+1])),int(sum(N[:layer+2]))):             # <<<<<<<<<<<<<<
@@ -4287,21 +4303,21 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
         __pyx_t_7.memview = NULL;
         __pyx_t_7.data = NULL;
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_17 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_17 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_17 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_17 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
         __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -4321,27 +4337,27 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
         __pyx_t_7.memview = NULL;
         __pyx_t_7.data = NULL;
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_18 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_18 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_18 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_18 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_19 = __pyx_t_17;
         for (__pyx_t_16 = __pyx_t_18; __pyx_t_16 < __pyx_t_19; __pyx_t_16+=1) {
           __pyx_v_v2 = __pyx_t_16;
 
-          /* "cython_Dijkstra.pyx":100
+          /* "cython_Dijkstra.pyx":111
  *                 for v2 in range(int(sum(N[:layer+1])),int(sum(N[:layer+2]))):
  *                     #print(l1,l2)
  *                     j=Hash[v2,0]             # <<<<<<<<<<<<<<
@@ -4352,7 +4368,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_12 = 0;
           __pyx_v_j = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-          /* "cython_Dijkstra.pyx":111
+          /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -4363,7 +4379,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_11 = 1;
           __pyx_t_15 = __pyx_v_v2;
           __pyx_t_14 = 2;
-          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 111, __pyx_L1_error)
+          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
           __pyx_t_21 = ((__pyx_t_20 >= __pyx_v_d) != 0);
           if (__pyx_t_21) {
           } else {
@@ -4371,7 +4387,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             goto __pyx_L15_bool_binop_done;
           }
 
-          /* "cython_Dijkstra.pyx":112
+          /* "cython_Dijkstra.pyx":123
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\
  *                         (abs(Hash[v2,1]-Hash[v1,1]) <= 1) and\             # <<<<<<<<<<<<<<
@@ -4382,7 +4398,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_15 = 1;
           __pyx_t_11 = __pyx_v_v1;
           __pyx_t_12 = 1;
-          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 112, __pyx_L1_error)
+          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 123, __pyx_L1_error)
           __pyx_t_21 = ((__pyx_t_20 <= 1) != 0);
           if (__pyx_t_21) {
           } else {
@@ -4390,7 +4406,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             goto __pyx_L15_bool_binop_done;
           }
 
-          /* "cython_Dijkstra.pyx":113
+          /* "cython_Dijkstra.pyx":124
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\
  *                         (abs(Hash[v2,1]-Hash[v1,1]) <= 1) and\
  *                         (abs(Hash[v2,2]-Hash[v1,2]) <=1)):             # <<<<<<<<<<<<<<
@@ -4401,12 +4417,12 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_11 = 2;
           __pyx_t_15 = __pyx_v_v1;
           __pyx_t_14 = 2;
-          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 113, __pyx_L1_error)
+          __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 124, __pyx_L1_error)
           __pyx_t_21 = ((__pyx_t_20 <= 1) != 0);
           __pyx_t_13 = __pyx_t_21;
           __pyx_L15_bool_binop_done:;
 
-          /* "cython_Dijkstra.pyx":111
+          /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -4415,7 +4431,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
           if (__pyx_t_13) {
 
-            /* "cython_Dijkstra.pyx":116
+            /* "cython_Dijkstra.pyx":127
  *                         #in this case, add the edge
  *                         #determine its (cumulative) cost first
  *                         i1 = (Hash[v2,1])             # <<<<<<<<<<<<<<
@@ -4426,7 +4442,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_15 = 1;
             __pyx_v_i1 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) )));
 
-            /* "cython_Dijkstra.pyx":117
+            /* "cython_Dijkstra.pyx":128
  *                         #determine its (cumulative) cost first
  *                         i1 = (Hash[v2,1])
  *                         i2 = (Hash[v2,2])             # <<<<<<<<<<<<<<
@@ -4437,7 +4453,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_14 = 2;
             __pyx_v_i2 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )));
 
-            /* "cython_Dijkstra.pyx":119
+            /* "cython_Dijkstra.pyx":130
  *                         i2 = (Hash[v2,2])
  * 
  *                         ip = 0.5*(j-i1)             # <<<<<<<<<<<<<<
@@ -4446,7 +4462,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_ip = (0.5 * (__pyx_v_j - __pyx_v_i1));
 
-            /* "cython_Dijkstra.pyx":120
+            /* "cython_Dijkstra.pyx":131
  * 
  *                         ip = 0.5*(j-i1)
  *                         jp = 0.5*(j+i1)             # <<<<<<<<<<<<<<
@@ -4455,7 +4471,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_jp = (0.5 * (__pyx_v_j + __pyx_v_i1));
 
-            /* "cython_Dijkstra.pyx":122
+            /* "cython_Dijkstra.pyx":133
  *                         jp = 0.5*(j+i1)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -4466,11 +4482,11 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_15 = 0;
             __pyx_t_11 = __pyx_v_v1;
             __pyx_t_12 = 0;
-            __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
+            __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 133, __pyx_L1_error)
             __pyx_t_13 = ((__pyx_t_20 <= 1) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":124
+              /* "cython_Dijkstra.pyx":135
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:             # <<<<<<<<<<<<<<
@@ -4484,7 +4500,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_13 = (((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) <= (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )))) != 0);
               if (__pyx_t_13) {
 
-                /* "cython_Dijkstra.pyx":125
+                /* "cython_Dijkstra.pyx":136
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]             # <<<<<<<<<<<<<<
@@ -4495,7 +4511,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 __pyx_t_15 = ((Py_ssize_t)__pyx_v_jp);
                 __pyx_v_Cijk = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Cost_horizontal.data + __pyx_t_14 * __pyx_v_Cost_horizontal.strides[0]) )) + __pyx_t_15)) )));
 
-                /* "cython_Dijkstra.pyx":124
+                /* "cython_Dijkstra.pyx":135
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:             # <<<<<<<<<<<<<<
@@ -4505,7 +4521,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 goto __pyx_L19;
               }
 
-              /* "cython_Dijkstra.pyx":127
+              /* "cython_Dijkstra.pyx":138
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]
  *                             else:
  *                                 Cijk = Cost_vertical[int(ip),int(jp)]             # <<<<<<<<<<<<<<
@@ -4519,7 +4535,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               }
               __pyx_L19:;
 
-              /* "cython_Dijkstra.pyx":122
+              /* "cython_Dijkstra.pyx":133
  *                         jp = 0.5*(j+i1)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -4528,7 +4544,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":134
+            /* "cython_Dijkstra.pyx":145
  * 
  * 
  *                         ip = 0.5*(j-i2)             # <<<<<<<<<<<<<<
@@ -4537,7 +4553,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_ip = (0.5 * (__pyx_v_j - __pyx_v_i2));
 
-            /* "cython_Dijkstra.pyx":135
+            /* "cython_Dijkstra.pyx":146
  * 
  *                         ip = 0.5*(j-i2)
  *                         jp = 0.5*(j+i2)             # <<<<<<<<<<<<<<
@@ -4546,7 +4562,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_jp = (0.5 * (__pyx_v_j + __pyx_v_i2));
 
-            /* "cython_Dijkstra.pyx":137
+            /* "cython_Dijkstra.pyx":148
  *                         jp = 0.5*(j+i2)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -4557,11 +4573,11 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_15 = 0;
             __pyx_t_11 = __pyx_v_v1;
             __pyx_t_12 = 0;
-            __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 137, __pyx_L1_error)
+            __pyx_t_20 = abs(((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))); if (unlikely(__pyx_t_20 == ((int)-1))) __PYX_ERR(0, 148, __pyx_L1_error)
             __pyx_t_13 = ((__pyx_t_20 <= 1) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":139
+              /* "cython_Dijkstra.pyx":150
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:             # <<<<<<<<<<<<<<
@@ -4575,7 +4591,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_13 = (((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) <= (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )))) != 0);
               if (__pyx_t_13) {
 
-                /* "cython_Dijkstra.pyx":140
+                /* "cython_Dijkstra.pyx":151
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]+Cijk # changing the inquality here             # <<<<<<<<<<<<<<
@@ -4586,7 +4602,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 __pyx_t_15 = ((Py_ssize_t)__pyx_v_jp);
                 __pyx_v_Cijk = ((*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Cost_horizontal.data + __pyx_t_14 * __pyx_v_Cost_horizontal.strides[0]) )) + __pyx_t_15)) ))) + __pyx_v_Cijk);
 
-                /* "cython_Dijkstra.pyx":139
+                /* "cython_Dijkstra.pyx":150
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:             # <<<<<<<<<<<<<<
@@ -4596,7 +4612,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 goto __pyx_L21;
               }
 
-              /* "cython_Dijkstra.pyx":142
+              /* "cython_Dijkstra.pyx":153
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]+Cijk # changing the inquality here
  *                             else:
  *                                 Cijk = Cost_vertical[int(ip),int(jp)]+Cijk             # <<<<<<<<<<<<<<
@@ -4610,7 +4626,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               }
               __pyx_L21:;
 
-              /* "cython_Dijkstra.pyx":137
+              /* "cython_Dijkstra.pyx":148
  *                         jp = 0.5*(j+i2)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -4619,7 +4635,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":145
+            /* "cython_Dijkstra.pyx":156
  * 
  * 
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):             # <<<<<<<<<<<<<<
@@ -4633,7 +4649,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_13 = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_14 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_15)) ))) > (__pyx_v_Cijk + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) ))))) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":147
+              /* "cython_Dijkstra.pyx":158
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):
  * 
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]             # <<<<<<<<<<<<<<
@@ -4646,7 +4662,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_14 = 0;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_15 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_14)) )) = (__pyx_v_Cijk + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) ))));
 
-              /* "cython_Dijkstra.pyx":148
+              /* "cython_Dijkstra.pyx":159
  * 
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]
  *                             node_val1[v2,1]=v1             # <<<<<<<<<<<<<<
@@ -4657,7 +4673,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_12 = 1;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_v1;
 
-              /* "cython_Dijkstra.pyx":149
+              /* "cython_Dijkstra.pyx":160
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]
  *                             node_val1[v2,1]=v1
  *                             node_val1[v2,2]=v2             # <<<<<<<<<<<<<<
@@ -4668,7 +4684,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_11 = 2;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_v2;
 
-              /* "cython_Dijkstra.pyx":145
+              /* "cython_Dijkstra.pyx":156
  * 
  * 
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):             # <<<<<<<<<<<<<<
@@ -4677,7 +4693,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":111
+            /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -4688,7 +4704,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         }
       }
 
-      /* "cython_Dijkstra.pyx":93
+      /* "cython_Dijkstra.pyx":104
  *              break
  * 
  *         if layer < sink_neighbour:             # <<<<<<<<<<<<<<
@@ -4698,23 +4714,14 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       goto __pyx_L9;
     }
 
-    /* "cython_Dijkstra.pyx":152
+    /* "cython_Dijkstra.pyx":164
+ *         else:
  * 
- *         else:
- *             i=0             # <<<<<<<<<<<<<<
- *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
- *                 i1=Hash[v1,1]
- */
-    /*else*/ {
-      __pyx_v_i = 0;
-
-      /* "cython_Dijkstra.pyx":153
- *         else:
- *             i=0
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):             # <<<<<<<<<<<<<<
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  */
+    /*else*/ {
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
       __PYX_INC_MEMVIEW(&__pyx_t_7, 0);
@@ -4733,21 +4740,21 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 153, __pyx_L1_error)
+    __PYX_ERR(0, 164, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -4767,28 +4774,28 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 153, __pyx_L1_error)
+    __PYX_ERR(0, 164, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_10 = __pyx_t_8;
       for (__pyx_t_4 = __pyx_t_9; __pyx_t_4 < __pyx_t_10; __pyx_t_4+=1) {
         __pyx_v_v1 = __pyx_t_4;
 
-        /* "cython_Dijkstra.pyx":154
- *             i=0
+        /* "cython_Dijkstra.pyx":165
+ * 
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 i1=Hash[v1,1]             # <<<<<<<<<<<<<<
  *                 i2=Hash[v1,2]
@@ -4798,7 +4805,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_12 = 1;
         __pyx_v_i1 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-        /* "cython_Dijkstra.pyx":155
+        /* "cython_Dijkstra.pyx":166
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]             # <<<<<<<<<<<<<<
@@ -4809,60 +4816,115 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_11 = 2;
         __pyx_v_i2 = (*((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-        /* "cython_Dijkstra.pyx":156
+        /* "cython_Dijkstra.pyx":167
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  *                 if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+ *                     i11 = int((truncated_layer + i1)*0.5)
  */
         __pyx_t_13 = ((fabs((__pyx_v_i1 - __pyx_v_i2)) >= __pyx_v_d) != 0);
         if (__pyx_t_13) {
 
-          /* "cython_Dijkstra.pyx":158
+          /* "cython_Dijkstra.pyx":169
  *                 if abs(i1-i2)>=d:
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]             # <<<<<<<<<<<<<<
+ *                     i11 = int((truncated_layer + i1)*0.5)             # <<<<<<<<<<<<<<
+ *                     i12 = int((truncated_layer + i2)*0.5)
+ * 
+ */
+          __pyx_v_i11 = ((int)((__pyx_v_truncated_layer + __pyx_v_i1) * 0.5));
+
+          /* "cython_Dijkstra.pyx":170
+ * 
+ *                     i11 = int((truncated_layer + i1)*0.5)
+ *                     i12 = int((truncated_layer + i2)*0.5)             # <<<<<<<<<<<<<<
+ * 
+ *                     print(i1,i2,i11,i12,truncated_layer)
+ */
+          __pyx_v_i12 = ((int)((__pyx_v_truncated_layer + __pyx_v_i2) * 0.5));
+
+          /* "cython_Dijkstra.pyx":172
+ *                     i12 = int((truncated_layer + i2)*0.5)
+ * 
+ *                     print(i1,i2,i11,i12,truncated_layer)             # <<<<<<<<<<<<<<
+ * 
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
+ */
+          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_i1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_1 = PyFloat_FromDouble(__pyx_v_i2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_1);
+          __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_i11); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_3);
+          __pyx_t_22 = __Pyx_PyInt_From_int(__pyx_v_truncated_layer); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          __pyx_t_23 = PyTuple_New(5); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_23);
+          __Pyx_GIVEREF(__pyx_t_5);
+          PyTuple_SET_ITEM(__pyx_t_23, 0, __pyx_t_5);
+          __Pyx_GIVEREF(__pyx_t_1);
+          PyTuple_SET_ITEM(__pyx_t_23, 1, __pyx_t_1);
+          __Pyx_GIVEREF(__pyx_t_2);
+          PyTuple_SET_ITEM(__pyx_t_23, 2, __pyx_t_2);
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_23, 3, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_22);
+          PyTuple_SET_ITEM(__pyx_t_23, 4, __pyx_t_22);
+          __pyx_t_5 = 0;
+          __pyx_t_1 = 0;
+          __pyx_t_2 = 0;
+          __pyx_t_3 = 0;
+          __pyx_t_22 = 0;
+          if (__Pyx_PrintOne(0, __pyx_t_23) < 0) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
+
+          /* "cython_Dijkstra.pyx":174
+ *                     print(i1,i2,i11,i12,truncated_layer)
+ * 
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]             # <<<<<<<<<<<<<<
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  */
-          __pyx_t_11 = __pyx_v_i;
-          __pyx_t_12 = ((Py_ssize_t)(__pyx_v_i + ((__pyx_v_i1 - __pyx_v_i2) / 2.0)));
-          __pyx_t_5 = __Pyx_PyInt_From_int(((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_11)) ))) + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_12)) ))))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
-          __Pyx_XDECREF_SET(__pyx_v_Cost_truncated_end1, __pyx_t_5);
-          __pyx_t_5 = 0;
+          __pyx_t_11 = __pyx_v_i11;
+          __pyx_t_12 = __pyx_v_i12;
+          __pyx_t_23 = __Pyx_PyInt_From_int(((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_11)) ))) + (*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_12)) ))))); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_23);
+          __Pyx_XDECREF_SET(__pyx_v_Cost_truncated_end1, __pyx_t_23);
+          __pyx_t_23 = 0;
 
-          /* "cython_Dijkstra.pyx":160
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+          /* "cython_Dijkstra.pyx":176
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1
  */
-          __pyx_t_5 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_22 = __Pyx_PyIndex_AsSsize_t(__pyx_t_5); if (unlikely((__pyx_t_22 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_12 = __pyx_t_22;
+          __pyx_t_23 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_23);
+          __pyx_t_24 = __Pyx_PyIndex_AsSsize_t(__pyx_t_23); if (unlikely((__pyx_t_24 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
+          __pyx_t_12 = __pyx_t_24;
           __pyx_t_11 = 0;
-          __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_23 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_23);
           __pyx_t_11 = __pyx_v_v1;
           __pyx_t_12 = 0;
-          __pyx_t_1 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = PyObject_RichCompare(__pyx_t_5, __pyx_t_2, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+          __pyx_t_22 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          __pyx_t_3 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_22); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_3);
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+          __pyx_t_22 = PyObject_RichCompare(__pyx_t_23, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_22); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_22); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
           if (__pyx_t_13) {
 
-            /* "cython_Dijkstra.pyx":161
+            /* "cython_Dijkstra.pyx":177
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]             # <<<<<<<<<<<<<<
@@ -4871,75 +4933,66 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_t_12 = __pyx_v_v1;
             __pyx_t_11 = 0;
-            __pyx_t_1 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_2 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_23 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_23 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_22 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_22 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_11 = __pyx_t_22;
+            __pyx_t_22 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_22);
+            __pyx_t_3 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_22); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+            __pyx_t_25 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_25 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_22 = __Pyx_PyNumber_Int(__pyx_t_3); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_22);
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_24 = __Pyx_PyIndex_AsSsize_t(__pyx_t_22); if (unlikely((__pyx_t_24 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+            __pyx_t_11 = __pyx_t_24;
             __pyx_t_12 = 0;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_23;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_25;
 
-            /* "cython_Dijkstra.pyx":162
+            /* "cython_Dijkstra.pyx":178
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),2]=float(n-1)
- *                         i=i+1
+ * 
  */
-            __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_22 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_22 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_12 = __pyx_t_22;
+            __pyx_t_22 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_22);
+            __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_22); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+            __pyx_t_24 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_24 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_12 = __pyx_t_24;
             __pyx_t_11 = 1;
             *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_v1;
 
-            /* "cython_Dijkstra.pyx":163
+            /* "cython_Dijkstra.pyx":179
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1
  *                         node_val1[int(n-1),2]=float(n-1)             # <<<<<<<<<<<<<<
- *                         i=i+1
+ * 
  * 
  */
-            __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_23 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_23 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_22 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_22 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_11 = __pyx_t_22;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_25 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__pyx_t_25 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_22 = __Pyx_PyNumber_Int(__pyx_t_3); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_22);
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_24 = __Pyx_PyIndex_AsSsize_t(__pyx_t_22); if (unlikely((__pyx_t_24 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+            __pyx_t_11 = __pyx_t_24;
             __pyx_t_12 = 2;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_23;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_25;
 
-            /* "cython_Dijkstra.pyx":164
- *                         node_val1[int(n-1),1]=v1
- *                         node_val1[int(n-1),2]=float(n-1)
- *                         i=i+1             # <<<<<<<<<<<<<<
- * 
- *         layer = layer+1
- */
-            __pyx_v_i = (__pyx_v_i + 1);
-
-            /* "cython_Dijkstra.pyx":160
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+            /* "cython_Dijkstra.pyx":176
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
@@ -4947,20 +5000,20 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
           }
 
-          /* "cython_Dijkstra.pyx":156
+          /* "cython_Dijkstra.pyx":167
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  *                 if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+ *                     i11 = int((truncated_layer + i1)*0.5)
  */
         }
       }
     }
     __pyx_L9:;
 
-    /* "cython_Dijkstra.pyx":166
- *                         i=i+1
+    /* "cython_Dijkstra.pyx":182
+ * 
  * 
  *         layer = layer+1             # <<<<<<<<<<<<<<
  * 
@@ -4970,7 +5023,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   }
   __pyx_L7_break:;
 
-  /* "cython_Dijkstra.pyx":168
+  /* "cython_Dijkstra.pyx":184
  *         layer = layer+1
  * 
  *     return Node_val1             # <<<<<<<<<<<<<<
@@ -4985,7 +5038,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -4998,6 +5051,8 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+  __Pyx_XDECREF(__pyx_t_22);
+  __Pyx_XDECREF(__pyx_t_23);
   __Pyx_AddTraceback("cython_Dijkstra.node_val", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5033,7 +5088,7 @@ static PyObject *__pyx_fuse_1__pyx_pw_15cython_Dijkstra_5node_val(PyObject *__py
   __Pyx_memviewslice __pyx_v_truncated_layer_end_cost = { 0, 0, { 0 }, { 0 }, { 0 } };
   double __pyx_v_K;
   double __pyx_v_d;
-  PyObject *__pyx_v_truncated_layer = 0;
+  double __pyx_v_truncated_layer;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5146,7 +5201,7 @@ static PyObject *__pyx_fuse_1__pyx_pw_15cython_Dijkstra_5node_val(PyObject *__py
     __pyx_v_truncated_layer_end_cost = __Pyx_PyObject_to_MemoryviewSlice_dc_double(values[5], PyBUF_WRITABLE); if (unlikely(!__pyx_v_truncated_layer_end_cost.memview)) __PYX_ERR(0, 34, __pyx_L3_error)
     __pyx_v_K = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_K == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
     __pyx_v_d = __pyx_PyFloat_AsDouble(values[7]); if (unlikely((__pyx_v_d == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
-    __pyx_v_truncated_layer = values[8];
+    __pyx_v_truncated_layer = __pyx_PyFloat_AsDouble(values[8]); if (unlikely((__pyx_v_truncated_layer == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
@@ -5164,7 +5219,7 @@ static PyObject *__pyx_fuse_1__pyx_pw_15cython_Dijkstra_5node_val(PyObject *__py
 }
 static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_5generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "cython_Dijkstra.pyx":87
+/* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
@@ -5184,7 +5239,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_3genexpr(PyObject *__pyx_s
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct_3_genexpr *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -5192,7 +5247,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_8node_val_3genexpr(PyObject *__pyx_s
   __Pyx_INCREF(((PyObject *)__pyx_cur_scope->__pyx_outer_scope));
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_outer_scope);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_15cython_Dijkstra_8node_val_5generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_pyx_fuse_1node_val_locals_gene, __pyx_n_s_cython_Dijkstra); if (unlikely(!gen)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_15cython_Dijkstra_8node_val_5generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_genexpr, __pyx_n_s_pyx_fuse_1node_val_locals_gene, __pyx_n_s_cython_Dijkstra); if (unlikely(!gen)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -5235,9 +5290,9 @@ static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_5generator1(__pyx_Coroutin
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 87, __pyx_L1_error)
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview)) { __Pyx_RaiseClosureNameError("node_val1"); __PYX_ERR(0, 87, __pyx_L1_error) }
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 87, __pyx_L1_error) }
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(0, 98, __pyx_L1_error)
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview)) { __Pyx_RaiseClosureNameError("node_val1"); __PYX_ERR(0, 98, __pyx_L1_error) }
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 98, __pyx_L1_error) }
   __pyx_t_1.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.data;
   __pyx_t_1.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview;
   __PYX_INC_MEMVIEW(&__pyx_t_1, 0);
@@ -5256,23 +5311,23 @@ static PyObject *__pyx_gb_15cython_Dijkstra_8node_val_5generator1(__pyx_Coroutin
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_5 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 87, __pyx_L1_error) }
+  if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview)) { __Pyx_RaiseClosureNameError("N"); __PYX_ERR(0, 98, __pyx_L1_error) }
   __pyx_t_1.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.data;
   __pyx_t_1.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_N.memview;
   __PYX_INC_MEMVIEW(&__pyx_t_1, 0);
@@ -5291,21 +5346,21 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
-  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_6 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_7.data = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.data;
   __pyx_t_7.memview = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_node_val1.memview;
@@ -5325,7 +5380,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 87, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
 }
 
 {
@@ -5334,7 +5389,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __p
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+__pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
@@ -5343,9 +5398,9 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_4 = __pyx_t_3; __Pyx_INCREF(__pyx_t_4); __pyx_t_6 = 0;
     __pyx_t_8 = NULL;
   } else {
-    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_6 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 98, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   for (;;) {
@@ -5353,17 +5408,17 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       if (likely(PyList_CheckExact(__pyx_t_4))) {
         if (__pyx_t_6 >= PyList_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       } else {
         if (__pyx_t_6 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely(0 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
         #else
-        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+        __pyx_t_3 = PySequence_ITEM(__pyx_t_4, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         #endif
       }
@@ -5373,7 +5428,7 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 87, __pyx_L1_error)
+          else __PYX_ERR(0, 98, __pyx_L1_error)
         }
         break;
       }
@@ -5383,14 +5438,14 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_v_ele, __pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_3 = 0;
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_math); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_math); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_inf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_inf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_ele, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_cur_scope->__pyx_v_ele, __pyx_t_9, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_11 = ((!__pyx_t_10) != 0);
     if (__pyx_t_11) {
@@ -5434,12 +5489,12 @@ __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
 /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
 
-static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, double __pyx_v_K, double __pyx_v_d, PyObject *__pyx_v_truncated_layer) {
+static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_Hash, __Pyx_memviewslice __pyx_v_Cost_horizontal, __Pyx_memviewslice __pyx_v_Cost_vertical, __Pyx_memviewslice __pyx_v_N, __Pyx_memviewslice __pyx_v_truncated_layer_start_cost, __Pyx_memviewslice __pyx_v_truncated_layer_end_cost, double __pyx_v_K, double __pyx_v_d, double __pyx_v_truncated_layer) {
   struct __pyx_obj_15cython_Dijkstra___pyx_scope_struct_2___pyx_fuse_1node_val *__pyx_cur_scope;
   PyObject *__pyx_v_n = NULL;
   PyObject *__pyx_v_k = NULL;
@@ -5457,7 +5512,9 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   int __pyx_v_v2;
   int __pyx_v_source_neighbour;
   int __pyx_v_sink_neighbour;
-  int __pyx_v_i;
+  CYTHON_UNUSED int __pyx_v_i;
+  int __pyx_v_i11;
+  int __pyx_v_i12;
   PyObject *__pyx_v_res = NULL;
   PyObject *__pyx_v_Cost_truncated_end1 = NULL;
   PyObject *__pyx_gb_15cython_Dijkstra_8node_val_5generator1 = 0;
@@ -5483,8 +5540,10 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   long __pyx_t_18;
   long __pyx_t_19;
   int __pyx_t_20;
-  Py_ssize_t __pyx_t_21;
-  double __pyx_t_22;
+  PyObject *__pyx_t_21 = NULL;
+  PyObject *__pyx_t_22 = NULL;
+  Py_ssize_t __pyx_t_23;
+  double __pyx_t_24;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5500,7 +5559,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   __pyx_cur_scope->__pyx_v_N = __pyx_v_N;
 
   /* "cython_Dijkstra.pyx":36
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):
  * 
  *     n = Hash.shape[0]             # <<<<<<<<<<<<<<
  *     k = Hash.shape[1]
@@ -5516,7 +5575,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
  *     n = Hash.shape[0]
  *     k = Hash.shape[1]             # <<<<<<<<<<<<<<
  *     N_nodes=int(K/2) +1
- *     #assert tuple(.shape) == tuple(array_2.shape)
+ * 
  */
   __pyx_t_1 = PyInt_FromSsize_t((__pyx_v_Hash.shape[1])); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5527,8 +5586,8 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
  *     n = Hash.shape[0]
  *     k = Hash.shape[1]
  *     N_nodes=int(K/2) +1             # <<<<<<<<<<<<<<
+ * 
  *     #assert tuple(.shape) == tuple(array_2.shape)
- * #Here accprding to
  */
   __pyx_t_1 = __Pyx_PyInt_FromDouble((__pyx_v_K / 2.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5538,34 +5597,34 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   __pyx_v_N_nodes = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cython_Dijkstra.pyx":48
+  /* "cython_Dijkstra.pyx":49
  *         dtype = np.intc
  *     elif my_type is double:
  *         dtype = np.double             # <<<<<<<<<<<<<<
  * 
  *     Node_val1 = np.random.rand(n, k)*np.inf
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_double); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_double); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_dtype = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cython_Dijkstra.pyx":50
+  /* "cython_Dijkstra.pyx":51
  *         dtype = np.double
  * 
  *     Node_val1 = np.random.rand(n, k)*np.inf             # <<<<<<<<<<<<<<
  *     #Node_val2 = np.random.rand(n, k)*np.inf
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rand); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_rand); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -5583,7 +5642,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_n, __pyx_v_k};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
@@ -5591,13 +5650,13 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
     PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_n, __pyx_v_k};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     if (__pyx_t_3) {
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
@@ -5608,92 +5667,91 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
     __Pyx_INCREF(__pyx_v_k);
     __Pyx_GIVEREF(__pyx_v_k);
     PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_k);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_inf); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_inf); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_Node_val1 = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cython_Dijkstra.pyx":53
+  /* "cython_Dijkstra.pyx":54
  *     #Node_val2 = np.random.rand(n, k)*np.inf
  * 
  *     Node_val1[0,0]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__5, __pyx_float_0_0) < 0)) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__5, __pyx_float_0_0) < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":54
+  /* "cython_Dijkstra.pyx":55
  * 
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,2]=0.0
  * 
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__6, __pyx_float_0_0) < 0)) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__6, __pyx_float_0_0) < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":55
+  /* "cython_Dijkstra.pyx":56
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__7, __pyx_float_0_0) < 0)) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (unlikely(PyObject_SetItem(__pyx_v_Node_val1, __pyx_tuple__7, __pyx_float_0_0) < 0)) __PYX_ERR(0, 56, __pyx_L1_error)
 
-  /* "cython_Dijkstra.pyx":58
+  /* "cython_Dijkstra.pyx":59
  * 
  * 
  *     cdef double[:,::1] node_val1 = Node_val1             # <<<<<<<<<<<<<<
  *     #cdef double[:,::1] node_val2 = Node_val2
  * 
  */
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_v_Node_val1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(__pyx_v_Node_val1, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 59, __pyx_L1_error)
   __pyx_cur_scope->__pyx_v_node_val1 = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "cython_Dijkstra.pyx":62
+  /* "cython_Dijkstra.pyx":63
  * 
  *     cdef double  ip, jp, i1, i2, j, l1, l2
  *     cdef double Cijk = 0, Cijk1 = 0             # <<<<<<<<<<<<<<
- *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
+ *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer, i11, i12
  * 
  */
   __pyx_v_Cijk = 0.0;
   __pyx_v_Cijk1 = 0.0;
 
-  /* "cython_Dijkstra.pyx":65
- *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer
+  /* "cython_Dijkstra.pyx":66
+ *     cdef int v1, v2,j1,j2,j3,source_neighbour,sink_neighbour,i,layer, i11, i12
  * 
- *     source_neighbour = truncated_layer             # <<<<<<<<<<<<<<
+ *     source_neighbour = int(truncated_layer)             # <<<<<<<<<<<<<<
  *     sink_neighbour = int(K-source_neighbour)
  * 
  */
-  __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_v_truncated_layer); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
-  __pyx_v_source_neighbour = __pyx_t_4;
+  __pyx_v_source_neighbour = ((int)__pyx_v_truncated_layer);
 
-  /* "cython_Dijkstra.pyx":66
+  /* "cython_Dijkstra.pyx":67
  * 
- *     source_neighbour = truncated_layer
+ *     source_neighbour = int(truncated_layer)
  *     sink_neighbour = int(K-source_neighbour)             # <<<<<<<<<<<<<<
  * 
  *     Cijk=0
  */
   __pyx_v_sink_neighbour = ((int)(__pyx_v_K - __pyx_v_source_neighbour));
 
-  /* "cython_Dijkstra.pyx":68
+  /* "cython_Dijkstra.pyx":69
  *     sink_neighbour = int(K-source_neighbour)
  * 
  *     Cijk=0             # <<<<<<<<<<<<<<
@@ -5702,7 +5760,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_Cijk = 0.0;
 
-  /* "cython_Dijkstra.pyx":69
+  /* "cython_Dijkstra.pyx":70
  * 
  *     Cijk=0
  *     i=0             # <<<<<<<<<<<<<<
@@ -5711,7 +5769,7 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
  */
   __pyx_v_i = 0;
 
-  /* "cython_Dijkstra.pyx":71
+  /* "cython_Dijkstra.pyx":72
  *     i=0
  * 
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):             # <<<<<<<<<<<<<<
@@ -5736,21 +5794,21 @@ static PyObject *__pyx_pf_15cython_Dijkstra_4node_val(CYTHON_UNUSED PyObject *__
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 71, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
 }
 
-__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
   __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -5770,27 +5828,27 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 71, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
 }
 
-__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
-  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_10 = __pyx_t_8;
   for (__pyx_t_4 = __pyx_t_9; __pyx_t_4 < __pyx_t_10; __pyx_t_4+=1) {
     __pyx_v_v2 = __pyx_t_4;
 
-    /* "cython_Dijkstra.pyx":72
+    /* "cython_Dijkstra.pyx":73
  * 
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):
  *         i1 = Hash[v2,1]             # <<<<<<<<<<<<<<
@@ -5801,43 +5859,61 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_12 = 1;
     __pyx_v_i1 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-    /* "cython_Dijkstra.pyx":73
+    /* "cython_Dijkstra.pyx":74
  *     for v2 in range(int(sum(N[:source_neighbour])),int(sum(N[:source_neighbour+1]))):
  *         i1 = Hash[v2,1]
  *         i2 = Hash[v2,2]             # <<<<<<<<<<<<<<
  * 
- *         if abs(i1-i2)>=d:
+ * 
  */
     __pyx_t_12 = __pyx_v_v2;
     __pyx_t_11 = 2;
     __pyx_v_i2 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-    /* "cython_Dijkstra.pyx":75
- *         i2 = Hash[v2,2]
+    /* "cython_Dijkstra.pyx":77
+ * 
  * 
  *         if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
- *             node_val1[v2,1] = 0
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
  */
     __pyx_t_13 = ((fabs((__pyx_v_i1 - __pyx_v_i2)) >= __pyx_v_d) != 0);
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":76
- * 
+      /* "cython_Dijkstra.pyx":79
  *         if abs(i1-i2)>=d:
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)             # <<<<<<<<<<<<<<
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)             # <<<<<<<<<<<<<<
+ *             i12 = int((truncated_layer + i2)*0.5)
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ */
+      __pyx_v_i11 = ((int)((__pyx_v_truncated_layer + __pyx_v_i1) * 0.5));
+
+      /* "cython_Dijkstra.pyx":80
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
+ *             i12 = int((truncated_layer + i2)*0.5)             # <<<<<<<<<<<<<<
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
+ */
+      __pyx_v_i12 = ((int)((__pyx_v_truncated_layer + __pyx_v_i2) * 0.5));
+
+      /* "cython_Dijkstra.pyx":82
+ *             i12 = int((truncated_layer + i2)*0.5)
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]             # <<<<<<<<<<<<<<
  *             node_val1[v2,1] = 0
  *             node_val1[v2,2] = v2
  */
-      __pyx_t_11 = __pyx_v_i;
-      __pyx_t_12 = ((Py_ssize_t)(__pyx_v_i + ((__pyx_v_i2 - __pyx_v_i1) / 2.0)));
+      __pyx_t_11 = __pyx_v_i11;
+      __pyx_t_12 = __pyx_v_i12;
       __pyx_t_14 = __pyx_v_v2;
       __pyx_t_15 = 0;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_14 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_15)) )) = ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_start_cost.data) + __pyx_t_11)) ))) + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_start_cost.data) + __pyx_t_12)) ))));
 
-      /* "cython_Dijkstra.pyx":77
- *         if abs(i1-i2)>=d:
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
+      /* "cython_Dijkstra.pyx":83
+ *             #print(i1,i2,i11,i12,truncated_layer)
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
  *             node_val1[v2,1] = 0             # <<<<<<<<<<<<<<
  *             node_val1[v2,2] = v2
  *             #print(node_val1[v2,0],v2)
@@ -5846,37 +5922,28 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       __pyx_t_11 = 1;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = 0.0;
 
-      /* "cython_Dijkstra.pyx":78
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
+      /* "cython_Dijkstra.pyx":84
+ *             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12]
  *             node_val1[v2,1] = 0
  *             node_val1[v2,2] = v2             # <<<<<<<<<<<<<<
  *             #print(node_val1[v2,0],v2)
- *             i = i+1
+ * 
  */
       __pyx_t_11 = __pyx_v_v2;
       __pyx_t_12 = 2;
       *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_v2;
 
-      /* "cython_Dijkstra.pyx":80
- *             node_val1[v2,2] = v2
- *             #print(node_val1[v2,0],v2)
- *             i = i+1             # <<<<<<<<<<<<<<
+      /* "cython_Dijkstra.pyx":77
  * 
- * 
- */
-      __pyx_v_i = (__pyx_v_i + 1);
-
-      /* "cython_Dijkstra.pyx":75
- *         i2 = Hash[v2,2]
  * 
  *         if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
- *             node_val1[v2,0] = truncated_layer_start_cost[i]+truncated_layer_start_cost[int(i+(i2-i1)/2)] # i have to read the indices reverse to sync with the Hash (3D graph nodes)
- *             node_val1[v2,1] = 0
+ *             #i_2 =  int(i+(i1-i2)/(2))
+ *             i11 = int((truncated_layer + i1)*0.5)
  */
     }
   }
 
-  /* "cython_Dijkstra.pyx":83
+  /* "cython_Dijkstra.pyx":94
  * 
  * 
  *     layer = source_neighbour             # <<<<<<<<<<<<<<
@@ -5885,7 +5952,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
   __pyx_cur_scope->__pyx_v_layer = __pyx_v_source_neighbour;
 
-  /* "cython_Dijkstra.pyx":85
+  /* "cython_Dijkstra.pyx":96
  *     layer = source_neighbour
  * 
  *     while layer <=sink_neighbour:             # <<<<<<<<<<<<<<
@@ -5896,43 +5963,43 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_13 = ((__pyx_cur_scope->__pyx_v_layer <= __pyx_v_sink_neighbour) != 0);
     if (!__pyx_t_13) break;
 
-    /* "cython_Dijkstra.pyx":87
+    /* "cython_Dijkstra.pyx":98
  *     while layer <=sink_neighbour:
  * 
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])             # <<<<<<<<<<<<<<
  * 
  *         if res == True:
  */
-    __pyx_t_2 = __pyx_pf_15cython_Dijkstra_8node_val_3genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_2 = __pyx_pf_15cython_Dijkstra_8node_val_3genexpr(((PyObject*)__pyx_cur_scope)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_Generator_Next(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF_SET(__pyx_v_res, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "cython_Dijkstra.pyx":89
+    /* "cython_Dijkstra.pyx":100
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])
  * 
  *         if res == True:             # <<<<<<<<<<<<<<
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')
  *              break
  */
-    __pyx_t_5 = PyObject_RichCompare(__pyx_v_res, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 89, __pyx_L1_error)
-    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_5 = PyObject_RichCompare(__pyx_v_res, Py_True, Py_EQ); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":90
+      /* "cython_Dijkstra.pyx":101
  * 
  *         if res == True:
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')             # <<<<<<<<<<<<<<
  *              break
  * 
  */
-      if (__Pyx_PrintOne(0, __pyx_kp_s_shift_the_target_its_in_infinite) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_kp_s_shift_the_target_its_in_infinite) < 0) __PYX_ERR(0, 101, __pyx_L1_error)
 
-      /* "cython_Dijkstra.pyx":91
+      /* "cython_Dijkstra.pyx":102
  *         if res == True:
  *              print('shift the target, its in infinite cost zone or give a bigger area for IDW point interpolation.')
  *              break             # <<<<<<<<<<<<<<
@@ -5941,7 +6008,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
       goto __pyx_L7_break;
 
-      /* "cython_Dijkstra.pyx":89
+      /* "cython_Dijkstra.pyx":100
  *         res = all(ele == math.inf for ele in node_val1[int(sum(N[:layer])):int(sum(N[:layer+1])),0])
  * 
  *         if res == True:             # <<<<<<<<<<<<<<
@@ -5950,7 +6017,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
     }
 
-    /* "cython_Dijkstra.pyx":93
+    /* "cython_Dijkstra.pyx":104
  *              break
  * 
  *         if layer < sink_neighbour:             # <<<<<<<<<<<<<<
@@ -5960,7 +6027,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     __pyx_t_13 = ((__pyx_cur_scope->__pyx_v_layer < __pyx_v_sink_neighbour) != 0);
     if (__pyx_t_13) {
 
-      /* "cython_Dijkstra.pyx":94
+      /* "cython_Dijkstra.pyx":105
  * 
  *         if layer < sink_neighbour:
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):             # <<<<<<<<<<<<<<
@@ -5985,21 +6052,21 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 94, __pyx_L1_error)
+    __PYX_ERR(0, 105, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -6019,27 +6086,27 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 94, __pyx_L1_error)
+    __PYX_ERR(0, 105, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_10 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_10 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_10 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_9 = __pyx_t_8;
       for (__pyx_t_4 = __pyx_t_10; __pyx_t_4 < __pyx_t_9; __pyx_t_4+=1) {
         __pyx_v_v1 = __pyx_t_4;
 
-        /* "cython_Dijkstra.pyx":96
+        /* "cython_Dijkstra.pyx":107
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 # give range of nodes in next layer.
  *                 j=(Hash[v1,0])             # <<<<<<<<<<<<<<
@@ -6050,7 +6117,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_11 = 0;
         __pyx_v_j = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-        /* "cython_Dijkstra.pyx":98
+        /* "cython_Dijkstra.pyx":109
  *                 j=(Hash[v1,0])
  * 
  *                 for v2 in range(int(sum(N[:layer+1])),int(sum(N[:layer+2]))):             # <<<<<<<<<<<<<<
@@ -6075,21 +6142,21 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
         __pyx_t_7.memview = NULL;
         __pyx_t_7.data = NULL;
-        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_17 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_17 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_17 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_17 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
         __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -6109,27 +6176,27 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 109, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
         __pyx_t_7.memview = NULL;
         __pyx_t_7.data = NULL;
-        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_18 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_18 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+        __pyx_t_18 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_18 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_19 = __pyx_t_17;
         for (__pyx_t_16 = __pyx_t_18; __pyx_t_16 < __pyx_t_19; __pyx_t_16+=1) {
           __pyx_v_v2 = __pyx_t_16;
 
-          /* "cython_Dijkstra.pyx":100
+          /* "cython_Dijkstra.pyx":111
  *                 for v2 in range(int(sum(N[:layer+1])),int(sum(N[:layer+2]))):
  *                     #print(l1,l2)
  *                     j=Hash[v2,0]             # <<<<<<<<<<<<<<
@@ -6140,7 +6207,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_12 = 0;
           __pyx_v_j = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-          /* "cython_Dijkstra.pyx":111
+          /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -6158,7 +6225,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             goto __pyx_L15_bool_binop_done;
           }
 
-          /* "cython_Dijkstra.pyx":112
+          /* "cython_Dijkstra.pyx":123
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\
  *                         (abs(Hash[v2,1]-Hash[v1,1]) <= 1) and\             # <<<<<<<<<<<<<<
@@ -6176,7 +6243,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             goto __pyx_L15_bool_binop_done;
           }
 
-          /* "cython_Dijkstra.pyx":113
+          /* "cython_Dijkstra.pyx":124
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\
  *                         (abs(Hash[v2,1]-Hash[v1,1]) <= 1) and\
  *                         (abs(Hash[v2,2]-Hash[v1,2]) <=1)):             # <<<<<<<<<<<<<<
@@ -6191,7 +6258,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
           __pyx_t_13 = __pyx_t_20;
           __pyx_L15_bool_binop_done:;
 
-          /* "cython_Dijkstra.pyx":111
+          /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -6200,7 +6267,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
           if (__pyx_t_13) {
 
-            /* "cython_Dijkstra.pyx":116
+            /* "cython_Dijkstra.pyx":127
  *                         #in this case, add the edge
  *                         #determine its (cumulative) cost first
  *                         i1 = (Hash[v2,1])             # <<<<<<<<<<<<<<
@@ -6211,7 +6278,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_15 = 1;
             __pyx_v_i1 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) )));
 
-            /* "cython_Dijkstra.pyx":117
+            /* "cython_Dijkstra.pyx":128
  *                         #determine its (cumulative) cost first
  *                         i1 = (Hash[v2,1])
  *                         i2 = (Hash[v2,2])             # <<<<<<<<<<<<<<
@@ -6222,7 +6289,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_14 = 2;
             __pyx_v_i2 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )));
 
-            /* "cython_Dijkstra.pyx":119
+            /* "cython_Dijkstra.pyx":130
  *                         i2 = (Hash[v2,2])
  * 
  *                         ip = 0.5*(j-i1)             # <<<<<<<<<<<<<<
@@ -6231,7 +6298,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_ip = (0.5 * (__pyx_v_j - __pyx_v_i1));
 
-            /* "cython_Dijkstra.pyx":120
+            /* "cython_Dijkstra.pyx":131
  * 
  *                         ip = 0.5*(j-i1)
  *                         jp = 0.5*(j+i1)             # <<<<<<<<<<<<<<
@@ -6240,7 +6307,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_jp = (0.5 * (__pyx_v_j + __pyx_v_i1));
 
-            /* "cython_Dijkstra.pyx":122
+            /* "cython_Dijkstra.pyx":133
  *                         jp = 0.5*(j+i1)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -6254,7 +6321,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_13 = ((fabs(((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))) <= 1.0) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":124
+              /* "cython_Dijkstra.pyx":135
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:             # <<<<<<<<<<<<<<
@@ -6268,7 +6335,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_13 = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) <= (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )))) != 0);
               if (__pyx_t_13) {
 
-                /* "cython_Dijkstra.pyx":125
+                /* "cython_Dijkstra.pyx":136
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]             # <<<<<<<<<<<<<<
@@ -6279,7 +6346,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 __pyx_t_15 = ((Py_ssize_t)__pyx_v_jp);
                 __pyx_v_Cijk = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Cost_horizontal.data + __pyx_t_14 * __pyx_v_Cost_horizontal.strides[0]) )) + __pyx_t_15)) )));
 
-                /* "cython_Dijkstra.pyx":124
+                /* "cython_Dijkstra.pyx":135
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,1]<=Hash[v2,1]:             # <<<<<<<<<<<<<<
@@ -6289,7 +6356,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 goto __pyx_L19;
               }
 
-              /* "cython_Dijkstra.pyx":127
+              /* "cython_Dijkstra.pyx":138
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]
  *                             else:
  *                                 Cijk = Cost_vertical[int(ip),int(jp)]             # <<<<<<<<<<<<<<
@@ -6303,7 +6370,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               }
               __pyx_L19:;
 
-              /* "cython_Dijkstra.pyx":122
+              /* "cython_Dijkstra.pyx":133
  *                         jp = 0.5*(j+i1)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -6312,7 +6379,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":134
+            /* "cython_Dijkstra.pyx":145
  * 
  * 
  *                         ip = 0.5*(j-i2)             # <<<<<<<<<<<<<<
@@ -6321,7 +6388,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_ip = (0.5 * (__pyx_v_j - __pyx_v_i2));
 
-            /* "cython_Dijkstra.pyx":135
+            /* "cython_Dijkstra.pyx":146
  * 
  *                         ip = 0.5*(j-i2)
  *                         jp = 0.5*(j+i2)             # <<<<<<<<<<<<<<
@@ -6330,7 +6397,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_v_jp = (0.5 * (__pyx_v_j + __pyx_v_i2));
 
-            /* "cython_Dijkstra.pyx":137
+            /* "cython_Dijkstra.pyx":148
  *                         jp = 0.5*(j+i2)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -6344,7 +6411,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_13 = ((fabs(((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_14 * __pyx_v_Hash.strides[0]) )) + __pyx_t_15)) ))) - (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) ))))) <= 1.0) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":139
+              /* "cython_Dijkstra.pyx":150
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:             # <<<<<<<<<<<<<<
@@ -6358,7 +6425,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_13 = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) ))) <= (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_15 * __pyx_v_Hash.strides[0]) )) + __pyx_t_14)) )))) != 0);
               if (__pyx_t_13) {
 
-                /* "cython_Dijkstra.pyx":140
+                /* "cython_Dijkstra.pyx":151
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]+Cijk # changing the inquality here             # <<<<<<<<<<<<<<
@@ -6369,7 +6436,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 __pyx_t_15 = ((Py_ssize_t)__pyx_v_jp);
                 __pyx_v_Cijk = ((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Cost_horizontal.data + __pyx_t_14 * __pyx_v_Cost_horizontal.strides[0]) )) + __pyx_t_15)) ))) + __pyx_v_Cijk);
 
-                /* "cython_Dijkstra.pyx":139
+                /* "cython_Dijkstra.pyx":150
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:
  * 
  *                             if Hash[v1,2]<=Hash[v2,2]:             # <<<<<<<<<<<<<<
@@ -6379,7 +6446,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
                 goto __pyx_L21;
               }
 
-              /* "cython_Dijkstra.pyx":142
+              /* "cython_Dijkstra.pyx":153
  *                                 Cijk = Cost_horizontal[int(ip),int(jp)]+Cijk # changing the inquality here
  *                             else:
  *                                 Cijk = Cost_vertical[int(ip),int(jp)]+Cijk             # <<<<<<<<<<<<<<
@@ -6393,7 +6460,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               }
               __pyx_L21:;
 
-              /* "cython_Dijkstra.pyx":137
+              /* "cython_Dijkstra.pyx":148
  *                         jp = 0.5*(j+i2)
  * 
  *                         if abs(Hash[v2,0]-Hash[v1,0])<=1:             # <<<<<<<<<<<<<<
@@ -6402,7 +6469,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":145
+            /* "cython_Dijkstra.pyx":156
  * 
  * 
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):             # <<<<<<<<<<<<<<
@@ -6416,7 +6483,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
             __pyx_t_13 = (((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_14 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_15)) ))) > (__pyx_v_Cijk + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) ))))) != 0);
             if (__pyx_t_13) {
 
-              /* "cython_Dijkstra.pyx":147
+              /* "cython_Dijkstra.pyx":158
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):
  * 
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]             # <<<<<<<<<<<<<<
@@ -6429,7 +6496,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_14 = 0;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_15 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_14)) )) = (__pyx_v_Cijk + (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) ))));
 
-              /* "cython_Dijkstra.pyx":148
+              /* "cython_Dijkstra.pyx":159
  * 
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]
  *                             node_val1[v2,1]=v1             # <<<<<<<<<<<<<<
@@ -6440,7 +6507,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_12 = 1;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_v_v1;
 
-              /* "cython_Dijkstra.pyx":149
+              /* "cython_Dijkstra.pyx":160
  *                             node_val1[v2,0]=Cijk+node_val1[v1,0]
  *                             node_val1[v2,1]=v1
  *                             node_val1[v2,2]=v2             # <<<<<<<<<<<<<<
@@ -6451,7 +6518,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
               __pyx_t_11 = 2;
               *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_v2;
 
-              /* "cython_Dijkstra.pyx":145
+              /* "cython_Dijkstra.pyx":156
  * 
  * 
  *                         if (node_val1[v2,0]>(Cijk+node_val1[v1,0])):             # <<<<<<<<<<<<<<
@@ -6460,7 +6527,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             }
 
-            /* "cython_Dijkstra.pyx":111
+            /* "cython_Dijkstra.pyx":122
  *                         #too early/late to differentiate the paths OR
  *                         #the vertices are far apart (i-distance is at least 2)
  *                     if ((abs(Hash[v2,1]-Hash[v2,2]) >= d) and\             # <<<<<<<<<<<<<<
@@ -6471,7 +6538,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         }
       }
 
-      /* "cython_Dijkstra.pyx":93
+      /* "cython_Dijkstra.pyx":104
  *              break
  * 
  *         if layer < sink_neighbour:             # <<<<<<<<<<<<<<
@@ -6481,23 +6548,14 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
       goto __pyx_L9;
     }
 
-    /* "cython_Dijkstra.pyx":152
+    /* "cython_Dijkstra.pyx":164
+ *         else:
  * 
- *         else:
- *             i=0             # <<<<<<<<<<<<<<
- *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
- *                 i1=Hash[v1,1]
- */
-    /*else*/ {
-      __pyx_v_i = 0;
-
-      /* "cython_Dijkstra.pyx":153
- *         else:
- *             i=0
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):             # <<<<<<<<<<<<<<
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  */
+    /*else*/ {
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
       __PYX_INC_MEMVIEW(&__pyx_t_7, 0);
@@ -6516,21 +6574,21 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 153, __pyx_L1_error)
+    __PYX_ERR(0, 164, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_8 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_7.data = __pyx_cur_scope->__pyx_v_N.data;
       __pyx_t_7.memview = __pyx_cur_scope->__pyx_v_N.memview;
@@ -6550,28 +6608,28 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 153, __pyx_L1_error)
+    __PYX_ERR(0, 164, __pyx_L1_error)
 }
 
-__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+__pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __pyx_t_7.memview = NULL;
       __pyx_t_7.data = NULL;
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_sum, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyInt_As_long(__pyx_t_5); if (unlikely((__pyx_t_9 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_10 = __pyx_t_8;
       for (__pyx_t_4 = __pyx_t_9; __pyx_t_4 < __pyx_t_10; __pyx_t_4+=1) {
         __pyx_v_v1 = __pyx_t_4;
 
-        /* "cython_Dijkstra.pyx":154
- *             i=0
+        /* "cython_Dijkstra.pyx":165
+ * 
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 i1=Hash[v1,1]             # <<<<<<<<<<<<<<
  *                 i2=Hash[v1,2]
@@ -6581,7 +6639,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_12 = 1;
         __pyx_v_i1 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_11 * __pyx_v_Hash.strides[0]) )) + __pyx_t_12)) )));
 
-        /* "cython_Dijkstra.pyx":155
+        /* "cython_Dijkstra.pyx":166
  *             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]             # <<<<<<<<<<<<<<
@@ -6592,60 +6650,115 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
         __pyx_t_11 = 2;
         __pyx_v_i2 = (*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_v_Hash.data + __pyx_t_12 * __pyx_v_Hash.strides[0]) )) + __pyx_t_11)) )));
 
-        /* "cython_Dijkstra.pyx":156
+        /* "cython_Dijkstra.pyx":167
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  *                 if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+ *                     i11 = int((truncated_layer + i1)*0.5)
  */
         __pyx_t_13 = ((fabs((__pyx_v_i1 - __pyx_v_i2)) >= __pyx_v_d) != 0);
         if (__pyx_t_13) {
 
-          /* "cython_Dijkstra.pyx":158
+          /* "cython_Dijkstra.pyx":169
  *                 if abs(i1-i2)>=d:
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]             # <<<<<<<<<<<<<<
+ *                     i11 = int((truncated_layer + i1)*0.5)             # <<<<<<<<<<<<<<
+ *                     i12 = int((truncated_layer + i2)*0.5)
+ * 
+ */
+          __pyx_v_i11 = ((int)((__pyx_v_truncated_layer + __pyx_v_i1) * 0.5));
+
+          /* "cython_Dijkstra.pyx":170
+ * 
+ *                     i11 = int((truncated_layer + i1)*0.5)
+ *                     i12 = int((truncated_layer + i2)*0.5)             # <<<<<<<<<<<<<<
+ * 
+ *                     print(i1,i2,i11,i12,truncated_layer)
+ */
+          __pyx_v_i12 = ((int)((__pyx_v_truncated_layer + __pyx_v_i2) * 0.5));
+
+          /* "cython_Dijkstra.pyx":172
+ *                     i12 = int((truncated_layer + i2)*0.5)
+ * 
+ *                     print(i1,i2,i11,i12,truncated_layer)             # <<<<<<<<<<<<<<
+ * 
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
+ */
+          __pyx_t_5 = PyFloat_FromDouble(__pyx_v_i1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_2 = PyFloat_FromDouble(__pyx_v_i2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
+          __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_i11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_1);
+          __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_i12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_3);
+          __pyx_t_21 = PyFloat_FromDouble(__pyx_v_truncated_layer); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_21);
+          __pyx_t_22 = PyTuple_New(5); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          __Pyx_GIVEREF(__pyx_t_5);
+          PyTuple_SET_ITEM(__pyx_t_22, 0, __pyx_t_5);
+          __Pyx_GIVEREF(__pyx_t_2);
+          PyTuple_SET_ITEM(__pyx_t_22, 1, __pyx_t_2);
+          __Pyx_GIVEREF(__pyx_t_1);
+          PyTuple_SET_ITEM(__pyx_t_22, 2, __pyx_t_1);
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_22, 3, __pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_21);
+          PyTuple_SET_ITEM(__pyx_t_22, 4, __pyx_t_21);
+          __pyx_t_5 = 0;
+          __pyx_t_2 = 0;
+          __pyx_t_1 = 0;
+          __pyx_t_3 = 0;
+          __pyx_t_21 = 0;
+          if (__Pyx_PrintOne(0, __pyx_t_22) < 0) __PYX_ERR(0, 172, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+
+          /* "cython_Dijkstra.pyx":174
+ *                     print(i1,i2,i11,i12,truncated_layer)
+ * 
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]             # <<<<<<<<<<<<<<
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  */
-          __pyx_t_11 = __pyx_v_i;
-          __pyx_t_12 = ((Py_ssize_t)(__pyx_v_i + ((__pyx_v_i1 - __pyx_v_i2) / 2.0)));
-          __pyx_t_5 = PyFloat_FromDouble(((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_11)) ))) + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_12)) ))))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
-          __Pyx_XDECREF_SET(__pyx_v_Cost_truncated_end1, __pyx_t_5);
-          __pyx_t_5 = 0;
+          __pyx_t_11 = __pyx_v_i11;
+          __pyx_t_12 = __pyx_v_i12;
+          __pyx_t_22 = PyFloat_FromDouble(((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_11)) ))) + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_truncated_layer_end_cost.data) + __pyx_t_12)) ))))); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 174, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          __Pyx_XDECREF_SET(__pyx_v_Cost_truncated_end1, __pyx_t_22);
+          __pyx_t_22 = 0;
 
-          /* "cython_Dijkstra.pyx":160
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+          /* "cython_Dijkstra.pyx":176
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1
  */
-          __pyx_t_5 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_21 = __Pyx_PyIndex_AsSsize_t(__pyx_t_5); if (unlikely((__pyx_t_21 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_12 = __pyx_t_21;
+          __pyx_t_22 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
+          __pyx_t_23 = __Pyx_PyIndex_AsSsize_t(__pyx_t_22); if (unlikely((__pyx_t_23 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+          __pyx_t_12 = __pyx_t_23;
           __pyx_t_11 = 0;
-          __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
+          __pyx_t_22 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_22);
           __pyx_t_11 = __pyx_v_v1;
           __pyx_t_12 = 0;
-          __pyx_t_2 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_1);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = PyObject_RichCompare(__pyx_t_5, __pyx_t_1, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 160, __pyx_L1_error)
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __pyx_t_21 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )))); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_21);
+          __pyx_t_3 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_21); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_3);
+          __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+          __pyx_t_21 = PyObject_RichCompare(__pyx_t_22, __pyx_t_3, Py_GT); __Pyx_XGOTREF(__pyx_t_21); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_21); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           if (__pyx_t_13) {
 
-            /* "cython_Dijkstra.pyx":161
+            /* "cython_Dijkstra.pyx":177
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]             # <<<<<<<<<<<<<<
@@ -6654,75 +6767,66 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
             __pyx_t_12 = __pyx_v_v1;
             __pyx_t_11 = 0;
-            __pyx_t_2 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_1 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_22 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_22 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_21 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_21 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_11 = __pyx_t_21;
+            __pyx_t_21 = PyFloat_FromDouble((*((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )))); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_21);
+            __pyx_t_3 = PyNumber_Add(__pyx_v_Cost_truncated_end1, __pyx_t_21); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+            __pyx_t_24 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_24 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_21 = __Pyx_PyNumber_Int(__pyx_t_3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_21);
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_23 = __Pyx_PyIndex_AsSsize_t(__pyx_t_21); if (unlikely((__pyx_t_23 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+            __pyx_t_11 = __pyx_t_23;
             __pyx_t_12 = 0;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_22;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_24;
 
-            /* "cython_Dijkstra.pyx":162
+            /* "cython_Dijkstra.pyx":178
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),2]=float(n-1)
- *                         i=i+1
+ * 
  */
-            __pyx_t_2 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_1 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_21 = __Pyx_PyIndex_AsSsize_t(__pyx_t_1); if (unlikely((__pyx_t_21 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_12 = __pyx_t_21;
+            __pyx_t_21 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_21);
+            __pyx_t_3 = __Pyx_PyNumber_Int(__pyx_t_21); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+            __pyx_t_23 = __Pyx_PyIndex_AsSsize_t(__pyx_t_3); if (unlikely((__pyx_t_23 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 178, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_12 = __pyx_t_23;
             __pyx_t_11 = 1;
             *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_12 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_11)) )) = __pyx_v_v1;
 
-            /* "cython_Dijkstra.pyx":163
+            /* "cython_Dijkstra.pyx":179
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
  *                         node_val1[int(n-1),1]=v1
  *                         node_val1[int(n-1),2]=float(n-1)             # <<<<<<<<<<<<<<
- *                         i=i+1
+ * 
  * 
  */
-            __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_22 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_22 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_2 = __Pyx_PyNumber_Int(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_21 = __Pyx_PyIndex_AsSsize_t(__pyx_t_2); if (unlikely((__pyx_t_21 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_11 = __pyx_t_21;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_24 = __Pyx_PyObject_AsDouble(__pyx_t_3); if (unlikely(__pyx_t_24 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_PyInt_SubtractObjC(__pyx_v_n, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_21 = __Pyx_PyNumber_Int(__pyx_t_3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_21);
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_23 = __Pyx_PyIndex_AsSsize_t(__pyx_t_21); if (unlikely((__pyx_t_23 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+            __pyx_t_11 = __pyx_t_23;
             __pyx_t_12 = 2;
-            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_22;
+            *((double *) ( /* dim=1 */ ((char *) (((double *) ( /* dim=0 */ (__pyx_cur_scope->__pyx_v_node_val1.data + __pyx_t_11 * __pyx_cur_scope->__pyx_v_node_val1.strides[0]) )) + __pyx_t_12)) )) = __pyx_t_24;
 
-            /* "cython_Dijkstra.pyx":164
- *                         node_val1[int(n-1),1]=v1
- *                         node_val1[int(n-1),2]=float(n-1)
- *                         i=i+1             # <<<<<<<<<<<<<<
- * 
- *         layer = layer+1
- */
-            __pyx_v_i = (__pyx_v_i + 1);
-
-            /* "cython_Dijkstra.pyx":160
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+            /* "cython_Dijkstra.pyx":176
+ *                     Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
  * 
  *                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):             # <<<<<<<<<<<<<<
  *                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
@@ -6730,20 +6834,20 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
  */
           }
 
-          /* "cython_Dijkstra.pyx":156
+          /* "cython_Dijkstra.pyx":167
  *                 i1=Hash[v1,1]
  *                 i2=Hash[v1,2]
  *                 if abs(i1-i2)>=d:             # <<<<<<<<<<<<<<
  * 
- *                     Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/2)]
+ *                     i11 = int((truncated_layer + i1)*0.5)
  */
         }
       }
     }
     __pyx_L9:;
 
-    /* "cython_Dijkstra.pyx":166
- *                         i=i+1
+    /* "cython_Dijkstra.pyx":182
+ * 
  * 
  *         layer = layer+1             # <<<<<<<<<<<<<<
  * 
@@ -6753,7 +6857,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   }
   __pyx_L7_break:;
 
-  /* "cython_Dijkstra.pyx":168
+  /* "cython_Dijkstra.pyx":184
  *         layer = layer+1
  * 
  *     return Node_val1             # <<<<<<<<<<<<<<
@@ -6768,7 +6872,7 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -6781,6 +6885,8 @@ __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_t_7, 1, (PyObject *(*)(char *)) __p
   __Pyx_XDECREF(__pyx_t_5);
   __PYX_XDEC_MEMVIEW(&__pyx_t_6, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+  __Pyx_XDECREF(__pyx_t_21);
+  __Pyx_XDECREF(__pyx_t_22);
   __Pyx_AddTraceback("cython_Dijkstra.node_val", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -21124,6 +21230,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_got_differing_extents_in_dimensi, __pyx_k_got_differing_extents_in_dimensi, sizeof(__pyx_k_got_differing_extents_in_dimensi), 0, 0, 1, 0},
   {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
   {&__pyx_n_s_i1, __pyx_k_i1, sizeof(__pyx_k_i1), 0, 0, 1, 1},
+  {&__pyx_n_s_i11, __pyx_k_i11, sizeof(__pyx_k_i11), 0, 0, 1, 1},
+  {&__pyx_n_s_i12, __pyx_k_i12, sizeof(__pyx_k_i12), 0, 0, 1, 1},
   {&__pyx_n_s_i2, __pyx_k_i2, sizeof(__pyx_k_i2), 0, 0, 1, 1},
   {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
@@ -21218,7 +21326,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 34, __pyx_L1_error)
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 34, __pyx_L1_error)
-  __pyx_builtin_sum = __Pyx_GetBuiltinName(__pyx_n_s_sum); if (!__pyx_builtin_sum) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_builtin_sum = __Pyx_GetBuiltinName(__pyx_n_s_sum); if (!__pyx_builtin_sum) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 134, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 149, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 152, __pyx_L1_error)
@@ -21237,7 +21345,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
@@ -21248,36 +21356,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "cython_Dijkstra.pyx":53
+  /* "cython_Dijkstra.pyx":54
  *     #Node_val2 = np.random.rand(n, k)*np.inf
  * 
  *     Node_val1[0,0]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "cython_Dijkstra.pyx":54
+  /* "cython_Dijkstra.pyx":55
  * 
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0             # <<<<<<<<<<<<<<
  *     Node_val1[0,2]=0.0
  * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "cython_Dijkstra.pyx":55
+  /* "cython_Dijkstra.pyx":56
  *     Node_val1[0,0]=0.0
  *     Node_val1[0,1]=0.0
  *     Node_val1[0,2]=0.0             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_2); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_int_0, __pyx_int_2); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
@@ -21479,14 +21587,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */
-  __pyx_tuple__27 = PyTuple_Pack(37, __pyx_n_s_Hash, __pyx_n_s_Cost_horizontal, __pyx_n_s_Cost_vertical, __pyx_n_s_N, __pyx_n_s_truncated_layer_start_cost, __pyx_n_s_truncated_layer_end_cost, __pyx_n_s_K, __pyx_n_s_d, __pyx_n_s_truncated_layer, __pyx_n_s_n, __pyx_n_s_k, __pyx_n_s_N_nodes, __pyx_n_s_dtype, __pyx_n_s_Node_val1, __pyx_n_s_node_val1, __pyx_n_s_ip, __pyx_n_s_jp, __pyx_n_s_i1, __pyx_n_s_i2, __pyx_n_s_j, __pyx_n_s_l1, __pyx_n_s_l2, __pyx_n_s_Cijk, __pyx_n_s_Cijk1, __pyx_n_s_v1, __pyx_n_s_v2, __pyx_n_s_j1, __pyx_n_s_j2, __pyx_n_s_j3, __pyx_n_s_source_neighbour, __pyx_n_s_sink_neighbour, __pyx_n_s_i, __pyx_n_s_layer, __pyx_n_s_res, __pyx_n_s_Cost_truncated_end1, __pyx_n_s_genexpr, __pyx_n_s_genexpr); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(39, __pyx_n_s_Hash, __pyx_n_s_Cost_horizontal, __pyx_n_s_Cost_vertical, __pyx_n_s_N, __pyx_n_s_truncated_layer_start_cost, __pyx_n_s_truncated_layer_end_cost, __pyx_n_s_K, __pyx_n_s_d, __pyx_n_s_truncated_layer, __pyx_n_s_n, __pyx_n_s_k, __pyx_n_s_N_nodes, __pyx_n_s_dtype, __pyx_n_s_Node_val1, __pyx_n_s_node_val1, __pyx_n_s_ip, __pyx_n_s_jp, __pyx_n_s_i1, __pyx_n_s_i2, __pyx_n_s_j, __pyx_n_s_l1, __pyx_n_s_l2, __pyx_n_s_Cijk, __pyx_n_s_Cijk1, __pyx_n_s_v1, __pyx_n_s_v2, __pyx_n_s_j1, __pyx_n_s_j2, __pyx_n_s_j3, __pyx_n_s_source_neighbour, __pyx_n_s_sink_neighbour, __pyx_n_s_i, __pyx_n_s_layer, __pyx_n_s_i11, __pyx_n_s_i12, __pyx_n_s_res, __pyx_n_s_Cost_truncated_end1, __pyx_n_s_genexpr, __pyx_n_s_genexpr); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(9, 0, 37, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_Dijkstra_pyx, __pyx_n_s_node_val, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(9, 0, 39, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_Dijkstra_pyx, __pyx_n_s_node_val, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 34, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -21627,7 +21735,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_15cython_Dijkstra___pyx_scope_struct____pyx_fuse_0node_val.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_15cython_Dijkstra___pyx_scope_struct____pyx_fuse_0node_val = &__pyx_type_15cython_Dijkstra___pyx_scope_struct____pyx_fuse_0node_val;
-  if (PyType_Ready(&__pyx_type_15cython_Dijkstra___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_15cython_Dijkstra___pyx_scope_struct_1_genexpr) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_15cython_Dijkstra___pyx_scope_struct_1_genexpr.tp_print = 0;
   #endif
@@ -21643,7 +21751,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_15cython_Dijkstra___pyx_scope_struct_2___pyx_fuse_1node_val.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_15cython_Dijkstra___pyx_scope_struct_2___pyx_fuse_1node_val = &__pyx_type_15cython_Dijkstra___pyx_scope_struct_2___pyx_fuse_1node_val;
-  if (PyType_Ready(&__pyx_type_15cython_Dijkstra___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 87, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_15cython_Dijkstra___pyx_scope_struct_3_genexpr) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_15cython_Dijkstra___pyx_scope_struct_3_genexpr.tp_print = 0;
   #endif
@@ -21998,7 +22106,7 @@ if (!__Pyx_RefNanny) {
   /* "cython_Dijkstra.pyx":34
  * 
  * #Here we are type declaring the Hash and other variables using fused type function
- * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, truncated_layer):             # <<<<<<<<<<<<<<
+ * def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, ::1] Cost_vertical, my_type[::1] N, my_type[::1] truncated_layer_start_cost,my_type[::1] truncated_layer_end_cost,my_type K, my_type d, my_type truncated_layer):             # <<<<<<<<<<<<<<
  * 
  *     n = Hash.shape[0]
  */

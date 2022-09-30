@@ -78,7 +78,7 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
             #i_2 =  int(i+(i1-i2)/(2))
             i11 = int((truncated_layer + i1)*0.5)
             i12 = int((truncated_layer + i2)*0.5)
-            print(i1,i2,i11,i12,truncated_layer)           
+            #print(i1,i2,i11,i12,truncated_layer)           
             node_val1[v2,0] = truncated_layer_start_cost[i11] + truncated_layer_start_cost[i12] 
             node_val1[v2,1] = 0
             node_val1[v2,2] = v2
@@ -160,19 +160,24 @@ def node_val(my_type[:, ::1] Hash, my_type[:, ::1] Cost_horizontal, my_type[:, :
                             node_val1[v2,2]=v2
 
         else:
-            i=0
+           
             for v1 in range(int(sum(N[:layer])),int(sum(N[:layer+1]))):
                 i1=Hash[v1,1]
                 i2=Hash[v1,2]
                 if abs(i1-i2)>=d:
 
-                    Cost_truncated_end1 = truncated_layer_end_cost[i]+ truncated_layer_end_cost[int(i+(i1-i2)/(2))]
-                    
+                    i11 = int((truncated_layer + i1)*0.5)
+                    i12 = int((truncated_layer + i2)*0.5)
+
+                    print(i1,i2,i11,i12,truncated_layer)   
+
+                    Cost_truncated_end1 = truncated_layer_end_cost[i11] + truncated_layer_end_cost[i12]
+
                     if (node_val1[n-1,0]>(Cost_truncated_end1 + node_val1[v1,0])):           
                         node_val1[int(n-1),0]=Cost_truncated_end1+node_val1[v1,0]
                         node_val1[int(n-1),1]=v1
                         node_val1[int(n-1),2]=float(n-1)
-                        i=i+1                       
+                                              
                                 
         layer = layer+1
     
