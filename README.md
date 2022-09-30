@@ -14,11 +14,7 @@ The algorithm uses the following set up and processes:
    
 2. A single shortest path is computed in the 3D which overcomes the computational intractibility of finding disjoint paths with constraints on a graph in polynomial time.
 3. This single least-cost path in 3D is projectes back to 2D grpahs. Following images may help to clear out the process.
-   https://github.com/jha-amit/DS2P/issues/1#issue-1091936540
-4. Near the terminals we introduced two complete graphs so that we can avoid the intractability due to path separation constraint. We relaxed the path separation constraint
-   in the neighbourhood of terminals and computed disjoint paths. Then we computed two least cost paths on the two complete graphs that connect with the disjoint paths at points
-   where path separation constraint is relaxed. We replace the portion of separation constraint relaxed disjoint path with the single least-cost paths on the complete graph. 
+   https://github.com/jha-amit/Disjoint_SPfinder/blob/main/3D%20embedding.JPG
+4. Near the terminals we introduced two complete graphs so that we can avoid the intractability due to path separation constraint in the neighbourhood of the start and end. We relaxed the path separation constraint in the neighbourhood of terminals and computed disjoint paths. Then we computed two least cost paths on the two complete graphs that connect with the disjoint paths computed on the diamond grid.
    
-The following instructions are to be followed to run the application
-1. Input lat-long-cost data in file provided as Cost_matrix.csv
-2. Provide Endgraph 
+The further info on the parameters to be entered by the user are in the file ![Read me parameters description]https://github.com/jha-amit/Disjoint_SPfinder/blob/main/static/Read_me.txt
