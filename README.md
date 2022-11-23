@@ -6,6 +6,24 @@ packages may give suboptimal soulution as they usually find two consecutive leas
 distance which may be more expensive than some combination of two paths. So, we minimize the combined cost of paths 
 using a heuristics 'Optimal transmission network topology for resilient power supply' developed by \cite{Zinchenko Y. et al. 2016}.
 
+Input:
+![image](https://user-images.githubusercontent.com/57409254/203500167-5553da05-6b52-4c25-a4bd-2165833c4642.png)
+
+The cost is per-unit construction cost in the vicinity of the point located by the latitude and longitudes.
+
+![image](https://user-images.githubusercontent.com/57409254/203500751-d2af72c9-3eaa-471a-8841-82906b1e8786.png)
+
+
+These costs are scattered data points, we interpolate costs at nodes first, using Inverse distance weight, and then use Bezier surface for cost map.
+
+![image](https://user-images.githubusercontent.com/57409254/203500939-4a6f97b1-903a-48a0-b8a7-08d516c23d0f.png)
+
+Then we compute edge cost:
+
+A flow chart representing the backend of the application is the following:
+
+![image](https://user-images.githubusercontent.com/57409254/203501288-9fe82768-53d1-4cf8-b2f6-66c33885415f.png)
+
 
 The algorithm uses the following set up and processes:
 1. The project area is represented as a diamond shape biconnected digraph and two such orthogonal graphs are combine as a 3D graph using affine transformations.
