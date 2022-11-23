@@ -21,6 +21,8 @@ The further info on the parameters to be entered by the user are in the file ![R
 ![image](https://user-images.githubusercontent.com/57409254/203498454-8c28d74d-b0db-4de5-ae1a-1b77cd526cc1.png)
 
 Here K is number of layers e.g. in the figure above the number of layers are 7. Number of nodes (N x N) in the 2D graph is proportional to number of layers N =(K-1)/2 + 1
+
 The MIP formulation was taking more than 2hrs for only 200x200 grid!!!
+
 The matlab's Mexfiles and python/cython implementation are comparable.
 
