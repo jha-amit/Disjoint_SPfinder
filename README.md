@@ -18,3 +18,5 @@ The algorithm uses the following set up and processes:
 4. Near the terminals we introduced two complete graphs so that we can avoid the intractability due to path separation constraint in the neighbourhood of the start and end. We relaxed the path separation constraint in the neighbourhood of terminals and computed disjoint paths. Then we computed two least cost paths on the two complete graphs that connect with the disjoint paths computed on the diamond grid.
    
 The further info on the parameters to be entered by the user are in the file ![Read me parameters description](https://github.com/jha-amit/Disjoint_SPfinder/blob/main/static/Read_me.txt)
+![image](https://user-images.githubusercontent.com/57409254/203498454-8c28d74d-b0db-4de5-ae1a-1b77cd526cc1.png)
+
